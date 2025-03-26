@@ -1,0 +1,16 @@
+# Ignora os arquivos de cache do Python
+# O diretório __pycache__ contém arquivos de bytecode compilados pelo Python,
+# que não precisam ser versionados. Isso ajuda a manter o repositório limpo.
+__pycache__/
+
+# Ignora o arquivo .env
+# O arquivo .env contém variáveis de ambiente sensíveis, como credenciais de banco de dados.
+# Não é seguro versioná-lo no repositório. Ele deve ser adicionado no .gitignore para evitar que
+# informações confidenciais sejam compartilhadas acidentalmente.
+.env
+
+# Ignora o arquivo database.db
+# O arquivo database.db é o banco de dados local (por exemplo, SQLite).
+# Este arquivo contém os dados da aplicação e pode ser refeito a partir das migrações.
+# Não é necessário armazená-lo no repositório, pois ele pode ser regenerado.
+database.db

@@ -5,7 +5,7 @@ from fastapi import Depends, HTTPException, status  # Importando classes e funç
 from fastapi.security import OAuth2PasswordBearer  # Importando OAuth2PasswordBearer para lidar com autenticação baseada em OAuth2
 from sqlalchemy.orm import Session  # Importando Session do SQLAlchemy para interação com o banco de dados
 from app.database import SessionLocal  # Importando a função SessionLocal, que cria uma sessão do banco de dados
-from app.models import User  # Importando o modelo User para interagir com a tabela 'users' no banco de dados
+from app.models import Usuario  # Importando o modelo Usuario para interagir com a tabela 'Usuarios' no banco de dados
 
 SECRET_KEY = "chave-secreta-muito-segura"  # Chave secreta usada para assinar os tokens JWT. Deve ser substituída por uma chave forte e segura
 ALGORITHM = "HS256"  # Algoritmo de hash usado para assinar o JWT
@@ -41,7 +41,7 @@ def get_db():
         db.close()  # Fecha a sessão ao final do uso
 
 # Função para obter o usuário atual a partir do token JWT
-def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+def get_current_Usuario(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     credentials_exception = HTTPException(  # Exceção a ser levantada se o token for inválido
         status_code=status.HTTP_401_UNAUTHORIZED,  # Código de status HTTP para não autorizado
         detail="Token inválido",  # Detalhe da exceção
@@ -58,18 +58,18 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
         raise credentials_exception  # Levanta a exceção de credenciais inválidas
 
     # Consulta o banco de dados para obter o usuário com o email informado no token
-    user = db.query(User).filter(User.email == email).first()
-    if user is None:  # Se o usuário não for encontrado no banco
+    Usuario = db.query(Usuario).filter(Usuario.email == email).first()
+    if Usuario is None:  # Se o usuário não for encontrado no banco
         raise credentials_exception  # Levanta a exceção de credenciais inválidas
 
-    return user  # Retorna o usuário autenticado
+    return Usuario  # Retorna o usuário autenticado
 
 # Função para verificar se o usuário é um administrador
-def is_admin(current_user: User = Depends(get_current_user)):  # Dependência que verifica se o usuário atual é um administrador
+def is_admin(current_Usuario: Usuario = Depends(get_current_Usuario)):  # Dependência que verifica se o usuário atual é um administrador
     """ Verifica se o usuário logado é um administrador """
-    if not current_user.is_admin:  # Se o usuário não for administrador
+    if not current_Usuario.is_admin:  # Se o usuário não for administrador
         raise HTTPException(  # Levanta uma exceção de acesso proibido
             status_code=status.HTTP_403_FORBIDDEN,  # Código de status HTTP para acesso proibido
             detail="Apenas administradores podem acessar essa rota",  # Detalhe da exceção
         )
-    return current_user  # Retorna o usuário, se ele for administrador
+    return current_Usuario  # Retorna o usuário, se ele for administrador

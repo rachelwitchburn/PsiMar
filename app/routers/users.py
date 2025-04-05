@@ -1,11 +1,11 @@
 # Importando os módulos necessários
 from fastapi import APIRouter, Depends, HTTPException, status   # FastAPI para criar rotas e lançar exceções
 from sqlalchemy.orm import Session  # Para interagir com o banco de dados usando SQLAlchemy
-from app.database import SessionLocal  # Para obter uma instância de sessão de banco de dados
-from app.models import User, LoginAttempt  # O modelo do usuário e tentativas de login no banco de dados
-from app.schemas import UserCreate, UserResponse  # Schemas Pydantic para validação e formatação dos dados
+from app.database_app import SessionLocal  # Para obter uma instância de sessão de banco de dados
+from app.models import Usuario, LoginAttempt  # O modelo do usuário e tentativas de login no banco de dados
+from app.schemas import UsuarioCreate, UsuarioResponse  # Schemas Pydantic para validação e formatação dos dados
 from app.crud import create_user  # Função para criação de um novo usuário (geralmente no arquivo `crud.py`)
-from app.security import get_current_user, is_admin, verify_password, create_access_token  # Funções para autenticação, verificação de senha e geração de tokens
+from app.security import get_current_usuario, is_admin, verify_password, create_access_token  # Funções para autenticação, verificação de senha e geração de tokens
 from datetime import datetime, timedelta  # Para lidar com datas e tempo (ex: bloqueio de login por 30 minutos)
 
 # Definindo um roteador para gerenciar as rotas do usuário
@@ -20,26 +20,26 @@ def get_db():
         db.close()  # Garante que a sessão será fechada quando terminar
 
 # Rota POST para criar um novo usuário
-@router.post("/", response_model=UserResponse)  # Cria um novo usuário e retorna um modelo UserResponse
-def register_user(user: UserCreate, db: Session = Depends(get_db)):  # Recebe o usuário para criação e uma sessão de banco de dados
+@router.post("/", response_model=UsuarioResponse)  # Cria um novo usuário e retorna um modelo UserResponse
+def register_user(usuario: UsuarioCreate, db: Session = Depends(get_db)):  # Recebe o usuário para criação e uma sessão de banco de dados
     """
     Rota para criar um novo usuário (paciente ou administrador).
     """
     # Verifica se o usuário aceitou os termos de uso antes de permitir o cadastro
-    if not user.aceitou_termos:
+    if not usuario.aceitou_termos:
         raise HTTPException(status_code=400, detail="Os termos devem ser aceitos para cadastro.")
 
     # Verifica se já existe um usuário com o mesmo email no banco de dados
-    existing_user = db.query(User).filter(User.email == user.email).first()
-    if existing_user:
+    existing_usuario = db.query(Usuario).filter(Usuario.email == usuario.email).first()
+    if existing_usuario:
         raise HTTPException(status_code=400, detail="Email já cadastrado")  # Se encontrar, lança uma exceção HTTP 400
 
     # Chama a função create_user para criar o usuário no banco de dados
-    return create_user(db, user)  # Cria o usuário e retorna a resposta com os dados do usuário
+    return create_user(db, usuario)  # Cria o usuário e retorna a resposta com os dados do usuário
 
 # Rota GET para obter o perfil do usuário autenticado
-@router.get("/me", response_model=UserResponse)  # Obtém o perfil do usuário e retorna um modelo UserResponse
-def get_my_profile(current_user: User = Depends(get_current_user)):  # Obtém o usuário autenticado através do token JWT
+@router.get("/me", response_model=UsuarioResponse)  # Obtém o perfil do usuário e retorna um modelo UserResponse
+def get_my_profile(current_user: Usuario = Depends(get_current_usuario)):  # Obtém o usuário autenticado através do token JWT
     """
     Rota para usuários autenticados verem seu próprio perfil.
     """
@@ -51,7 +51,7 @@ def get_all_users(db: Session = Depends(get_db)):  # Obtém todos os usuários n
     """
     Rota exclusiva para administradores verem todos os usuários cadastrados.
     """
-    return db.query(User).all()  # Retorna todos os usuários da tabela User no banco de dados
+    return db.query(Usuario).all()  # Retorna todos os usuários da tabela User no banco de dados
 
 
 def get_db():
@@ -70,8 +70,8 @@ def login(email: str, senha: str, db: Session = Depends(get_db)):  # Recebe emai
     Implementa bloqueio de 30 minutos após 5 tentativas de login falhas consecutivas.
     """
     # Verificar se o usuário existe no banco de dados
-    user = db.query(User).filter(User.email == email).first()
-    if not user:
+    usuario = db.query(Usuario).filter(Usuario.email == email).first()
+    if not usuario:
         # Se o usuário não for encontrado, retorna uma exceção HTTP 401 (não autorizado)
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -80,7 +80,7 @@ def login(email: str, senha: str, db: Session = Depends(get_db)):  # Recebe emai
         )
 
     # Verificar o estado de bloqueio do usuário
-    login_attempt = db.query(LoginAttempt).filter(LoginAttempt.user_id == user.id).first()
+    login_attempt = db.query(LoginAttempt).filter(LoginAttempt.usuario_id == usuario.id).first()
 
     if login_attempt:
         # Se o usuário tem uma tentativa de login registrada, verificar se está bloqueado
@@ -100,11 +100,11 @@ def login(email: str, senha: str, db: Session = Depends(get_db)):  # Recebe emai
             )
 
     # Verificar a senha fornecida
-    if not verify_password(senha, user.senha):
+    if not verify_password(senha, usuario.senha):
         # Se a senha estiver errada, atualiza a contagem de tentativas falhas
         if not login_attempt:
             # Se ainda não houver uma tentativa de login registrada, cria uma nova
-            login_attempt = LoginAttempt(user_id=user.id)
+            login_attempt = LoginAttempt(usuario_id=usuario.id)
             db.add(login_attempt)  # Adiciona ao banco de dados
 
         # Incrementa o número de tentativas falhas e registra o momento da última falha
@@ -126,7 +126,7 @@ def login(email: str, senha: str, db: Session = Depends(get_db)):  # Recebe emai
         db.commit()  # Confirma as mudanças no banco de dados
 
     # Cria um token de acesso JWT para o usuário autenticado
-    access_token = create_access_token(data={"sub": user.email, "is_admin": user.is_admin})
+    access_token = create_access_token(data={"sub": usuario.email, "is_admin": usuario.is_admin})
 
     # Retorna o token de acesso
     return {"access_token": access_token, "token_type": "bearer"}

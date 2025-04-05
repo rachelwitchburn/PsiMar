@@ -4,7 +4,7 @@ from passlib.context import CryptContext  # Importando 'CryptContext' para traba
 from fastapi import Depends, HTTPException, status  # Importando classes e funções do FastAPI para dependências e exceções
 from fastapi.security import OAuth2PasswordBearer  # Importando OAuth2PasswordBearer para lidar com autenticação baseada em OAuth2
 from sqlalchemy.orm import Session  # Importando Session do SQLAlchemy para interação com o banco de dados
-from app.database import SessionLocal  # Importando a função SessionLocal, que cria uma sessão do banco de dados
+from app.database_app import SessionLocal  # Importando a função SessionLocal, que cria uma sessão do banco de dados
 from app.models import Usuario  # Importando o modelo Usuario para interagir com a tabela 'Usuarios' no banco de dados
 
 SECRET_KEY = "chave-secreta-muito-segura"  # Chave secreta usada para assinar os tokens JWT. Deve ser substituída por uma chave forte e segura

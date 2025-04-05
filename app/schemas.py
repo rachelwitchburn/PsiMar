@@ -2,7 +2,7 @@
 from pydantic import BaseModel, EmailStr, field_validator  # Importando classes do Pydantic para validação de dados e tipos específicos, como EmailStr
 
 # Esquema de criação de usuário com validação dos campos
-class UserCreate(BaseModel):  # Definindo o modelo Pydantic para criar um novo usuário. O Pydantic é usado para validar e serializar dados de entrada
+class UsuarioCreate(BaseModel):  # Definindo o modelo Pydantic para criar um novo usuário. O Pydantic é usado para validar e serializar dados de entrada
     nome: str  # O campo 'nome' é uma string, representando o nome do usuário
     email: EmailStr  # O campo 'email' é validado automaticamente como um e-mail válido (EmailStr é um tipo específico do Pydantic)
     senha: str  # O campo 'senha' é uma string, representando a senha do usuário
@@ -24,7 +24,7 @@ class UserCreate(BaseModel):  # Definindo o modelo Pydantic para criar um novo u
         return confirmacao_senha  # Retorna a confirmação de senha validada
 
 # Esquema de resposta para exibir os dados do usuário
-class UserResponse(BaseModel):  # Definindo o modelo Pydantic para representar os dados do usuário na resposta da API
+class UsuarioResponse(BaseModel):  # Definindo o modelo Pydantic para representar os dados do usuário na resposta da API
     id: int  # O campo 'id' é um número inteiro, representando o ID único do usuário
     nome: str  # O campo 'nome' é uma string, representando o nome do usuário
     is_admin: bool  # O campo 'is_admin' é um booleano, indicando se o usuário é administrador

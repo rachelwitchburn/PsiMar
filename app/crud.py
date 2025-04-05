@@ -1,6 +1,6 @@
 # Importando a sessão do banco de dados e o modelo User
 from sqlalchemy.orm import Session  # Importando a classe 'Session' para interagir com o banco de dados
-from app.models import User  # Importando o modelo 'User', que representa a tabela de usuários no banco de dados
+from app.models import Usuario  # Importando o modelo 'User', que representa a tabela de usuários no banco de dados
 
 # Importando o esquema UserCreate para receber os dados de entrada
 from app.schemas import \
@@ -21,7 +21,7 @@ def create_user(db: Session, user: UserCreate):
         user.senha)  # Utilizando o 'pwd_context' para criptografar a senha fornecida pelo usuário
 
     # Criando uma instância do modelo User com os dados fornecidos
-    db_user = User(
+    db_user = Usuario(
         nome=user.nome,  # Atribuindo o nome fornecido ao novo usuário
         email=user.email,  # Atribuindo o e-mail fornecido ao novo usuário
         senha=hashed_password,  # Atribuindo a senha criptografada ao novo usuário

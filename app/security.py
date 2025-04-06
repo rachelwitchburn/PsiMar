@@ -41,7 +41,7 @@ def get_db():
         db.close()  # Fecha a sessão ao final do uso
 
 # Função para obter o usuário atual a partir do token JWT
-def get_current_Usuario(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+def get_current_usuario(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     credentials_exception = HTTPException(  # Exceção a ser levantada se o token for inválido
         status_code=status.HTTP_401_UNAUTHORIZED,  # Código de status HTTP para não autorizado
         detail="Token inválido",  # Detalhe da exceção
@@ -65,7 +65,7 @@ def get_current_Usuario(token: str = Depends(oauth2_scheme), db: Session = Depen
     return Usuario  # Retorna o usuário autenticado
 
 # Função para verificar se o usuário é um administrador
-def is_admin(current_Usuario: Usuario = Depends(get_current_Usuario)):  # Dependência que verifica se o usuário atual é um administrador
+def is_admin(current_Usuario: Usuario = Depends(get_current_usuario)):  # Dependência que verifica se o usuário atual é um administrador
     """ Verifica se o usuário logado é um administrador """
     if not current_Usuario.is_admin:  # Se o usuário não for administrador
         raise HTTPException(  # Levanta uma exceção de acesso proibido

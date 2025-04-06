@@ -152,3 +152,13 @@ class Pagamento(Base):
     consulta = relationship("Consulta", back_populates="pagamento")
     paciente = relationship("Paciente", back_populates="pagamentos")
     psicologo = relationship("Psicologo", back_populates="pagamentos")
+
+# Modelo de dados para registrar tentativas de login
+class LoginAttempt(Base):  # Definindo a classe LoginAttempt para registrar as tentativas de login
+    _tablename_ = "login_attempts"  # A tabela no banco de dados será chamada "login_attempts"
+
+    id = Column(Integer, primary_key=True, index=True)  # Definindo a coluna 'id' como chave primária (integer) e com índice
+    user_id = Column(Integer, index=True)  # A coluna 'user_id' armazena o ID do usuário relacionado à tentativa de login (indexada para consultas rápidas)
+    failed_attempts = Column(Integer, default=0)  # A coluna 'failed_attempts' mantém o contador de tentativas falhas (valor padrão é 0)
+    #last_failed_attempt = Column(DateTime, default=datetime.utcnow)  # A coluna 'last_failed_attempt' registra o horário da última tentativa falha
+    lock_until = Column(DateTime, nullable=True)  # A coluna 'lock_until' armazena a data e hora até a qual o usuário está bloqueado após falhas sucessivas (nullable, ou seja, pode ser nulo)

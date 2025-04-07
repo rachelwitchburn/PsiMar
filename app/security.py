@@ -58,7 +58,7 @@ def get_current_Usuario(token: str = Depends(oauth2_scheme), db: Session = Depen
         raise credentials_exception  # Levanta a exceção de credenciais inválidas
 
     # Consulta o banco de dados para obter o usuário com o email informado no token
-    Usuario = db.query(Usuario).filter(Usuario.email == email).first()
+    usuario = db.query(Usuario).filter(Usuario.email == email).first()
     if Usuario is None:  # Se o usuário não for encontrado no banco
         raise credentials_exception  # Levanta a exceção de credenciais inválidas
 

@@ -2,10 +2,10 @@
 from fastapi import APIRouter, Depends, HTTPException, status   # FastAPI para criar rotas e lançar exceções
 from sqlalchemy.orm import Session  # Para interagir com o banco de dados usando SQLAlchemy
 from app.database_app import SessionLocal  # Para obter uma instância de sessão de banco de dados
-from app.models import Usuario, LoginAttempt  # O modelo do usuário e tentativas de login no banco de dados
+from app.models import Usuario #, Log  # O modelo do usuário e tentativas de login no banco de dados
 from app.schemas import UsuarioCreate, UsuarioResponse  # Schemas Pydantic para validação e formatação dos dados
 from app.crud import create_user  # Função para criação de um novo usuário (geralmente no arquivo `crud.py`)
-from app.security import get_current_usuario, is_admin, verify_password, create_access_token  # Funções para autenticação, verificação de senha e geração de tokens
+from app.security import get_current_Usuario, is_admin, verify_password, create_access_token  # Funções para autenticação, verificação de senha e geração de tokens
 from datetime import datetime, timedelta  # Para lidar com datas e tempo (ex: bloqueio de login por 30 minutos)
 
 # Definindo um roteador para gerenciar as rotas do usuário

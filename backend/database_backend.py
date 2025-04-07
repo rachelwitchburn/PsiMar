@@ -1,6 +1,6 @@
 #Conexão com o banco
 from flask import Flask
-from flask_sqlachemy import SQLAlchemy
+import SQLAlchemy
 import os
 
 # Caminho do bd

@@ -3,7 +3,7 @@ import flet as ft
 def register(page):
     page.title = 'PsiMar'
 
-    Senha = ft.Ref[ft.TextField]()  # Correção: Inicializa sem passar um valor aqui
+    Senha = ft.Ref[ft.TextField]()  
 
     def toggle_password(e):
         senha_field = Senha.current
@@ -21,7 +21,7 @@ def register(page):
 
         page.update()
 
-    # A checkbox para aceitar os termos
+    
     def handle_close(e):
         page.close(dlg)
 

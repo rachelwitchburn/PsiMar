@@ -1,19 +1,16 @@
 import flet as ft
 
-
 def login(page):
     page.title = 'PsiMar'
     page.clean()
-    page.horizontal_alignment = 'center'
-    page.vertical_alignment = 'center'
-    page.window_maximized = True
+    
 
-    def toggle_password():
-        Senha.password = not Senha.password
+    def toggle_password(e):
+        Senha.password = not Senha.password  
         Senha.suffix.icon = ft.icons.VISIBILITY if Senha.password else ft.icons.VISIBILITY_OFF
         page.update()
 
-    def login_action():
+    def login_action(e):
         if not Usuario.value:
             Usuario.error_text = "Campo obrigatório."
             page.update()
@@ -23,86 +20,109 @@ def login(page):
         else:
             nome = Usuario.value
             senha = Senha.value
-            print(f"nome: {nome}\n senha: {senha}")
-            page.clean()
-            page.add(ft.Text(f"Olá, {nome}"))
+            if nome == "1":
+                page.go("/usuario")  
+            elif nome == "2":
+                page.go("/psicologo")
+        # botar 1 no campo de usuario vai pra tela do paciente
+        # botar 2 vai pra tela do psicologo
 
     Usuario = ft.TextField(
         label="Usuário",
-        label_style=ft.TextStyle(color="black"),
-        width=300,
-        border_color="black",
-        color="black",
+        width=310, 
+        border_color="black", 
+        color="black", 
         bgcolor="white"
     )
-
+    
     Senha = ft.TextField(
         label="Senha",
-        label_style=ft.TextStyle(color="black"),
         password=True,
-        width=300,
+        width=310,
         border_color="black",
         color="black",
-        content_padding=ft.padding.symmetric(vertical=10, horizontal=10),
+        content_padding=ft.padding.symmetric(vertical=10, horizontal=10),  
         suffix=ft.IconButton(
-            icon=ft.icons.VISIBILITY,
+            icon=ft.Icons.VISIBILITY, 
             icon_color="black",
-            on_click=toggle_password,
-            style=ft.ButtonStyle(
-                shape={"": ft.RoundedRectangleBorder(radius=0)},
-                padding=ft.padding.all(0),
-            ),
+            on_click=toggle_password
         ),
-        bgcolor="white",
+        bgcolor="white",   
     )
 
     conteudo = ft.Stack(
+        expand=True,
         alignment=ft.alignment.center,
         controls=[
-            ft.Image(src="../assets/imagem.png", fit=ft.ImageFit.COVER, expand=True),
-
+            ft.Image(src="imagem.png", fit=ft.ImageFit.COVER, expand=True),
             ft.Container(
+                alignment=ft.alignment.center,
                 content=ft.Column(
                     [
-                        ft.Image(src="../assets/psi.png", width=100, height=100),
+                        ft.Image(src="psi.png", width=100, height=100),
                         Usuario,
                         Senha,
-                        ft.Row(
+                        ft.ResponsiveRow(
+                            
                             [
-                                ft.ElevatedButton("Login", on_click=login_action, color="white", width=140,
-                                                  style=ft.ButtonStyle(
-                                                      shape=ft.RoundedRectangleBorder(radius=5),
-                                                      elevation=5,
-                                                      overlay_color="rgba(255, 255, 255, 0.2)",
-                                                      bgcolor="#212121",
-                                                      color="#white")
-                                                  ),
-                                ft.ElevatedButton("Registrar", on_click=lambda e: page.go("/register"), width=140,
-                                                  style=ft.ButtonStyle(
-                                                      shape=ft.RoundedRectangleBorder(radius=5),
-                                                      elevation=5,
-                                                      overlay_color="rgba(255, 255, 255, 0.2)",
-                                                      bgcolor="#212121",
-                                                      color="white")
-                                                  )
-                            ],
-                            alignment=ft.MainAxisAlignment.CENTER,
-                            spacing=10
-                        )
+                                ft.Container(
+                                    col ={"xs":1}
+                                ),
+
+                                ft.Column(
+                                    controls=[
+                                        ft.ElevatedButton(
+                                            "Login", 
+                                            on_click=login_action, 
+                                            color="white", 
+                                            width=175, 
+                                            style=ft.ButtonStyle(
+                                                shape=ft.RoundedRectangleBorder(radius=5),  
+                                                elevation=5, 
+                                                bgcolor="#847769",
+                                                color="white"
+                                            )
+                                        )
+                                    ],
+                                    col={"xs": 5, "md": 5},  
+                                   
+                                ),
+                                ft.Column(
+                                    controls=[
+                                        ft.ElevatedButton(
+                                            "Registrar", 
+                                            on_click=lambda e: page.go("/register"), 
+                                            width=175, 
+                                            style=ft.ButtonStyle(
+                                                shape=ft.RoundedRectangleBorder(radius=5),  
+                                                elevation=5, 
+                                                bgcolor="#847769",
+                                                color="white"
+                                            )
+                                        )
+                                    ],
+                                    col={"xs": 5, "md": 5},  
+                                    
+                                ),
+                            ], 
+                            
+                        ),
+                        ft.TextButton(
+                            "Esqueci minha senha", 
+                            on_click=lambda e: page.go("/nsenha"),
+                            style=ft.ButtonStyle(color="#847769")
+                        ),
                     ],
                     alignment=ft.MainAxisAlignment.CENTER,
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER
                 ),
-                alignment=ft.alignment.center,
                 expand=True
             )
-        ],
+        ]
     )
 
     return ft.View(
         route="/",
         bgcolor="#f2dbc2",
-        controls=[
-            conteudo
-        ]
+        controls=[conteudo]
     )

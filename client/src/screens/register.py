@@ -5,8 +5,8 @@ from flet_core import FontWeight
 def register(page):
     page.title = 'PsiMar'
 
-    Senha = ft.Ref[ft.TextField]()  # Correção: Inicializa sem passar um valor aqui
-
+    Senha = ft.Ref[ft.TextField]()  
+    
     def toggle_password(e):
         senha_field = Senha.current
         senha_field.password = not senha_field.password

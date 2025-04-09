@@ -79,7 +79,7 @@ def register(page):
                     shape=ft.RoundedRectangleBorder(radius=5),
                     elevation=5,
                     overlay_color="rgba(255, 255, 255, 0.2)",
-                    bgcolor="black",
+                    bgcolor="#847769",
                     color="white"
                 )
             )
@@ -91,7 +91,7 @@ def register(page):
     def paciente_form():
         return ft.Column([
             ft.TextField(
-                label="Código",
+                label="Email",
                 label_style=ft.TextStyle(color="black"),
                 width=300,
                 border_color="black",
@@ -122,7 +122,7 @@ def register(page):
                     shape=ft.RoundedRectangleBorder(radius=5),
                     elevation=5,
                     overlay_color="rgba(255, 255, 255, 0.2)",
-                    bgcolor="black",
+                    bgcolor="#847769",
                     color="white"
                 )
             )
@@ -155,7 +155,7 @@ def register(page):
                                               shape=ft.RoundedRectangleBorder(radius=5),
                                               elevation=5,
                                               overlay_color="rgba(255, 255, 255, 0.2)",
-                                              bgcolor="black",
+                                              bgcolor="#847769",
                                               color="white"
                                           )),
                         ft.ElevatedButton("Sou Paciente", on_click=lambda e: show_form("paciente"),
@@ -163,7 +163,7 @@ def register(page):
                                               shape=ft.RoundedRectangleBorder(radius=5),
                                               elevation=5,
                                               overlay_color="rgba(255, 255, 255, 0.2)",
-                                              bgcolor="black",
+                                              bgcolor="#847769",
                                               color="white"
                                           )),
                     ], alignment=ft.MainAxisAlignment.CENTER, spacing=20),

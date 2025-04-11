@@ -3,11 +3,11 @@ from datetime import datetime, timedelta
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
-from api.app.crud import create_user
-from api.app.database_app import SessionLocal
-from api.app.models import Usuario, LoginAttempt
-from api.app.schemas import UsuarioCreate, UsuarioResponse
-from api.app.security import get_current_usuario, is_admin, verify_password, create_access_token
+from app.crud.user_crud import create_user
+from app.database_app import SessionLocal
+from app.models.models import User, LoginAttempt
+from app.schemas.user import UserCreate, UserResponse
+from app.security import get_current_usuario, is_admin, verify_password, create_access_token
 
 router = APIRouter(prefix="/users", tags=["users"])
 
@@ -20,36 +20,33 @@ def get_db():
         db.close()
 
 
-@router.post("/", response_model=UsuarioResponse)
-def register_user(usuario: UsuarioCreate, db: Session = Depends(get_db)):
+@router.post("/", response_model=UserResponse)
+def register_user(usuario: UserCreate, db: Session = Depends(get_db)):
     """
-    Rota para criar um novo usuário (paciente ou administrador).
+    Rota para criar um novo usuário (paciente ou psicologo).
     """
 
-    if not usuario.aceitou_termos:
-        raise HTTPException(status_code=400, detail="Os termos devem ser aceitos para cadastro.")
-
-    existing_usuario = db.query(Usuario).filter(Usuario.email == usuario.email).first()
+    existing_usuario = db.query(User).filter(User.email == usuario.email).first()
     if existing_usuario:
         raise HTTPException(status_code=400, detail="Email já cadastrado")
 
     return create_user(db, usuario)
 
 
-@router.get("/me", response_model=UsuarioResponse)
-def get_my_profile(current_user: Usuario = Depends(get_current_usuario)):
+@router.get("/me", response_model=UserResponse)
+def get_my_profile(current_user: User = Depends(get_current_usuario)):
     """
     Rota para usuários autenticados verem seu próprio perfil.
     """
     return current_user
 
 
-@router.get("/", dependencies=[Depends(is_admin)])
+@router.get("/", response_model=list[UserResponse])
 def get_all_users(db: Session = Depends(get_db)):
     """
     Rota exclusiva para administradores verem todos os usuários cadastrados.
     """
-    return db.query(Usuario).all()
+    return db.query(User).all()
 
 
 def get_db():
@@ -67,15 +64,15 @@ def login(email: str, senha: str, db: Session = Depends(get_db)):
     Implementa bloqueio de 30 minutos após 5 tentativas de login falhas consecutivas.
     """
 
-    usuario = db.query(Usuario).filter(Usuario.email == email).first()
-    if not usuario:
+    user = db.query(User).filter(User.email == email).first()
+    if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Credenciais inválidas",
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-    login_attempt = db.query(LoginAttempt).filter(LoginAttempt.usuario_id == usuario.id).first()
+    login_attempt = db.query(LoginAttempt).filter(LoginAttempt.usuario_id == user.id).first()
 
     if login_attempt:
 
@@ -94,10 +91,10 @@ def login(email: str, senha: str, db: Session = Depends(get_db)):
                 detail="Muitas tentativas falhas. Sua conta foi bloqueada por 30 minutos.",
             )
 
-    if not verify_password(senha, usuario.senha):
+    if not verify_password(senha, user.password):
 
         if not login_attempt:
-            login_attempt = LoginAttempt(usuario_id=usuario.id)
+            login_attempt = LoginAttempt(usuario_id=user.id)
             db.add(login_attempt)
 
         login_attempt.failed_attempts += 1
@@ -109,12 +106,13 @@ def login(email: str, senha: str, db: Session = Depends(get_db)):
             detail="Credenciais inválidas",
             headers={"WWW-Authenticate": "Bearer"},
         )
-
+"""
     if login_attempt:
         login_attempt.failed_attempts = 0
         login_attempt.lock_until = None
         db.commit()
 
-    access_token = create_access_token(data={"sub": usuario.email, "is_admin": usuario.is_admin})
+    # access_token = create_access_token(data={"sub": user.email, "is_admin": user.is_admin}) NÃO TEM IS_ADMIN MAIS
 
     return {"access_token": access_token, "token_type": "bearer"}
+"""

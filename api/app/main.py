@@ -1,6 +1,6 @@
 from fastapi import FastAPI  # Importando a classe FastAPI do FastAPI para criar o aplicativo
 
-from api.app.routers import users, auth
+from app.routers import users, auth
 
 # Criação da aplicação FastAPI com título personalizado
 # A classe FastAPI é a base da nossa aplicação web.
@@ -12,10 +12,14 @@ app = FastAPI(title="PSIMAR - Atendimento Psicológico")
 app.include_router(users.router)
 app.include_router(auth.router)
 
-
 # Rota inicial para testar o funcionamento da API
 # Definindo uma rota simples para verificar se a API está funcionando corretamente.
 @app.get("/")
 def home():
     # Retorna uma mensagem simples como resposta quando o endpoint "/" for acessado.
     return {"message": "Bem-vindo ao PSIMAR"}
+
+"""
+@app.post("/Login")
+def login
+"""

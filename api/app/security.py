@@ -8,9 +8,10 @@ from jose import JWTError, jwt  # Importando a biblioteca 'jose' para trabalhar 
 from passlib.context import CryptContext  # Importando 'CryptContext' para trabalhar com criptografia de senhas
 from sqlalchemy.orm import Session  # Importando Session do SQLAlchemy para interação com o banco de dados
 
-from api.app.database_app import SessionLocal  # Importando a função SessionLocal, que cria uma sessão do banco de dados
-from api.app.models import \
-    Usuario  # Importando o modelo Usuario para interagir com a tabela 'Usuarios' no banco de dados
+from app.database_app import SessionLocal, \
+    get_db  # Importando a função SessionLocal, que cria uma sessão do banco de dados
+from app.models.models import \
+    User  # Importando o modelo Usuario para interagir com a tabela 'Usuarios' no banco de dados
 
 SECRET_KEY = "chave-secreta-muito-segura"  # Chave secreta usada para assinar os tokens JWT. Deve ser substituída por uma chave forte e segura
 ALGORITHM = "HS256"  # Algoritmo de hash usado para assinar o JWT
@@ -44,15 +45,6 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)  # Gera o token JWT com os dados e a chave secreta
 
 
-# Função para obter uma sessão de banco de dados
-def get_db():
-    db = SessionLocal()  # Cria uma nova sessão do banco de dados
-    try:
-        yield db  # Retorna a sessão para ser usada nas dependências
-    finally:
-        db.close()  # Fecha a sessão ao final do uso
-
-
 # Função para obter o usuário atual a partir do token JWT
 def get_current_usuario(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     credentials_exception = HTTPException(  # Exceção a ser levantada se o token for inválido
@@ -71,20 +63,22 @@ def get_current_usuario(token: str = Depends(oauth2_scheme), db: Session = Depen
         raise credentials_exception  # Levanta a exceção de credenciais inválidas
 
     # Consulta o banco de dados para obter o usuário com o email informado no token
-    usuario = db.query(Usuario).filter(Usuario.email == email).first()
-    if Usuario is None:  # Se o usuário não for encontrado no banco
+    usuario = db.query(User).filter(User.email == email).first()
+    if User is None:  # Se o usuário não for encontrado no banco
         raise credentials_exception  # Levanta a exceção de credenciais inválidas
 
-    return Usuario  # Retorna o usuário autenticado
+    return User  # Retorna o usuário autenticado
 
 
+"""
 # Função para verificar se o usuário é um administrador
-def is_admin(current_Usuario: Usuario = Depends(
+def is_admin(current_User: User = Depends(
     get_current_usuario)):  # Dependência que verifica se o usuário atual é um administrador
-    """ Verifica se o usuário logado é um administrador """
-    if not current_Usuario.is_admin:  # Se o usuário não for administrador
+    Verifica se o usuário logado é um administrador 
+    if not current_User.is_admin:  # Se o usuário não for administrador
         raise HTTPException(  # Levanta uma exceção de acesso proibido
             status_code=status.HTTP_403_FORBIDDEN,  # Código de status HTTP para acesso proibido
             detail="Apenas administradores podem acessar essa rota",  # Detalhe da exceção
         )
-    return current_Usuario  # Retorna o usuário, se ele for administrador
+    return current_User  # Retorna o usuário, se ele for administrador
+"""

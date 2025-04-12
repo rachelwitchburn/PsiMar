@@ -2,13 +2,13 @@ from pydantic import BaseModel, EmailStr, field_validator
 from enum import Enum
 from typing import Optional
 
-# Usado quando o paciente faz o cadastro completo (senha)
-class UsuarioCadastroCompletoPaciente(BaseModel):
+# Usado quando o paciente faz o cadastro completo (password)
+class PatientCompleteRegistration(BaseModel):
     email: EmailStr
-    senha: str
+    password: str
 
-    @field_validator("senha")
-    def validar_senha(cls, senha):
-        if len(senha) < 6:
-            raise ValueError("A senha deve ter pelo menos 6 caracteres.")
-        return senha
+    @field_validator("password")
+    def validate_password(cls, password):
+        if len(password) < 6:
+            raise ValueError("A password deve ter pelo menos 6 caracteres.")
+        return password

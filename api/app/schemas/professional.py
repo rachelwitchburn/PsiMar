@@ -1,4 +1,4 @@
 from pydantic import BaseModel, EmailStr
 
-class UsuarioPreCadastro(BaseModel):
-    email: EmailStr
+class LoginProfessional(BaseModel):
+    access_code: str

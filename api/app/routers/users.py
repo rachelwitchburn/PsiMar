@@ -7,7 +7,7 @@ from app.crud.user_crud import create_user
 from app.database_app import SessionLocal
 from app.models.models import User, LoginAttempt
 from app.schemas.user import UserCreate, UserResponse
-from app.security import get_current_usuario, is_admin, verify_password, create_access_token
+from app.security import get_current_usuario, verify_password, create_access_token
 
 router = APIRouter(prefix="/users", tags=["users"])
 

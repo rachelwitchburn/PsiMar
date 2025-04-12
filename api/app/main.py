@@ -14,10 +14,15 @@ app.include_router(auth.router)
 
 # Rota inicial para testar o funcionamento da API
 # Definindo uma rota simples para verificar se a API está funcionando corretamente.
-@app.get("/")
+@app.get("/professionalHome")
 def home():
     # Retorna uma mensagem simples como resposta quando o endpoint "/" for acessado.
-    return {"message": "Bem-vindo ao PSIMAR"}
+    return {"message": "Bem-vindo, Maria"}
+
+@app.get("/patientHome")
+def home():
+    # Retorna uma mensagem simples como resposta quando o endpoint "/" for acessado.
+    return {"message": "Bem-vindo, {patient_name}}"}
 
 """
 @app.post("/Login")

@@ -8,26 +8,27 @@ def login(page):
     page.vertical_alignment = 'center'
     page.window_maximized = True
 
+
     def toggle_password():
-        Senha.password = not Senha.password
-        Senha.suffix.icon = ft.icons.VISIBILITY if Senha.password else ft.icons.VISIBILITY_OFF
+        Passwords.password = not Passwords.password
+        Passwords.suffix.icon = ft.icons.VISIBILITY if Passwords.password else ft.icons.VISIBILITY_OFF
         page.update()
 
     def login_action():
-        if not Usuario.value:
-            Usuario.error_text = "Campo obrigatório."
+        if not User.value:
+            User.error_text = "Campo obrigatório."
             page.update()
-        if not Senha.value:
-            Senha.error_text = "Campo obrigatório."
+        if not Passwords.value:
+            Passwords.error_text = "Campo obrigatório."
             page.update()
         else:
-            nome = Usuario.value
-            senha = Senha.value
+            nome = User.value
+            senha = Passwords.value
             print(f"nome: {nome}\n senha: {senha}")
             page.clean()
             page.add(ft.Text(f"Olá, {nome}"))
 
-    Usuario = ft.TextField(
+    User = ft.TextField(
         label="Usuário",
         label_style=ft.TextStyle(color="black"),
         width=300,
@@ -36,8 +37,8 @@ def login(page):
         bgcolor="white"
     )
 
-    Senha = ft.TextField(
-        label="Senha",
+    Passwords = ft.TextField(
+        label="Passwords",
         label_style=ft.TextStyle(color="black"),
         password=True,
         width=300,
@@ -65,8 +66,8 @@ def login(page):
                 content=ft.Column(
                     [
                         ft.Image(src="../assets/psi.png", width=100, height=100),
-                        Usuario,
-                        Senha,
+                        User,
+                        Passwords,
                         ft.Row(
                             [
                                 ft.ElevatedButton("Login", on_click=login_action, color="white", width=140,

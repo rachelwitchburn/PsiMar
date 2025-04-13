@@ -1,42 +1,65 @@
 import flet as ft
 
+from src.services import PsimarAPI
+
+
 def login(page):
     page.title = 'PsiMar'
     page.clean()
     
 
-    def toggle_password(e):
-        Senha.password = not Senha.password  
-        Senha.suffix.icon = ft.icons.VISIBILITY if Senha.password else ft.icons.VISIBILITY_OFF
+
+    def toggle_password():
+        Passwords.password = not Passwords.password
+        Passwords.suffix.icon = ft.icons.VISIBILITY if Passwords.password else ft.icons.VISIBILITY_OFF
         page.update()
 
     def login_action(e):
-        if not Usuario.value:
-            Usuario.error_text = "Campo obrigatório."
-            page.update()
-        if not Senha.value:
-            Senha.error_text = "Campo obrigatório."
-            page.update()
-        else:
-            nome = Usuario.value
-            senha = Senha.value
-            if nome == "1":
-                page.go("/usuario")  
-            elif nome == "2":
-                page.go("/psicologo")
-        # botar 1 no campo de usuario vai pra tela do paciente
-        # botar 2 vai pra tela do psicologo
+        user_input = User.value
+        password_input = Passwords.value
 
-    Usuario = ft.TextField(
+        User.error_text = ""
+        Passwords.error_text = ""
+        if not user_input:
+            User.error_text = "Campo obrigatório."
+        if not password_input:
+            Passwords.error_text = "Campo obrigatório."
+        page.update()
+
+        if User.error_text or Passwords.error_text:
+            return  # para execução se tiver erro
+
+        # Caso 1: Psicólogo - login com código de acesso
+        if user_input.startswith("PSI"):  # supondo que códigos comecem com 'PSI'
+            response = PsimarAPI().login_professional(user_input)
+
+            if "error" in response:
+                User.error_text = response["error"]
+                page.update()
+            else:
+                page.go("/psicologo")
+
+        # Caso 2: Paciente - login com e-mail/nome + senha
+        else:
+            response = PsimarAPI().login_patient(user_input, password_input)
+
+            if "error" in response:
+                User.error_text = response["error"]
+                page.update()
+            else:
+                page.go("/usuario")
+
+    User = ft.TextField(
         label="Usuário",
         width=310, 
         border_color="black", 
         color="black", 
         bgcolor="white"
     )
-    
-    Senha = ft.TextField(
-        label="Senha",
+
+    Passwords = ft.TextField(
+        label="Passwords",
+        label_style=ft.TextStyle(color="black"),
         password=True,
         width=310,
         border_color="black",
@@ -59,11 +82,10 @@ def login(page):
                 alignment=ft.alignment.center,
                 content=ft.Column(
                     [
-                        ft.Image(src="psi.png", width=100, height=100),
-                        Usuario,
-                        Senha,
-                        ft.ResponsiveRow(
-                            
+                        ft.Image(src="../assets/psi.png", width=100, height=100),
+                        User,
+                        Passwords,
+                        ft.Row(
                             [
                                 ft.Container(
                                     col ={"xs":1}

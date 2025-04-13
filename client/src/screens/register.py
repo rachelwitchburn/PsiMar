@@ -23,7 +23,7 @@ def register(page):
 
         page.update()
 
-    # A checkbox para aceitar os termos
+    # A checkbox para aceitar os termos -> TIRAR
     def handle_close(e):
         page.close(dlg)
 

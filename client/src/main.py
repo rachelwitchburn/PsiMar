@@ -1,5 +1,6 @@
 import flet as ft
 
+from services import PsimarAPI
 from screens.login import login
 from screens.register import register
 from screens.usuario_tela import usuario
@@ -13,21 +14,27 @@ from screens.gerenciar_horarios import gerenciar_horarios
 
 
 def main(page: ft.Page):
+    page.title = "PsiMar"
     page.window.width = 380  
     page.window.height = 700  
     page.window.resizable = False
     page.update()
+    psimar_api = PsimarAPI()
+    #users = psimar_api.get_users()
+    #print(users)
 
+# funcao que troca rotas pro usuario
+
+    routes = {
+        "/": login,
+        "/register": register,
+        "/usuario": usuario,
+        "/psicologo": psicologo
+    }
 
     def route_change(route):
         page.views.clear()
-        if page.route == "/":
-            page.views.append(login(page))
-        elif page.route == "/register":
-            page.views.append(register(page))
-        elif page.route == "/usuario":
-            page.views.append(usuario(page))
-        elif page.route == "/psicologo":
+        if page.route in routes:
             page.views.append(psicologo(page))
         elif page.route == "/nsenha":
             page.views.append(mudar_senha(page)) 

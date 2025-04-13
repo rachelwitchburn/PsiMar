@@ -499,7 +499,7 @@
     </routine>
     <schema id="191" parent="1" name="main">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2025-04-09.04:02:27</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2025-04-11.03:44:20</LastIntrospectionLocalTimestamp>
     </schema>
     <argument id="192" parent="16">
       <ArgumentDirection>R</ArgumentDirection>
@@ -1590,131 +1590,129 @@
     <argument id="554" parent="190">
       <Position>1</Position>
     </argument>
-    <table id="555" parent="191" name="agenda"/>
+    <table id="555" parent="191" name="access_code"/>
     <table id="556" parent="191" name="alembic_version"/>
-    <table id="557" parent="191" name="codigos_acesso"/>
-    <table id="558" parent="191" name="consulta"/>
-    <table id="559" parent="191" name="feedback"/>
-    <table id="560" parent="191" name="login_attempts"/>
-    <table id="561" parent="191" name="paciente"/>
-    <table id="562" parent="191" name="pagamento"/>
-    <table id="563" parent="191" name="psicologo"/>
+    <table id="557" parent="191" name="appointment"/>
+    <table id="558" parent="191" name="feedback"/>
+    <table id="559" parent="191" name="login_attempt"/>
+    <table id="560" parent="191" name="patient"/>
+    <table id="561" parent="191" name="payment"/>
+    <table id="562" parent="191" name="professional"/>
+    <table id="563" parent="191" name="schedule"/>
     <table id="564" parent="191" name="sqlite_master">
       <System>1</System>
     </table>
-    <table id="565" parent="191" name="tarefa"/>
-    <table id="566" parent="191" name="usuario"/>
-    <column id="567" parent="555" name="id">
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>INTEGER|0s</StoredType>
-    </column>
-    <column id="568" parent="555" name="psicologo_id">
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-      <StoredType>INTEGER|0s</StoredType>
-    </column>
-    <column id="569" parent="555" name="data_horario">
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-      <StoredType>DATETIME|0s</StoredType>
-    </column>
-    <column id="570" parent="555" name="paciente_id">
-      <Position>4</Position>
-      <StoredType>INTEGER|0s</StoredType>
-    </column>
-    <foreign-key id="571" parent="555">
-      <ColNames>psicologo_id</ColNames>
-      <RefColNames>id</RefColNames>
-      <RefTableName>psicologo</RefTableName>
-    </foreign-key>
-    <foreign-key id="572" parent="555">
-      <ColNames>paciente_id</ColNames>
-      <RefColNames>id</RefColNames>
-      <RefTableName>paciente</RefTableName>
-    </foreign-key>
-    <index id="573" parent="555" name="sqlite_autoindex_agenda_1">
-      <ColNames>data_horario</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <Unique>1</Unique>
-    </index>
-    <key id="574" parent="555">
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <key id="575" parent="555">
-      <ColNames>data_horario</ColNames>
-      <UnderlyingIndexName>sqlite_autoindex_agenda_1</UnderlyingIndexName>
-    </key>
-    <column id="576" parent="556" name="version_num">
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>VARCHAR(32)|0s</StoredType>
-    </column>
-    <index id="577" parent="556" name="sqlite_autoindex_alembic_version_1">
-      <ColNames>version_num</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <Unique>1</Unique>
-    </index>
-    <key id="578" parent="556" name="alembic_version_pkc">
-      <ColNames>version_num</ColNames>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_alembic_version_1</UnderlyingIndexName>
-    </key>
-    <column id="579" parent="557" name="codigo">
+    <table id="565" parent="191" name="task"/>
+    <table id="566" parent="191" name="user"/>
+    <column id="567" parent="555" name="code">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>VARCHAR|0s</StoredType>
     </column>
-    <column id="580" parent="557" name="utilizado">
+    <column id="568" parent="555" name="email">
+      <NotNull>1</NotNull>
       <Position>2</Position>
+      <StoredType>VARCHAR|0s</StoredType>
+    </column>
+    <column id="569" parent="555" name="used">
+      <Position>3</Position>
       <StoredType>BOOLEAN|0s</StoredType>
     </column>
-    <index id="581" parent="557" name="sqlite_autoindex_codigos_acesso_1">
-      <ColNames>codigo</ColNames>
+    <index id="570" parent="555" name="sqlite_autoindex_access_code_1">
+      <ColNames>code</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <key id="582" parent="557">
-      <ColNames>codigo</ColNames>
+    <key id="571" parent="555">
+      <ColNames>code</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_codigos_acesso_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_access_code_1</UnderlyingIndexName>
     </key>
+    <key id="572" parent="555">
+      <ColNames>code</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_access_code_1</UnderlyingIndexName>
+    </key>
+    <column id="573" parent="556" name="version_num">
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>VARCHAR(32)|0s</StoredType>
+    </column>
+    <index id="574" parent="556" name="sqlite_autoindex_alembic_version_1">
+      <ColNames>version_num</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="575" parent="556" name="alembic_version_pkc">
+      <ColNames>version_num</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_alembic_version_1</UnderlyingIndexName>
+    </key>
+    <column id="576" parent="557" name="id">
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>INTEGER|0s</StoredType>
+    </column>
+    <column id="577" parent="557" name="date_time">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StoredType>DATETIME|0s</StoredType>
+    </column>
+    <column id="578" parent="557" name="status">
+      <Position>3</Position>
+      <StoredType>VARCHAR(9)|0s</StoredType>
+    </column>
+    <column id="579" parent="557" name="professional_id">
+      <Position>4</Position>
+      <StoredType>INTEGER|0s</StoredType>
+    </column>
+    <column id="580" parent="557" name="patient_id">
+      <Position>5</Position>
+      <StoredType>INTEGER|0s</StoredType>
+    </column>
+    <foreign-key id="581" parent="557">
+      <ColNames>professional_id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>professional</RefTableName>
+    </foreign-key>
+    <foreign-key id="582" parent="557">
+      <ColNames>patient_id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>patient</RefTableName>
+    </foreign-key>
     <key id="583" parent="557">
-      <ColNames>codigo</ColNames>
-      <UnderlyingIndexName>sqlite_autoindex_codigos_acesso_1</UnderlyingIndexName>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
     </key>
     <column id="584" parent="558" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="585" parent="558" name="data_horario">
-      <NotNull>1</NotNull>
+    <column id="585" parent="558" name="patient_id">
       <Position>2</Position>
+      <StoredType>INTEGER|0s</StoredType>
+    </column>
+    <column id="586" parent="558" name="professional_id">
+      <Position>3</Position>
+      <StoredType>INTEGER|0s</StoredType>
+    </column>
+    <column id="587" parent="558" name="date">
+      <Position>4</Position>
       <StoredType>DATETIME|0s</StoredType>
     </column>
-    <column id="586" parent="558" name="status">
-      <Position>3</Position>
-      <StoredType>VARCHAR(10)|0s</StoredType>
-    </column>
-    <column id="587" parent="558" name="psicologo_id">
-      <Position>4</Position>
-      <StoredType>INTEGER|0s</StoredType>
-    </column>
-    <column id="588" parent="558" name="paciente_id">
+    <column id="588" parent="558" name="message">
       <Position>5</Position>
-      <StoredType>INTEGER|0s</StoredType>
+      <StoredType>TEXT|0s</StoredType>
     </column>
     <foreign-key id="589" parent="558">
-      <ColNames>psicologo_id</ColNames>
+      <ColNames>patient_id</ColNames>
       <RefColNames>id</RefColNames>
-      <RefTableName>psicologo</RefTableName>
+      <RefTableName>patient</RefTableName>
     </foreign-key>
     <foreign-key id="590" parent="558">
-      <ColNames>paciente_id</ColNames>
+      <ColNames>professional_id</ColNames>
       <RefColNames>id</RefColNames>
-      <RefTableName>paciente</RefTableName>
+      <RefTableName>professional</RefTableName>
     </foreign-key>
     <key id="591" parent="558">
       <ColNames>id</ColNames>
@@ -1725,267 +1723,285 @@
       <Position>1</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="593" parent="559" name="paciente_id">
+    <column id="593" parent="559" name="user_id">
       <Position>2</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="594" parent="559" name="psicologo_id">
+    <column id="594" parent="559" name="failed_attempts">
       <Position>3</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="595" parent="559" name="data">
+    <column id="595" parent="559" name="lock_until">
       <Position>4</Position>
       <StoredType>DATETIME|0s</StoredType>
     </column>
-    <column id="596" parent="559" name="mensagem">
+    <column id="596" parent="559" name="last_attempt">
       <Position>5</Position>
-      <StoredType>TEXT|0s</StoredType>
+      <StoredType>DATETIME|0s</StoredType>
     </column>
     <foreign-key id="597" parent="559">
-      <ColNames>paciente_id</ColNames>
+      <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
-      <RefTableName>paciente</RefTableName>
+      <RefTableName>user</RefTableName>
     </foreign-key>
-    <foreign-key id="598" parent="559">
-      <ColNames>psicologo_id</ColNames>
-      <RefColNames>id</RefColNames>
-      <RefTableName>psicologo</RefTableName>
-    </foreign-key>
+    <index id="598" parent="559" name="sqlite_autoindex_login_attempt_1">
+      <ColNames>user_id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
     <key id="599" parent="559">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="600" parent="560" name="id">
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>INTEGER|0s</StoredType>
-    </column>
-    <column id="601" parent="560" name="user_id">
-      <Position>2</Position>
-      <StoredType>INTEGER|0s</StoredType>
-    </column>
-    <column id="602" parent="560" name="failed_attempts">
-      <Position>3</Position>
-      <StoredType>INTEGER|0s</StoredType>
-    </column>
-    <column id="603" parent="560" name="lock_until">
-      <Position>4</Position>
-      <StoredType>DATETIME|0s</StoredType>
-    </column>
-    <index id="604" parent="560" name="ix_login_attempts_id">
-      <ColNames>id</ColNames>
-    </index>
-    <index id="605" parent="560" name="ix_login_attempts_user_id">
+    <key id="600" parent="559">
       <ColNames>user_id</ColNames>
-    </index>
-    <key id="606" parent="560">
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>ix_login_attempts_id</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_login_attempt_1</UnderlyingIndexName>
     </key>
-    <column id="607" parent="561" name="id">
+    <column id="601" parent="560" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="608" parent="561" name="psicologo_id">
+    <column id="602" parent="560" name="professional_id">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <foreign-key id="609" parent="561">
+    <foreign-key id="603" parent="560">
       <ColNames>id</ColNames>
       <RefColNames>id</RefColNames>
-      <RefTableName>usuario</RefTableName>
+      <RefTableName>user</RefTableName>
     </foreign-key>
-    <foreign-key id="610" parent="561">
-      <ColNames>psicologo_id</ColNames>
+    <foreign-key id="604" parent="560">
+      <ColNames>professional_id</ColNames>
       <RefColNames>id</RefColNames>
-      <RefTableName>psicologo</RefTableName>
+      <RefTableName>professional</RefTableName>
     </foreign-key>
-    <key id="611" parent="561">
+    <key id="605" parent="560">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="612" parent="562" name="id">
+    <column id="606" parent="561" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="613" parent="562" name="consulta_id">
+    <column id="607" parent="561" name="appointment_id">
       <Position>2</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="614" parent="562" name="paciente_id">
+    <column id="608" parent="561" name="patient_id">
       <Position>3</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="615" parent="562" name="psicologo_id">
+    <column id="609" parent="561" name="professional_id">
       <Position>4</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="616" parent="562" name="valor">
+    <column id="610" parent="561" name="amount">
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StoredType>DECIMAL(10,2)|0s</StoredType>
     </column>
-    <column id="617" parent="562" name="status">
+    <column id="611" parent="561" name="status">
       <Position>6</Position>
       <StoredType>VARCHAR(9)|0s</StoredType>
     </column>
-    <column id="618" parent="562" name="metodo_pagamento">
+    <column id="612" parent="561" name="payment_method">
       <Position>7</Position>
-      <StoredType>VARCHAR(13)|0s</StoredType>
+      <StoredType>VARCHAR(8)|0s</StoredType>
     </column>
-    <foreign-key id="619" parent="562">
-      <ColNames>consulta_id</ColNames>
+    <foreign-key id="613" parent="561">
+      <ColNames>appointment_id</ColNames>
       <RefColNames>id</RefColNames>
-      <RefTableName>consulta</RefTableName>
+      <RefTableName>appointment</RefTableName>
     </foreign-key>
-    <foreign-key id="620" parent="562">
-      <ColNames>paciente_id</ColNames>
+    <foreign-key id="614" parent="561">
+      <ColNames>patient_id</ColNames>
       <RefColNames>id</RefColNames>
-      <RefTableName>paciente</RefTableName>
+      <RefTableName>patient</RefTableName>
     </foreign-key>
-    <foreign-key id="621" parent="562">
-      <ColNames>psicologo_id</ColNames>
+    <foreign-key id="615" parent="561">
+      <ColNames>professional_id</ColNames>
       <RefColNames>id</RefColNames>
-      <RefTableName>psicologo</RefTableName>
+      <RefTableName>professional</RefTableName>
     </foreign-key>
-    <key id="622" parent="562">
+    <key id="616" parent="561">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="623" parent="563" name="id">
+    <column id="617" parent="562" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="624" parent="563" name="codigoAcesso">
+    <column id="618" parent="562" name="access_code">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>VARCHAR|0s</StoredType>
     </column>
-    <foreign-key id="625" parent="563">
+    <foreign-key id="619" parent="562">
       <ColNames>id</ColNames>
       <RefColNames>id</RefColNames>
-      <RefTableName>usuario</RefTableName>
+      <RefTableName>user</RefTableName>
     </foreign-key>
-    <foreign-key id="626" parent="563">
-      <ColNames>codigoAcesso</ColNames>
-      <RefColNames>codigo</RefColNames>
-      <RefTableName>codigos_acesso</RefTableName>
+    <foreign-key id="620" parent="562">
+      <ColNames>access_code</ColNames>
+      <RefColNames>code</RefColNames>
+      <RefTableName>access_code</RefTableName>
     </foreign-key>
-    <key id="627" parent="563">
+    <key id="621" parent="562">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="628" parent="564" name="type">
+    <column id="622" parent="563" name="id">
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>INTEGER|0s</StoredType>
+    </column>
+    <column id="623" parent="563" name="professional_id">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StoredType>INTEGER|0s</StoredType>
+    </column>
+    <column id="624" parent="563" name="date_time">
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StoredType>DATETIME|0s</StoredType>
+    </column>
+    <column id="625" parent="563" name="patient_id">
+      <Position>4</Position>
+      <StoredType>INTEGER|0s</StoredType>
+    </column>
+    <foreign-key id="626" parent="563">
+      <ColNames>professional_id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>professional</RefTableName>
+    </foreign-key>
+    <foreign-key id="627" parent="563">
+      <ColNames>patient_id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>patient</RefTableName>
+    </foreign-key>
+    <index id="628" parent="563" name="sqlite_autoindex_schedule_1">
+      <ColNames>date_time</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="629" parent="563">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="630" parent="563">
+      <ColNames>date_time</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_schedule_1</UnderlyingIndexName>
+    </key>
+    <column id="631" parent="564" name="type">
       <Position>1</Position>
       <StoredType>TEXT|0s</StoredType>
     </column>
-    <column id="629" parent="564" name="name">
+    <column id="632" parent="564" name="name">
       <Position>2</Position>
       <StoredType>TEXT|0s</StoredType>
     </column>
-    <column id="630" parent="564" name="tbl_name">
+    <column id="633" parent="564" name="tbl_name">
       <Position>3</Position>
       <StoredType>TEXT|0s</StoredType>
     </column>
-    <column id="631" parent="564" name="rootpage">
+    <column id="634" parent="564" name="rootpage">
       <Position>4</Position>
       <StoredType>INT|0s</StoredType>
     </column>
-    <column id="632" parent="564" name="sql">
+    <column id="635" parent="564" name="sql">
       <Position>5</Position>
       <StoredType>TEXT|0s</StoredType>
     </column>
-    <column id="633" parent="565" name="id">
+    <column id="636" parent="565" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="634" parent="565" name="paciente_id">
+    <column id="637" parent="565" name="patient_id">
       <Position>2</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="635" parent="565" name="psicologo_id">
+    <column id="638" parent="565" name="professional_id">
       <Position>3</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="636" parent="565" name="descricao">
+    <column id="639" parent="565" name="description">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StoredType>TEXT|0s</StoredType>
     </column>
-    <column id="637" parent="565" name="data_criacao">
+    <column id="640" parent="565" name="created_at">
       <Position>5</Position>
       <StoredType>DATETIME|0s</StoredType>
     </column>
-    <column id="638" parent="565" name="data_limite">
+    <column id="641" parent="565" name="due_date">
       <Position>6</Position>
       <StoredType>DATETIME|0s</StoredType>
     </column>
-    <column id="639" parent="565" name="status">
+    <column id="642" parent="565" name="status">
       <Position>7</Position>
       <StoredType>VARCHAR(9)|0s</StoredType>
     </column>
-    <foreign-key id="640" parent="565">
-      <ColNames>paciente_id</ColNames>
+    <foreign-key id="643" parent="565">
+      <ColNames>patient_id</ColNames>
       <RefColNames>id</RefColNames>
-      <RefTableName>paciente</RefTableName>
+      <RefTableName>patient</RefTableName>
     </foreign-key>
-    <foreign-key id="641" parent="565">
-      <ColNames>psicologo_id</ColNames>
+    <foreign-key id="644" parent="565">
+      <ColNames>professional_id</ColNames>
       <RefColNames>id</RefColNames>
-      <RefTableName>psicologo</RefTableName>
+      <RefTableName>professional</RefTableName>
     </foreign-key>
-    <key id="642" parent="565">
+    <key id="645" parent="565">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="643" parent="566" name="id">
+    <column id="646" parent="566" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="644" parent="566" name="nome">
+    <column id="647" parent="566" name="first_name">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>VARCHAR|0s</StoredType>
     </column>
-    <column id="645" parent="566" name="sobrenome">
+    <column id="648" parent="566" name="last_name">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>VARCHAR|0s</StoredType>
     </column>
-    <column id="646" parent="566" name="email">
+    <column id="649" parent="566" name="email">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StoredType>VARCHAR|0s</StoredType>
     </column>
-    <column id="647" parent="566" name="tipo_usuario">
+    <column id="650" parent="566" name="password">
       <NotNull>1</NotNull>
       <Position>5</Position>
-      <StoredType>VARCHAR(9)|0s</StoredType>
-    </column>
-    <column id="648" parent="566" name="sena">
-      <NotNull>1</NotNull>
-      <Position>6</Position>
       <StoredType>VARCHAR|0s</StoredType>
     </column>
-    <index id="649" parent="566" name="sqlite_autoindex_usuario_1">
+    <column id="651" parent="566" name="user_type">
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+      <StoredType>VARCHAR(12)|0s</StoredType>
+    </column>
+    <index id="652" parent="566" name="sqlite_autoindex_user_1">
       <ColNames>email</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <key id="650" parent="566">
+    <key id="653" parent="566">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="651" parent="566">
+    <key id="654" parent="566">
       <ColNames>email</ColNames>
-      <UnderlyingIndexName>sqlite_autoindex_usuario_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_user_1</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>

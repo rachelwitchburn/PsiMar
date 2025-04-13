@@ -46,7 +46,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
 
 
 # Função para obter o usuário atual a partir do token JWT
-def get_current_usuario(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     credentials_exception = HTTPException(  # Exceção a ser levantada se o token for inválido
         status_code=status.HTTP_401_UNAUTHORIZED,  # Código de status HTTP para não autorizado
         detail="Token inválido",  # Detalhe da exceção

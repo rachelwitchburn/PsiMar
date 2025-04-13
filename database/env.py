@@ -5,7 +5,7 @@ from logging.config import fileConfig  # Para configurar o logging do Alembic
 from sqlalchemy import engine_from_config  # Para criar o motor de conexão do SQLAlchemy
 from sqlalchemy import pool  # Para gerenciar pools de conexões no SQLAlchemy
 from alembic import context  # Contexto do Alembic para migrações
-from api.app.models import Base  # Importa o modelo Base, que contém a metadata dos modelos de banco de dados
+from api.app.models.models import Base  # Importa o modelo Base, que contém a metadata dos modelos de banco de dados
 
 # Carrega as variáveis de ambiente do arquivo .env, se disponível
 load_dotenv()

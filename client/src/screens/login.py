@@ -1,5 +1,7 @@
 import flet as ft
 
+from src.services import PsimarAPI
+
 
 def login(page):
     page.title = 'PsiMar'
@@ -14,19 +16,40 @@ def login(page):
         Passwords.suffix.icon = ft.icons.VISIBILITY if Passwords.password else ft.icons.VISIBILITY_OFF
         page.update()
 
-    def login_action():
-        if not User.value:
+    def login_action(e):
+        user_input = User.value
+        password_input = Passwords.value
+
+        User.error_text = ""
+        Passwords.error_text = ""
+        if not user_input:
             User.error_text = "Campo obrigatório."
-            page.update()
-        if not Passwords.value:
+        if not password_input:
             Passwords.error_text = "Campo obrigatório."
-            page.update()
+        page.update()
+
+        if User.error_text or Passwords.error_text:
+            return  # para execução se tiver erro
+
+        # Caso 1: Psicólogo - login com código de acesso
+        if user_input.startswith("PSI"):  # supondo que códigos comecem com 'PSI'
+            response = PsimarAPI().login_professional(user_input)
+
+            if "error" in response:
+                User.error_text = response["error"]
+                page.update()
+            else:
+                page.go("/psicologo")
+
+        # Caso 2: Paciente - login com e-mail/nome + senha
         else:
-            nome = User.value
-            senha = Passwords.value
-            print(f"nome: {nome}\n senha: {senha}")
-            page.clean()
-            page.add(ft.Text(f"Olá, {nome}"))
+            response = PsimarAPI().login_patient(user_input, password_input)
+
+            if "error" in response:
+                User.error_text = response["error"]
+                page.update()
+            else:
+                page.go("/usuario")
 
     User = ft.TextField(
         label="Usuário",

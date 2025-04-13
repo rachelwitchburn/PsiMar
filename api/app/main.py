@@ -1,6 +1,7 @@
 from fastapi import FastAPI  # Importando a classe FastAPI do FastAPI para criar o aplicativo
 
-from app.routers import users, auth
+#se aberto do projeto_gerencia
+from api.app.routers import users, auth
 
 # Criação da aplicação FastAPI com título personalizado
 # A classe FastAPI é a base da nossa aplicação web.

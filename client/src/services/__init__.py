@@ -1,1 +1,1 @@
-from .psimar_api import PsimarAPI
+from .professional_api import PsimarAPI

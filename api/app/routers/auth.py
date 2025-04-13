@@ -8,7 +8,7 @@ from app.database_app import \
     SessionLocal
 from app.models.models import User
 from app.security import create_access_token, verify_password, \
-    get_current_usuario
+    get_current_user
 
 router = APIRouter(prefix="/auth",
                    tags=["auth"])
@@ -58,7 +58,7 @@ def login(email: str, senha: str, db: Session = Depends(get_db)):
 
 
 @router.post("/reset-password")
-def reset_password(nova_senha: str, current_usuario: User = Depends(get_current_usuario),
+def reset_password(nova_senha: str, current_usuario: User = Depends(get_current_user),
                    db: Session = Depends(get_db)):
     """
     Rota para usuários autenticados redefinirem sua própria senha.

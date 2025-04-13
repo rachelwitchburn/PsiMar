@@ -7,7 +7,7 @@ from app.crud.user_crud import create_user
 from app.database_app import SessionLocal
 from app.models.models import User, LoginAttempt
 from app.schemas.user import UserCreate, UserResponse
-from app.security import get_current_usuario, verify_password, create_access_token
+from app.security import get_current_user, verify_password, create_access_token
 
 router = APIRouter(prefix="/users", tags=["users"])
 
@@ -34,7 +34,7 @@ def register_user(usuario: UserCreate, db: Session = Depends(get_db)):
 
 
 @router.get("/me", response_model=UserResponse)
-def get_my_profile(current_user: User = Depends(get_current_usuario)):
+def get_my_profile(current_user: User = Depends(get_current_user)):
     """
     Rota para usuários autenticados verem seu próprio perfil.
     """

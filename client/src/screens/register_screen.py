@@ -5,50 +5,45 @@ from flet_core import FontWeight
 def register(page):
     page.title = 'PsiMar'
 
-    Senha = ft.Ref[ft.TextField]()  
-    
+    password = ft.Ref[ft.TextField]()
+    confirm_password = ft.Ref[ft.TextField]()
+    username = ft.Ref[ft.TextField]()
+
     def toggle_password(e):
-        senha_field = Senha.current
-        senha_field.password = not senha_field.password
-        senha_field.suffix.icon = ft.icons.VISIBILITY if senha_field.password else ft.icons.VISIBILITY_OFF
+        for field_ref in [password, confirm_password]:
+            field = field_ref.current
+            field.password = not field.password
+            field.suffix.icon = ft.icons.VISIBILITY if field.password else ft.icons.VISIBILITY_OFF
         page.update()
 
-    def show_form(tipo):
+    def show_form(user_type):
         form_container.clean()
-
-        if tipo == "psicologo":
-            form_container.content = psicologo_form()
-        else:
-            form_container.content = paciente_form()
-
+        form_container.content = create_form(user_type)
         page.update()
 
-    # A checkbox para aceitar os termos -> TIRAR
-    def handle_close(e):
-        page.close(dlg)
+    def handle_register(user_type: str):
+        if not username.current.value or not password.current.value or not confirm_password.current.value:
+            show_message("Todos os campos são obrigatórios.")
+            return
 
-    dlg = ft.AlertDialog(modal=True,
-                         title=ft.Text("Termos de uso"),
-                         content=ft.Column([
-                             ft.Text("Texto dos termos aqui"),
-                             ft.Checkbox(
-                                 label="Aceito os termos de uso",
-                             ),
-                         ]),
-                         actions=[
+        if password.current.value != confirm_password.current.value:
+            show_message("As senhas não coincidem.")
+            return
 
-                             ft.TextButton("Fechar", on_click=handle_close),
-                         ],
-                         actions_alignment=ft.MainAxisAlignment.END,
-                         on_dismiss=lambda e: page.add(
-                             ft.Text("Modal dialog dismissed"),
-                         ),
-                         )
+        # Aqui você pode fazer a requisição à API futuramente
+        destination = "/professional" if user_type == "/professional" else "/user"
+        page.go(destination)
 
-    def psicologo_form():
+    def show_message(msg: str):
+        page.snack_bar = ft.SnackBar(content=ft.Text(msg), bgcolor="red")
+        page.snack_bar.open = True
+        page.update()
+
+    def create_form(user_type: str):
         return ft.Column([
             ft.TextField(
-                label="Código",
+                ref=username,
+                label="Código" if user_type == "professional" else "Email",
                 label_style=ft.TextStyle(color="black"),
                 width=300,
                 border_color="black",
@@ -56,7 +51,7 @@ def register(page):
                 bgcolor="white"
             ),
             ft.TextField(
-                ref=Senha,
+                ref=password,
                 label="Senha",
                 label_style=ft.TextStyle(color="black"),
                 password=True,
@@ -70,37 +65,9 @@ def register(page):
                     on_click=toggle_password
                 )
             ),
-            ft.TextButton("Termos de uso", on_click=lambda e: page.open(dlg)),
-            ft.ElevatedButton(
-                "Registrar",
-                on_click=lambda e: page.go("/psicologo"),
-                width=150,
-                style=ft.ButtonStyle(
-                    shape=ft.RoundedRectangleBorder(radius=5),
-                    elevation=5,
-                    overlay_color="rgba(255, 255, 255, 0.2)",
-                    bgcolor="#847769",
-                    color="white"
-                )
-            )
-        ],
-            alignment=ft.MainAxisAlignment.CENTER,
-            horizontal_alignment=ft.CrossAxisAlignment.CENTER
-        )
-
-    def paciente_form():
-        return ft.Column([
             ft.TextField(
-                label="Email",
-                label_style=ft.TextStyle(color="black"),
-                width=300,
-                border_color="black",
-                color="black",
-                bgcolor="white"
-            ),
-            ft.TextField(
-                ref=Senha,
-                label="Senha",
+                ref=confirm_password,
+                label="Confirmar Senha",
                 label_style=ft.TextStyle(color="black"),
                 password=True,
                 width=300,
@@ -113,16 +80,15 @@ def register(page):
                     on_click=toggle_password
                 )
             ),
-            ft.TextButton("Termos de uso", on_click=lambda e: page.open(dlg)),
             ft.ElevatedButton(
                 "Registrar",
-                on_click=lambda e: page.go("/usuario"),
+                on_click=lambda e: handle_register(user_type),
                 width=150,
                 style=ft.ButtonStyle(
                     shape=ft.RoundedRectangleBorder(radius=5),
                     elevation=5,
                     overlay_color="rgba(255, 255, 255, 0.2)",
-                    bgcolor="#847769",
+                    bgcolor="black",
                     color="white"
                 )
             )
@@ -155,7 +121,7 @@ def register(page):
                                               shape=ft.RoundedRectangleBorder(radius=5),
                                               elevation=5,
                                               overlay_color="rgba(255, 255, 255, 0.2)",
-                                              bgcolor="#847769",
+                                              bgcolor="black",
                                               color="white"
                                           )),
                         ft.ElevatedButton("Sou Paciente", on_click=lambda e: show_form("paciente"),
@@ -163,7 +129,7 @@ def register(page):
                                               shape=ft.RoundedRectangleBorder(radius=5),
                                               elevation=5,
                                               overlay_color="rgba(255, 255, 255, 0.2)",
-                                              bgcolor="#847769",
+                                              bgcolor="black",
                                               color="white"
                                           )),
                     ], alignment=ft.MainAxisAlignment.CENTER, spacing=20),

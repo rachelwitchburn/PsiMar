@@ -1,18 +1,20 @@
 # Importa as bibliotecas necessárias
 import os  # Para manipulação de variáveis de ambiente e caminhos
+
 from dotenv import load_dotenv  # Para carregar variáveis de ambiente de um arquivo .env
 from logging.config import fileConfig  # Para configurar o logging do Alembic
 from sqlalchemy import engine_from_config  # Para criar o motor de conexão do SQLAlchemy
 from sqlalchemy import pool  # Para gerenciar pools de conexões no SQLAlchemy
 from alembic import context  # Contexto do Alembic para migrações
 from api.app.models.models import Base  # Importa o modelo Base, que contém a metadata dos modelos de banco de dados
-
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 # Carrega as variáveis de ambiente do arquivo .env, se disponível
 load_dotenv()
-
 # Obtém a URL de conexão com o banco de dados a partir das variáveis de ambiente ou usa um valor padrão
-url = os.getenv("DATABASE_URL", "sqlite:///default.db")  # A URL do banco de dados, ou "sqlite:///default.db" se não estiver definida
-
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./database.sqlite")
+engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 # Configuração do Alembic - prepara o arquivo de configuração do Alembic
 config = context.config  # Carrega as configurações do Alembic
 
@@ -27,7 +29,7 @@ def run_migrations_offline() -> None:
     """Executar migrações no modo 'offline'."""
     # Configura o contexto do Alembic para trabalhar offline (usando URL diretamente)
     context.configure(
-        url=url,  # URL do banco de dados
+        url=DATABASE_URL,  # URL do banco de dados
         target_metadata=target_metadata,  # Metadata dos modelos do banco de dados
         literal_binds=True,  # Usa a ligação literal dos parâmetros (em vez de placeholders)
         dialect_opts={"paramstyle": "named"},  # Estilo de parâmetros nomeados para o banco de dados

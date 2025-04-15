@@ -4,6 +4,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import declarative_base, relationship
 
+
 Base = declarative_base()
 
 
@@ -18,6 +19,11 @@ class AppointmentStatusEnum(enum.Enum):
     canceled = 'canceled'
     completed = 'completed'
 
+class PaymentStatusEnum(enum.Enum):
+    pending = 'pending'
+    completed = 'completed'
+    failed = 'failed'
+    refunded = 'refunded'
 
 class TaskStatusEnum(enum.Enum):
     pending = 'pending'
@@ -90,6 +96,7 @@ class Appointment(Base):
     status = Column(Enum(AppointmentStatusEnum), default=AppointmentStatusEnum.requested)
     professional_id = Column(Integer, ForeignKey('professional.id'))
     patient_id = Column(Integer, ForeignKey('patient.id'))
+    created_at = Column(DateTime, server_default=func.now())
 
     professional = relationship("Professional", back_populates="appointments")
     patient = relationship("Patient", back_populates="appointments")
@@ -114,7 +121,7 @@ class Feedback(Base):
     id = Column(Integer, primary_key=True)
     patient_id = Column(Integer, ForeignKey('patient.id'))
     professional_id = Column(Integer, ForeignKey('professional.id'))
-    date = Column(DateTime)
+    date = Column(DateTime, server_default=func.now())
     message = Column(Text)
 
     patient = relationship("Patient", back_populates="feedbacks")
@@ -128,7 +135,7 @@ class Task(Base):
     patient_id = Column(Integer, ForeignKey('patient.id'))
     professional_id = Column(Integer, ForeignKey('professional.id'))
     description = Column(Text, nullable=False)
-    created_at = Column(DateTime)
+    created_at = Column(DateTime, server_default=func.now())
     due_date = Column(DateTime)
     status = Column(Enum(TaskStatusEnum), default=TaskStatusEnum.pending)
 
@@ -144,8 +151,9 @@ class Payment(Base):
     patient_id = Column(Integer, ForeignKey('patient.id'))
     professional_id = Column(Integer, ForeignKey('professional.id'))
     amount = Column(DECIMAL(10, 2), nullable=False)
-    status = Column(Enum(TaskStatusEnum), default=TaskStatusEnum.pending)
+    status = Column(Enum(PaymentStatusEnum), default=PaymentStatusEnum.pending)
     payment_method = Column(Enum(PaymentMethodEnum))
+    created_at = Column(DateTime, server_default=func.now())
 
     appointment = relationship("Appointment", back_populates="payment")
     patient = relationship("Patient", back_populates="payments")
@@ -159,6 +167,6 @@ class LoginAttempt(Base):
     user_id = Column(Integer, ForeignKey('user.id'), unique=True)
     failed_attempts = Column(Integer, default=0)
     lock_until = Column(DateTime, nullable=True)
-    last_attempt = Column(DateTime, default=func.now())
+    last_attempt = Column(DateTime, server_default=func.now())
 
     user = relationship("User")

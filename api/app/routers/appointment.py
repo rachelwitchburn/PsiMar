@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from app import crud, models, schemas
+from app import crud, schemas
 from app.database_app import get_db
 from app.schemas.appointment import CreateAppointment
 

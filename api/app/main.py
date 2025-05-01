@@ -1,7 +1,7 @@
 from fastapi import FastAPI  # Importando a classe FastAPI do FastAPI para criar o aplicativo
 
 #se aberto do projeto_gerencia
-from api.app.routers import users, auth
+from app.routers import users, auth, patient, professional, schedule
 
 # Criação da aplicação FastAPI com título personalizado
 # A classe FastAPI é a base da nossa aplicação web.
@@ -12,6 +12,12 @@ app = FastAPI(title="PSIMAR - Atendimento Psicológico")
 # O router 'users' gerencia tudo relacionado aos usuários e o router 'auth' gerencia as rotas de autenticação.
 app.include_router(users.router)
 app.include_router(auth.router)
+
+app.include_router(patient.router)
+
+app.include_router(professional.router)
+
+app.include_router(schedule.router)
 
 # Rota inicial para testar o funcionamento da API
 # Definindo uma rota simples para verificar se a API está funcionando corretamente.

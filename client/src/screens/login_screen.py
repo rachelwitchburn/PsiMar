@@ -1,6 +1,6 @@
 import flet as ft
 
-from client.src.services import PsimarAPI
+from src.services import PsimarAPI
 
 
 def login(page):
@@ -11,10 +11,6 @@ def login(page):
     page.window_maximized = True
 
 
-    def toggle_password():
-        passwords.password = not passwords.password
-        passwords.suffix.icon = ft.icons.VISIBILITY if passwords.password else ft.icons.VISIBILITY_OFF
-        page.update()
 
     def login_action(e):
         user_input = user.value
@@ -58,19 +54,11 @@ def login(page):
         label="Password",
         label_style=ft.TextStyle(color="black"),
         password=True,
+        can_reveal_password=True,
         width=300,
         border_color="black",
         color="black",
         content_padding=ft.padding.symmetric(vertical=10, horizontal=10),
-        suffix=ft.IconButton(
-            icon=ft.icons.VISIBILITY,
-            icon_color="black",
-            on_click=toggle_password,
-            style=ft.ButtonStyle(
-                shape={"": ft.RoundedRectangleBorder(radius=0)},
-                padding=ft.padding.all(0),
-            ),
-        ),
         bgcolor="white",
     )
 
@@ -106,7 +94,12 @@ def login(page):
                             ],
                             alignment=ft.MainAxisAlignment.CENTER,
                             spacing=10
-                        )
+                        ),
+                        ft.TextButton(
+                            "Esqueci minha senha",
+                            on_click=lambda e: page.go("/changePass"),
+                            style=ft.ButtonStyle(color="#847769")
+                        ),
                     ],
                     alignment=ft.MainAxisAlignment.CENTER,
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER

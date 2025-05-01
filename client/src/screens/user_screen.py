@@ -1,36 +1,65 @@
 import flet as ft
 
-
 def user(page):
+    page.title = 'PsiMar'
+    page.clean()
+
+
+    agendamentos = ft.Column(
+                expand=True,
+                alignment=ft.MainAxisAlignment.CENTER,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                controls=[
+                    ft.Container(
+                        alignment=ft.alignment.center,
+                        content=ft.Text("As consultas marcadas ficam aqui!", color="black")
+                    ),
+                ],
+    )
+    page.floating_action_button = ft.FloatingActionButton(icon=ft.icons.ADD)
+    page.floating_action_button_location = ft.FloatingActionButtonLocation.CENTER_DOCKED
+
+
+    appBar =  ft.BottomAppBar(
+        bgcolor="#847769",
+        height= 55.0,
+        shape=ft.NotchShape.CIRCULAR,
+        content=ft.Row(
+            controls=[
+                ft.Container(expand=True),
+                ft.IconButton(icon=ft.icons.HOUSE, icon_color=ft.colors.WHITE),
+                ft.Container(expand=True),
+                ft.IconButton(icon=ft.icons.BOOK, on_click= lambda e: page.go("/patient_activities"),icon_color=ft.colors.WHITE),
+                ft.Container(expand=True),
+            ]
+        ),
+    )
+
+    logout = ft.Container(
+                content=ft.IconButton(
+                    icon=ft.icons.LOGOUT,
+                    on_click=lambda e: page.go("/"),
+                    icon_color="black",
+                ),
+                alignment=ft.alignment.top_right,
+                padding=ft.padding.only(left=10, top=10),
+            )
+
+
+
     return ft.View(
         route="/user",
         bgcolor="#f2dbc2",
+        appbar=appBar,
         controls=[
-            ft.Container(
-                alignment=ft.alignment.top_left,
-                padding=10,
-                content=ft.IconButton(
-                    icon=ft.icons.ARROW_BACK,
-                    on_click=lambda e: page.go("/"),
-                    icon_color="black"
-                )
-            ),
-            ft.Container(
-                content=ft.Column([
-                    ft.Text("Área do Usuário", size=24, weight=ft.FontWeight.BOLD, color="black"),
-                    ft.Text("Esta área está em construção. Em breve novas funcionalidades!"),
-                    ft.Image(
-                        src="assets/psi.png",  # use a imagem local se tiver
-                        width=300,
-                        height=300,
-                        fit=ft.ImageFit.CONTAIN
-                    )
-                ],
-                    alignment=ft.MainAxisAlignment.CENTER,
-                    horizontal_alignment=ft.CrossAxisAlignment.CENTER
-                ),
-                alignment=ft.alignment.center,
-                expand=True
-            )
-        ]
-    )
+            logout,
+            agendamentos,
+        ],
+        floating_action_button=ft.FloatingActionButton(
+            icon=ft.icons.ADD,
+            on_click=lambda e: page.go("/appointment"),
+            bgcolor= "#847769",
+            foreground_color= "white",
+        ),
+        floating_action_button_location=ft.FloatingActionButtonLocation.END_FLOAT,
+)

@@ -9,12 +9,7 @@ def register(page):
     confirm_password = ft.Ref[ft.TextField]()
     username = ft.Ref[ft.TextField]()
 
-    def toggle_password(e):
-        for field_ref in [password, confirm_password]:
-            field = field_ref.current
-            field.password = not field.password
-            field.suffix.icon = ft.icons.VISIBILITY if field.password else ft.icons.VISIBILITY_OFF
-        page.update()
+
 
     def show_form(user_type):
         form_container.clean()
@@ -31,7 +26,7 @@ def register(page):
             return
 
         # Aqui você pode fazer a requisição à API futuramente
-        destination = "/professional" if user_type == "/professional" else "/user"
+        destination = "/professional" #if user_type == "/professional" else "/user"
         page.go(destination)
 
     def show_message(msg: str):
@@ -55,30 +50,22 @@ def register(page):
                 label="Senha",
                 label_style=ft.TextStyle(color="black"),
                 password=True,
+                can_reveal_password=True,
                 width=300,
                 border_color="black",
                 color="black",
                 bgcolor="white",
-                suffix=ft.IconButton(
-                    icon=ft.icons.VISIBILITY_OFF,
-                    icon_color="black",
-                    on_click=toggle_password
-                )
             ),
             ft.TextField(
                 ref=confirm_password,
                 label="Confirmar Senha",
                 label_style=ft.TextStyle(color="black"),
                 password=True,
+                can_reveal_password=True,
                 width=300,
                 border_color="black",
                 color="black",
                 bgcolor="white",
-                suffix=ft.IconButton(
-                    icon=ft.icons.VISIBILITY_OFF,
-                    icon_color="black",
-                    on_click=toggle_password
-                )
             ),
             ft.ElevatedButton(
                 "Registrar",

@@ -1,22 +1,30 @@
-# Importa as bibliotecas necessárias
 import os  # Para manipulação de variáveis de ambiente e caminhos
 from dotenv import load_dotenv  # Para carregar variáveis de ambiente de um arquivo .env
 from logging.config import fileConfig  # Para configurar o logging do Alembic
-from sqlalchemy import engine_from_config  # Para criar o motor de conexão do SQLAlchemy
-from sqlalchemy import pool  # Para gerenciar pools de conexões no SQLAlchemy
+from sqlalchemy import engine_from_config, pool  # Para criar o motor de conexão do SQLAlchemy
 from alembic import context  # Contexto do Alembic para migrações
 from api.app.models.models import Base  # Importa o modelo Base, que contém a metadata dos modelos de banco de dados
+from pathlib import Path
+
 
 # Carrega as variáveis de ambiente do arquivo .env, se disponível
 load_dotenv()
 
-# Obtém a URL de conexão com o banco de dados a partir das variáveis de ambiente ou usa um valor padrão
-url = os.getenv("DATABASE_URL", "sqlite:///default.db")  # A URL do banco de dados, ou "sqlite:///default.db" se não estiver definida
+base_dir = Path(__file__).resolve().parent.parent / "app" / "build"
+base_dir.mkdir(parents=True, exist_ok=True)
+db_path = base_dir / "database.sqlite"
+url = os.getenv("DATABASE_URL", f"sqlite:///{db_path}")
 
-# Configuração do Alembic - prepara o arquivo de configuração do Alembic
+
+#database_url = os.getenv('DATABASE_URL')
+if not url:
+    raise ValueError('DATABASE_URL is not set')
+
+
+# db_path = base_dir / "database.sqlite"
 config = context.config  # Carrega as configurações do Alembic
+config.set_main_option("sqlalchemy.url", url)
 
-# Verifica se o arquivo de configuração de logging está presente e, em caso afirmativo, carrega-o
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
@@ -63,3 +71,5 @@ if context.is_offline_mode():
     run_migrations_offline()  # Se estiver offline, executa migrações offline
 else:
     run_migrations_online()  # Se estiver online, executa migrações online
+
+print(Path(__file__).resolve().parent.parent / "app" / "build" / "database.sqlite")

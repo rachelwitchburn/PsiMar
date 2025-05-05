@@ -6,8 +6,12 @@ from passlib.context import CryptContext  # Importando 'CryptContext' para traba
 from sqlalchemy.orm import Session  # Importando Session do SQLAlchemy para interação com o banco de dados
 from api.app.database_app import get_db  # Importando a função SessionLocal, que cria uma sessão do banco de dados
 from api.app.models.models import User  # Importando o modelo Usuario para interagir com a tabela 'Usuarios' no banco de dados
+import os
+from dotenv import load_dotenv
 
-SECRET_KEY = "chave-secreta-muito-segura"  # Chave secreta usada para assinar os tokens JWT. Deve ser substituída por uma chave forte e segura
+load_dotenv()
+
+SECRET_KEY = os.getenv("SECRET_KEY", "super-secret-key")  # Chave secreta usada para assinar os tokens JWT. Deve ser substituída por uma chave forte e segura
 ALGORITHM = "HS256"  # Algoritmo de hash usado para assinar o JWT
 ACCESS_TOKEN_EXPIRE_MINUTES = 60  # Tempo de expiração do token de acesso (em minutos)
 

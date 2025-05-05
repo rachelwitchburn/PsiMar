@@ -13,6 +13,7 @@ uvicorn api.app.main:app --reload
 ✅ Como testar a API (com pytest):
 
 pytest
+pytest tests/api --db-reset (para resetar o db após algum teste)
 
 ✅ Como iniciar banco de dados:
 

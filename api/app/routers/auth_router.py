@@ -24,7 +24,11 @@ async def login(credentials: LoginData, db: Session = Depends(get_db)):
     - **email**: E-mail do usuário.
     - **password**: Senha do usuário.
     """
-    user = db.query(User).filter(User.email == credentials.email).first()
+    try:
+        user = db.query(User).filter(User.email == credentials.email).first()
+    except Exception as e:
+        print(f"[ERRO] Falha ao acessar o banco no login: {e}")
+        raise HTTPException(status_code=500, detail="Erro ao acessar o banco de dados")
 
     if not user or not verify_password(credentials.password, user.password):
         raise HTTPException(

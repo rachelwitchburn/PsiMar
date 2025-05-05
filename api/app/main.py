@@ -1,5 +1,6 @@
-from fastapi import FastAPI  # Importando a classe FastAPI do FastAPI para criar o aplicativo
-
+from fastapi import FastAPI, Depends  # Importando a classe FastAPI do FastAPI para criar o aplicativo
+from api.app.models.models import User
+from api.app.security import get_current_user
 #se aberto do projeto_gerencia
 from api.app.routers import users_router, auth_router, schedule_router, professional_router, patient_router, appointment_router
 
@@ -24,14 +25,12 @@ def root():
     return {"message": "API PSIMAR está rodando!"}
 # Definindo uma rota simples para verificar se a API está funcionando corretamente.
 @app.get("/professionalHome")
-def professional_home():
-    return {"message": "Bem-vindo, Maria"}
+async def professional_home(current_user: User = Depends(get_current_user)):
+    return {"message": f"Bem-vindo, {current_user.nome}"}
 
 @app.get("/patientHome")
-def patient_home():
-    return {"message": "Bem-vindo, {patient_name}"}
+async def patient_home(current_user: User = Depends(get_current_user)):
+    return {"message": f"Bem-vindo, {current_user.nome}"}
 
-@app.post("/login")
-def login():
-    return {"message": "Login endpoint em construção"}
+
 

@@ -1,22 +1,26 @@
 # Importa as bibliotecas necessárias
 import os  # Para manipulação de variáveis de ambiente e caminhos
-
 from dotenv import load_dotenv  # Para carregar variáveis de ambiente de um arquivo .env
 from logging.config import fileConfig  # Para configurar o logging do Alembic
 from sqlalchemy import engine_from_config  # Para criar o motor de conexão do SQLAlchemy
 from sqlalchemy import pool  # Para gerenciar pools de conexões no SQLAlchemy
 from alembic import context  # Contexto do Alembic para migrações
 from api.app.models.models import Base  # Importa o modelo Base, que contém a metadata dos modelos de banco de dados
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+
 # Carrega as variáveis de ambiente do arquivo .env, se disponível
 load_dotenv()
+
+# Caminho absoluto do banco
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+db_file = os.path.join(BASE_DIR, '..', 'api', 'app', 'build', 'database.sqlite')
+db_file = os.path.abspath(db_file)
+
 # Obtém a URL de conexão com o banco de dados a partir das variáveis de ambiente ou usa um valor padrão
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./database.sqlite")
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-# Configuração do Alembic - prepara o arquivo de configuração do Alembic
-config = context.config  # Carrega as configurações do Alembic
+DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{db_file}")
+
+# Alembic Config
+config = context.config
+config.set_main_option("sqlalchemy.url", DATABASE_URL)
 
 # Verifica se o arquivo de configuração de logging está presente e, em caso afirmativo, carrega-o
 if config.config_file_name is not None:

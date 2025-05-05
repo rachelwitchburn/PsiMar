@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, field_validator
+from pydantic import BaseModel, EmailStr, field_validator, ConfigDict
 
 class Token(BaseModel):
     access_token: str
@@ -18,20 +18,20 @@ class LoginData(BaseModel):
     email: EmailStr
     password: str
 
-    model_config = {
-        "json_schema_extra": {
+    model_config = ConfigDict(
+        json_schema_extra={
             "examples": [{"email": "usuario@example.com", "password": "senha123"}]
         }
-    }
+    )
 
 class ResetPassword(BaseModel):
     nova_senha: str
 
-    model_config = {
-        "json_schema_extra": {
+    model_config = ConfigDict(
+        json_schema_extra={
             "examples": [{"nova_senha": "novasenha456"}]
         }
-    }
+    )
 
 class TokenResponse(BaseModel):
     access_token: str

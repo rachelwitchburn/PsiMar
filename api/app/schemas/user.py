@@ -1,5 +1,5 @@
 from enum import Enum
-from pydantic import BaseModel, EmailStr, field_validator, model_validator
+from pydantic import BaseModel, EmailStr, field_validator, model_validator, ConfigDict
 from api.app.models.models import UserTypeEnum as UserTypeEnumModel
 
 class UserTypeEnum(str, Enum):
@@ -26,8 +26,8 @@ class UserCreate(BaseModel):
             raise ValueError("A senha deve ter pelo menos 6 caracteres.")
         return password
 
-    model_config = {
-        "json_schema_extra": {
+    model_config = ConfigDict(
+        json_schema_extra={
             "examples": [
                 {
                     "first_name": "João",
@@ -38,7 +38,7 @@ class UserCreate(BaseModel):
                 }
             ]
         }
-    }
+    )
 
 class UserResponse(BaseModel):
     id: int
@@ -47,6 +47,4 @@ class UserResponse(BaseModel):
     email: str
     user_type: UserTypeEnum
 
-    model_config = {
-        "from_attributes": True
-    }
+    model_config = ConfigDict(from_attributes=True)

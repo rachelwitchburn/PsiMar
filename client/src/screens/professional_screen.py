@@ -19,6 +19,39 @@ def psychologist(page):
     page.floating_action_button = ft.FloatingActionButton(icon=ft.icons.ADD)
     page.floating_action_button_location = ft.FloatingActionButtonLocation.CENTER_DOCKED
 
+    popupmenu = ft.Container(
+        content=ft.PopupMenuButton(
+            icon=ft.icons.MENU,
+            icon_color= "#847769",
+            bgcolor= "white",
+            items=[
+                ft.PopupMenuItem(
+                    content= ft.Row([
+                        ft.Icon(ft.icons.ADD, color= "#847769"),
+                        ft.Text("Gerenciar Horários", color="#847769"),
+                    ]),
+                    on_click=lambda e: page.go("/agenda"),
+                ),
+                ft.PopupMenuItem(
+                    content=ft.Row([
+                        ft.Icon(ft.icons.LOGOUT, color= "#847769"),
+                        ft.Text("Sair", color= "#847769"),
+                    ]),
+                    on_click=lambda e: page.go("/"),
+                ),
+                ft.PopupMenuItem(
+                    content=ft.Row([
+                        ft.Icon(ft.icons.FEEDBACK, color="#847769"),
+                        ft.Text("Ver feedback", color="#847769"),
+                    ]),
+                    on_click=lambda e: page.go("/feedback_professional"),
+                ),
+            ]
+        ),
+        alignment=ft.alignment.top_right,
+        padding=ft.padding.only(left=10, top=10),
+    )
+
 
     appBar =  ft.BottomAppBar(
         bgcolor="#847769",
@@ -34,15 +67,15 @@ def psychologist(page):
             ]
         ),
     )
-    logout = ft.Container(
-                content=ft.IconButton(
-                    icon=ft.icons.LOGOUT,
-                    on_click=lambda e: page.go("/"),
-                    icon_color="black",
-                ),
-                alignment=ft.alignment.top_right,
-                padding=ft.padding.only(left=10, top=10),
-            )
+    #logout = ft.Container(
+    #            content=ft.IconButton(
+    #                icon=ft.icons.LOGOUT,
+    #                on_click=lambda e: page.go("/"),
+    #                icon_color="black",
+    #            ),
+    #            alignment=ft.alignment.top_right,
+    #            padding=ft.padding.only(left=10, top=10),
+    #        )
 
 
 
@@ -51,7 +84,8 @@ def psychologist(page):
         bgcolor="#f2dbc2",
         appbar=appBar,
         controls=[
-            logout,
+            popupmenu,
+            #logout,
             agendamentos,
         ],
 

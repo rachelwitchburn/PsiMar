@@ -35,15 +35,41 @@ def user(page):
         ),
     )
 
-    logout = ft.Container(
-                content=ft.IconButton(
-                    icon=ft.icons.LOGOUT,
-                    on_click=lambda e: page.go("/"),
-                    icon_color="black",
+    popupmenu = ft.Container(
+        content=ft.PopupMenuButton(
+            icon=ft.icons.MENU,
+            icon_color= "#847769",
+            bgcolor= "white",
+            items=[
+                ft.PopupMenuItem(
+                    content= ft.Row([
+                        ft.Icon(ft.icons.FEEDBACK, color= "#847769"),
+                        ft.Text("Feedback", color="#847769"),
+                    ]),
+                    on_click=lambda e: page.go("/feedback_user"),
                 ),
-                alignment=ft.alignment.top_right,
-                padding=ft.padding.only(left=10, top=10),
-            )
+                ft.PopupMenuItem(
+                    content=ft.Row([
+                        ft.Icon(ft.icons.LOGOUT, color= "#847769"),
+                        ft.Text("Sair", color= "#847769"),
+                    ]),
+                    on_click=lambda e: page.go("/"),
+                )
+            ]
+        ),
+        alignment=ft.alignment.top_right,
+        padding=ft.padding.only(left=10, top=10),
+    )
+
+    #logout = ft.Container(
+    #            content=ft.IconButton(
+    #                icon=ft.icons.LOGOUT,
+    #                on_click=lambda e: page.go("/"),
+    #                icon_color="black",
+    #            ),
+    #            alignment=ft.alignment.top_right,
+    #            padding=ft.padding.only(left=10, top=10),
+    #        )
 
 
 
@@ -52,7 +78,7 @@ def user(page):
         bgcolor="#f2dbc2",
         appbar=appBar,
         controls=[
-            logout,
+            popupmenu,
             agendamentos,
         ],
         floating_action_button=ft.FloatingActionButton(

@@ -26,7 +26,7 @@ def register(page):
             return
 
         # Aqui você pode fazer a requisição à API futuramente
-        destination = "/professional" #if user_type == "/professional" else "/user"
+        destination = "/user"#"/professional" #if user_type == "/professional" else "/user"
         page.go(destination)
 
     def show_message(msg: str):

@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0d7f162-b1c1-4b67-b4f0-c8798e9dc88f" name="Changes" comment="refactor: reestruturação completa do projeto (backend, frontend e database)&#10;&#10;- Reorganização das pastas e arquivos para melhor modularização&#10;- Separação clara entre camadas de backend, frontend e banco de dados&#10;- Ajustes nos imports e rotas para refletir a nova estrutura&#10;- Preparação para facilitar manutenção e escalabilidade futura">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/50a45685-cc4d-42b8-8fe5-1a50b3a28558.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/50a45685-cc4d-42b8-8fe5-1a50b3a28558.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alembic.ini" beforeDir="false" afterPath="$PROJECT_DIR$/alembic.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app/database_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/database_app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/env.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/env.py" afterDir="false" />
-    </list>
+    <list default="true" id="b0d7f162-b1c1-4b67-b4f0-c8798e9dc88f" name="Changes" comment="refactor: reestruturação completa do projeto (backend, frontend e database)&#10;&#10;- Reorganização das pastas e arquivos para melhor modularização&#10;- Separação clara entre camadas de backend, frontend e banco de dados&#10;- Ajustes nos imports e rotas para refletir a nova estrutura&#10;- Preparação para facilitar manutenção e escalabilidade futura" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -252,7 +245,7 @@
       <workItem from="1745925826527" duration="432000" />
       <workItem from="1746143613358" duration="1147000" />
       <workItem from="1746355475219" duration="5668000" />
-      <workItem from="1746364004910" duration="1923000" />
+      <workItem from="1746364004910" duration="2553000" />
     </task>
     <task id="LOCAL-00001" summary="refactor: reestruturação completa do projeto (backend, frontend e database)&#10;&#10;- Reorganização das pastas e arquivos para melhor modularização&#10;- Separação clara entre camadas de backend, frontend e banco de dados&#10;- Ajustes nos imports e rotas para refletir a nova estrutura&#10;- Preparação para facilitar manutenção e escalabilidade futura">
       <option name="closed" value="true" />

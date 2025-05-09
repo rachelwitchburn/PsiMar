@@ -5,6 +5,14 @@ from screens.login_screen import login
 from screens.professional_screen import psychologist
 from screens.register_screen import register
 from screens.user_screen import user
+from screens.change_password_screen import change_password
+from screens.patient_activities_screen import patient_activities
+from screens.professional_activities_screen import professional_activities
+from screens.make_appointment_screen import make_appointment
+from screens.create_activities_screen import create_activities
+from screens.agenda_screen import agenda
+from screens.feedback_user_screen import create_feedback
+from screens.feedback_professional_screen import read_feedbacks
 
 
 def main(page: ft.Page):
@@ -20,7 +28,17 @@ def main(page: ft.Page):
         "/": login,
         "/register": register,
         "/user": user,
-        "/professional": psychologist
+        "/professional": psychologist,
+        "/changePass": change_password,
+        "/patient_activities": patient_activities,
+        "/professional_activities": professional_activities,
+        "/appointment": make_appointment,
+        "/create_activities": create_activities,
+        "/agenda": agenda,
+        "/feedback_user": create_feedback,
+        "/feedback_professional": read_feedbacks
+
+
     }
 
     def route_change(route):

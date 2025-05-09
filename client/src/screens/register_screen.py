@@ -5,16 +5,13 @@ from flet_core import FontWeight
 def register(page):
     page.title = 'PsiMar'
 
+    # Referências
+    username = ft.Ref[ft.TextField]()
     password = ft.Ref[ft.TextField]()
     confirm_password = ft.Ref[ft.TextField]()
-    username = ft.Ref[ft.TextField]()
-
-    def toggle_password(e):
-        for field_ref in [password, confirm_password]:
-            field = field_ref.current
-            field.password = not field.password
-            field.suffix.icon = ft.icons.VISIBILITY if field.password else ft.icons.VISIBILITY_OFF
-        page.update()
+    first_name = ft.Ref[ft.TextField]()
+    last_name = ft.Ref[ft.TextField]()
+    access_code = ft.Ref[ft.TextField]()
 
     def show_form(user_type):
         form_container.clean()
@@ -30,8 +27,8 @@ def register(page):
             show_message("As senhas não coincidem.")
             return
 
-        # Aqui você pode fazer a requisição à API futuramente
-        destination = "/professional" if user_type == "/professional" else "/user"
+
+        destination = "/user"  # ou "/professional"
         page.go(destination)
 
     def show_message(msg: str):
@@ -40,45 +37,82 @@ def register(page):
         page.update()
 
     def create_form(user_type: str):
-        return ft.Column([
-            ft.TextField(
-                ref=username,
-                label="Código" if user_type == "professional" else "Email",
-                label_style=ft.TextStyle(color="black"),
-                width=300,
-                border_color="black",
-                color="black",
-                bgcolor="white"
-            ),
+        fields = []
+
+        if user_type == "psicologo":
+            fields.extend([
+                ft.TextField(
+                    ref=first_name,
+                    label="Primeiro Nome",
+                    label_style=ft.TextStyle(color="black"),
+                    width=300,
+                    border_color="black",
+                    color="black",
+                    bgcolor="white",
+                ),
+                ft.TextField(
+                    ref=last_name,
+                    label="Último Nome",
+                    label_style=ft.TextStyle(color="black"),
+                    width=300,
+                    border_color="black",
+                    color="black",
+                    bgcolor="white",
+                ),
+                ft.TextField(
+                    ref=username,
+                    label="Email",
+                    label_style=ft.TextStyle(color="black"),
+                    width=300,
+                    border_color="black",
+                    color="black",
+                    bgcolor="white",
+                ),
+                ft.TextField(
+                    ref=access_code,
+                    label="Código de Acesso",
+                    label_style=ft.TextStyle(color="black"),
+                    width=300,
+                    border_color="black",
+                    color="black",
+                    bgcolor="white",
+                ),
+            ])
+        else:
+            fields.append(
+                ft.TextField(
+                    ref=username,
+                    label="Email",
+                    label_style=ft.TextStyle(color="black"),
+                    width=300,
+                    border_color="black",
+                    color="black",
+                    bgcolor="white",
+                )
+            )
+
+        fields.extend([
             ft.TextField(
                 ref=password,
                 label="Senha",
                 label_style=ft.TextStyle(color="black"),
                 password=True,
+                can_reveal_password=True,
                 width=300,
                 border_color="black",
                 color="black",
                 bgcolor="white",
-                suffix=ft.IconButton(
-                    icon=ft.icons.VISIBILITY_OFF,
-                    icon_color="black",
-                    on_click=toggle_password
-                )
             ),
             ft.TextField(
                 ref=confirm_password,
                 label="Confirmar Senha",
                 label_style=ft.TextStyle(color="black"),
                 password=True,
+                can_reveal_password=True,
                 width=300,
                 border_color="black",
                 color="black",
                 bgcolor="white",
-                suffix=ft.IconButton(
-                    icon=ft.icons.VISIBILITY_OFF,
-                    icon_color="black",
-                    on_click=toggle_password
-                )
             ),
             ft.ElevatedButton(
                 "Registrar",
@@ -92,7 +126,10 @@ def register(page):
                     color="white"
                 )
             )
-        ],
+        ])
+
+        return ft.Column(
+            controls=fields,
             alignment=ft.MainAxisAlignment.CENTER,
             horizontal_alignment=ft.CrossAxisAlignment.CENTER
         )

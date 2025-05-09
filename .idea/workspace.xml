@@ -108,7 +108,7 @@
       <recent name="C:\Users\raque\dev\python\projeto_gerencia\api\app\schemas" />
     </key>
   </component>
-  <component name="RunManager" selected="FastAPI.Api">
+  <component name="RunManager" selected="Python.Client">
     <configuration name="env" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProjetoPSIMAR" />
       <option name="ENV_FILES" value="" />
@@ -148,7 +148,6 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="FastAPI.Api" />
       <item itemvalue="Python.Client" />
       <item itemvalue="Python.env" />
     </list>

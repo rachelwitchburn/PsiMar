@@ -1,6 +1,6 @@
 import flet as ft
 
-from client.src.services import PsimarAPI
+from src.services import PsimarAPI
 
 
 def login(page):
@@ -11,10 +11,6 @@ def login(page):
     page.window_maximized = True
 
 
-    def toggle_password():
-        passwords.password = not passwords.password
-        passwords.suffix.icon = ft.icons.VISIBILITY if passwords.password else ft.icons.VISIBILITY_OFF
-        page.update()
 
     def login_action(e):
         user_input = user.value
@@ -51,6 +47,7 @@ def login(page):
         width=300,
         border_color="black",
         color="black",
+        content_padding=ft.padding.symmetric(vertical=10, horizontal=10),
         bgcolor="white"
     )
 
@@ -58,69 +55,66 @@ def login(page):
         label="Password",
         label_style=ft.TextStyle(color="black"),
         password=True,
+        can_reveal_password=True,
         width=300,
         border_color="black",
         color="black",
         content_padding=ft.padding.symmetric(vertical=10, horizontal=10),
-        suffix=ft.IconButton(
-            icon=ft.icons.VISIBILITY,
-            icon_color="black",
-            on_click=toggle_password,
-            style=ft.ButtonStyle(
-                shape={"": ft.RoundedRectangleBorder(radius=0)},
-                padding=ft.padding.all(0),
-            ),
-        ),
         bgcolor="white",
     )
 
-    content = ft.Stack(
+    content = ft.Container(
+        expand=True,
         alignment=ft.alignment.center,
-        controls=[
-            ft.Image(src="../assets/imagem.png", fit=ft.ImageFit.COVER, expand=True),
-
-            ft.Container(
-                content=ft.Column(
+        content=ft.Column(
+            [
+                ft.Image(src="../assets/psi.png", width=100, height=100),
+                user,
+                passwords,
+                ft.Row(
                     [
-                        ft.Image(src="../assets/psi.png", width=100, height=100),
-                        user,
-                        passwords,
-                        ft.Row(
-                            [
-                                ft.ElevatedButton("Login", on_click=login_action, color="white", width=140,
-                                                  style=ft.ButtonStyle(
-                                                      shape=ft.RoundedRectangleBorder(radius=5),
-                                                      elevation=5,
-                                                      overlay_color="rgba(255, 255, 255, 0.2)",
-                                                      bgcolor="#212121",
-                                                      color="#white")
-                                                  ),
-                                ft.ElevatedButton("Registrar", on_click=lambda e: page.go("/register"), width=140,
-                                                  style=ft.ButtonStyle(
-                                                      shape=ft.RoundedRectangleBorder(radius=5),
-                                                      elevation=5,
-                                                      overlay_color="rgba(255, 255, 255, 0.2)",
-                                                      bgcolor="#212121",
-                                                      color="white")
-                                                  )
-                            ],
-                            alignment=ft.MainAxisAlignment.CENTER,
-                            spacing=10
-                        )
+                        ft.ElevatedButton("Login", on_click=login_action, color="white", width=140,
+                                          style=ft.ButtonStyle(
+                                              shape=ft.RoundedRectangleBorder(radius=5),
+                                              elevation=5,
+                                              overlay_color="rgba(255, 255, 255, 0.2)",
+                                              bgcolor="#212121",
+                                              color="#white")
+                                          ),
+                        ft.ElevatedButton("Registrar", on_click=lambda e: page.go("/register"), width=140,
+                                          style=ft.ButtonStyle(
+                                              shape=ft.RoundedRectangleBorder(radius=5),
+                                              elevation=5,
+                                              overlay_color="rgba(255, 255, 255, 0.2)",
+                                              bgcolor="#212121",
+                                              color="white")
+                                          )
                     ],
                     alignment=ft.MainAxisAlignment.CENTER,
-                    horizontal_alignment=ft.CrossAxisAlignment.CENTER
+                    spacing=10
                 ),
-                alignment=ft.alignment.center,
-                expand=True
-            )
-        ],
+                ft.TextButton(
+                    "Esqueci minha senha",
+                    on_click=lambda e: page.go("/changePass"),
+                    style=ft.ButtonStyle(color="#847769")
+                ),
+            ],
+            alignment=ft.MainAxisAlignment.CENTER,
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER
+        )
     )
 
     return ft.View(
         route="/",
         bgcolor="#f2dbc2",
         controls=[
-            content
+            ft.Stack(
+                expand=True,
+                controls=[
+                    ft.Image(src="../assets/imagem.png", fit=ft.ImageFit.COVER, expand=True),
+                    content
+                ]
+            )
         ]
     )
+

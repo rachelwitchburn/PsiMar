@@ -215,6 +215,7 @@
       <workItem from="1746825033052" duration="8594000" />
       <workItem from="1746837873359" duration="3000" />
       <workItem from="1746837923298" duration="1000" />
+      <workItem from="1746838686251" duration="114000" />
     </task>
     <task id="LOCAL-00001" summary="refactor: reestruturação completa do projeto (backend, frontend e database)&#10;&#10;- Reorganização das pastas e arquivos para melhor modularização&#10;- Separação clara entre camadas de backend, frontend e banco de dados&#10;- Ajustes nos imports e rotas para refletir a nova estrutura&#10;- Preparação para facilitar manutenção e escalabilidade futura">
       <option name="closed" value="true" />

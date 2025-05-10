@@ -1,21 +1,17 @@
-<<<<<<< Updated upstream
-from pydantic import BaseModel, EmailStr, field_validator
-=======
 from pydantic import BaseModel, EmailStr, field_validator, ConfigDict, Field
->>>>>>> Stashed changes
 
+class Token(BaseModel):
+    access_token: str
+    token_type: str
 
 class LoginCredential(BaseModel):
     email: EmailStr
     password: str = Field(min_length=1, description="Senha não pode ser vazia")
 
     @field_validator("password")
-    def validate_password(self, password):
+    def validate_password(cls, password):
         if len(password) < 6:
             raise ValueError("A senha deve ter pelo menos 6 caracteres.")
-<<<<<<< Updated upstream
-        return password
-=======
         return password
 
 class LoginData(BaseModel):
@@ -40,4 +36,3 @@ class ResetPassword(BaseModel):
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str
->>>>>>> Stashed changes

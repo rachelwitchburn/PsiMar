@@ -1,25 +1,30 @@
-from datetime import datetime, date
-
-from fastapi import HTTPException
+from datetime import datetime, date, time
+import logging
 from sqlalchemy.orm import Session
+from api.app.models.models import Appointment
 
-from app.models.models import Schedule, Appointment
-
+logger = logging.getLogger(__name__)
 
 # agenda do psi
-def view_schedule_professional(db: Session, professional_id: int):
+def get_schedule_professional(db: Session, professional_id: int):
+    logger.info(f"Buscando agenda para profissional com ID {professional_id}")
     return db.query(Appointment) \
         .filter(Appointment.professional_id == professional_id) \
         .filter(Appointment.date_time >= datetime.now()) \
         .order_by(Appointment.date_time).all()
 
 # agenda do paciente
-def view_schedule_patient(db: Session, patient_id: int):
+def get_schedule_patient(db: Session, patient_id: int):
+    logger.info(f"Buscando agenda do dia para paciente com ID {patient_id}")
     today = date.today()
-    result = db.query(Appointment) \
+    start_of_day = datetime.combine(today, time.min)
+    end_of_day = datetime.combine(today, time.max)
+
+    return db.query(Appointment) \
         .filter(Appointment.patient_id == patient_id) \
-        .filter(Appointment.date_time >= datetime.combine(today, datetime.min.time())) \
-        .filter(Appointment.date_time <= datetime.combine(today, datetime.max.time())) \
-        .first()
-    return result
+        .filter(Appointment.date_time >= start_of_day) \
+        .filter(Appointment.date_time <= end_of_day) \
+        .order_by(Appointment.date_time) \
+        .all()
+
 

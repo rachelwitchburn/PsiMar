@@ -26,3 +26,15 @@ def get_db():
         yield db
     finally:
         db.close()
+
+if __name__ == "__main__":
+    if not os.path.exists(DATABASE_FILE):
+        print("Database file does not exist. Creating a new one.")
+        engine = create_engine(DATABASE_URL)
+        Base.metadata.create_all(bind=engine)
+    else:
+        print("Database file already exists.")
+
+Base.metadata.create_all(bind=engine)
+print("Tabelas criadas")
+

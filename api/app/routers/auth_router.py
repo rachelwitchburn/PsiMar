@@ -43,7 +43,7 @@ async def login(credentials: LoginData, db: Session = Depends(get_db)):
         expires_delta=access_token_expires
     )
 
-    return TokenResponse(access_token=access_token, token_type="bearer")
+    return TokenResponse(access_token=access_token, token_type="bearer",user_type=user.user_type)
 
 @router.post("/reset-password", summary="Redefinir senha do usuário autenticado")
 async def reset_password(data: ResetPassword, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):

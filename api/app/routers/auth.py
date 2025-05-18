@@ -46,14 +46,19 @@ def login(email: str, senha: str, db: Session = Depends(get_db)):
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
 
-    access_token = create_access_token(data={"sub": usuario.email, "is_admin": usuario.is_admin},
-                                       expires_delta=access_token_expires)
+    access_token = create_access_token(
+        data={"sub": usuario.email, "is_admin": usuario.is_admin},
+        expires_delta=access_token_expires
+    )
 
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "user_type": "professional" if usuario.is_admin else "patient"
+    }
 
-    return {"access_token": access_token, "token_type": "bearer"}
 
 
 

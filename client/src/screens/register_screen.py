@@ -46,7 +46,7 @@ def register(page):
         response = api.register_user(user_data)
 
         if response.status_code == 201:
-            page.go("/login")  # ou qualquer rota de sucesso
+            page.go("/")  # ou qualquer rota de sucesso
         else:
             show_message(response.json().get("detail", "Erro ao registrar."))
 
@@ -58,26 +58,30 @@ def register(page):
     def create_form(user_type: str):
         fields = []
 
+        fields.extend([
+            ft.TextField(
+                ref=first_name,
+                label="Primeiro Nome",
+                label_style=ft.TextStyle(color="black"),
+                width=300,
+                border_color="black",
+                color="black",
+                bgcolor="white",
+            ),
+            ft.TextField(
+                ref=last_name,
+                label="Último Nome",
+                label_style=ft.TextStyle(color="black"),
+                width=300,
+                border_color="black",
+                color="black",
+                bgcolor="white",
+            ),
+        ])
+
+        # Depois, os campos específicos por tipo
         if user_type == "psicologo":
             fields.extend([
-                ft.TextField(
-                    ref=first_name,
-                    label="Primeiro Nome",
-                    label_style=ft.TextStyle(color="black"),
-                    width=300,
-                    border_color="black",
-                    color="black",
-                    bgcolor="white",
-                ),
-                ft.TextField(
-                    ref=last_name,
-                    label="Último Nome",
-                    label_style=ft.TextStyle(color="black"),
-                    width=300,
-                    border_color="black",
-                    color="black",
-                    bgcolor="white",
-                ),
                 ft.TextField(
                     ref=username,
                     label="Email",

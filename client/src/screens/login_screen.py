@@ -10,8 +10,6 @@ def login(page):
     page.vertical_alignment = 'center'
     page.window_maximized = True
 
-
-
     def login_action(e):
         user_input = user.value
         password_input = passwords.value
@@ -30,16 +28,22 @@ def login(page):
         api = PsimarAPI()
         response = api.login(user_input, password_input)
 
-        # Caso 1: Psicólogo - login com código de acesso
         if response.status_code != 200:
             user.error_text = response.json().get("detail", "Credenciais inválidas.")
             page.update()
         else:
-            page.go("/user")
+            data = response.json()
+            user_type = data.get("user_type")
 
-        # Caso 2: Paciente - login com e-mail/nome + senha
-
-
+            if user_type == "patient":
+                page.go("/user")
+            elif user_type == "professional":
+                page.go("/professional")
+            else:
+                # Fallback para caso venha um tipo desconhecido
+                page.snack_bar = ft.SnackBar(ft.Text("Tipo de usuário desconhecido."))
+                page.snack_bar.open = True
+                page.update()
 
     user = ft.TextField(
         label="User",

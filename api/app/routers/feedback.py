@@ -33,4 +33,3 @@ def list_feedbacks_for_patient(patient_id: int, db: Session = Depends(get_db)):
     if not feedbacks:
         raise HTTPException(status_code=404, detail="No feedback found for this patient")
     return feedbacks
-

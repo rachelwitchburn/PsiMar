@@ -61,3 +61,20 @@ class PsimarAPI:
         response = requests.post(f"{self.__base_url}/auth/reset-password", json={"nova_senha": new_password},
                                  headers=self._get_headers())
         return response
+
+# feedback::
+    def send_feedback(self, patient_id: int, professional_id: int, message: str):
+        payload = {
+            "patient_id": patient_id,
+            "professional_id": professional_id,
+            "message": message
+        }
+        response = requests.post(f"{self.__base_url}/feedback", json=payload, headers=self.__get_headers())
+        return response
+
+    def get_feedback_for_professional(self, professional_id: int):
+        response = requests.get(
+            f"{self.__base_url}/feedback/professional/{professional_id}",
+            headers=self._get_headers()
+        )
+        return response

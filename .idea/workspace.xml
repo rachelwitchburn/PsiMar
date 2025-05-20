@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b0d7f162-b1c1-4b67-b4f0-c8798e9dc88f" name="Changes" comment="refactor: reestruturação completa do projeto (backend, frontend e database)&#10;&#10;- Reorganização das pastas e arquivos para melhor modularização&#10;- Separação clara entre camadas de backend, frontend e banco de dados&#10;- Ajustes nos imports e rotas para refletir a nova estrutura&#10;- Preparação para facilitar manutenção e escalabilidade futura">
-      <change beforePath="$PROJECT_DIR$/.idea/ProjetoPSIMAR.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ProjetoPSIMAR.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/50a45685-cc4d-42b8-8fe5-1a50b3a28558.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/50a45685-cc4d-42b8-8fe5-1a50b3a28558/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/services/professional_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/services/professional_api.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,39 +69,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "FastAPI.Api.executor": "Run",
-    "FastAPI.App.executor": "Run",
-    "Python.Client.executor": "Run",
-    "Python.database_app.executor": "Run",
-    "Python.env.executor": "Run",
-    "Python.main.executor": "Run",
-    "RunOnceActivity.OpenDatabaseViewOnStart": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "last-version",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "C:/Users/raque/dev/python/projeto_gerencia/api/app/main.py",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "configurable.group.tools",
-    "settings.editor.splitter.proportion": "0.30040732",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;FastAPI.Api.executor&quot;: &quot;Run&quot;,
+    &quot;FastAPI.App.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Client.executor&quot;: &quot;Run&quot;,
+    &quot;Python.database_app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.env.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenDatabaseViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;last-version&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/raque/dev/python/projeto_gerencia/api/app/main.py&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.tools&quot;,
+    &quot;settings.editor.splitter.proportion&quot;: &quot;0.30040732&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "sqlite"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\tassi\Desktop\PsiMar-dev" />
@@ -267,7 +261,8 @@
       <workItem from="1747686587939" duration="824000" />
       <workItem from="1747689504213" duration="66000" />
       <workItem from="1747693919836" duration="667000" />
-      <workItem from="1747695004099" duration="3952000" />
+      <workItem from="1747695004099" duration="4938000" />
+      <workItem from="1747708332446" duration="662000" />
     </task>
     <task id="LOCAL-00001" summary="refactor: reestruturação completa do projeto (backend, frontend e database)&#10;&#10;- Reorganização das pastas e arquivos para melhor modularização&#10;- Separação clara entre camadas de backend, frontend e banco de dados&#10;- Ajustes nos imports e rotas para refletir a nova estrutura&#10;- Preparação para facilitar manutenção e escalabilidade futura">
       <option name="closed" value="true" />

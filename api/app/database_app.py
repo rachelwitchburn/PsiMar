@@ -27,6 +27,7 @@ def get_db():
         yield db
     except Exception as e:
         db.rollback()  # Em caso de erro, realiza o rollback
+        print(" ERRO:", str(e))  # Mostra no terminal
         raise HTTPException(status_code=500, detail="Erro ao acessar o banco de dados") from e
     finally:
         db.close()  # Garante que a sessão seja fechada após o uso

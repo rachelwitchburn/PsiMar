@@ -174,10 +174,10 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="FastAPI.Api" />
       <item itemvalue="Python.Client" />
       <item itemvalue="Python.database_app" />
       <item itemvalue="Python.env" />
+      <item itemvalue="FastAPI.Api" />
     </list>
     <recent_temporary>
       <list>
@@ -262,7 +262,7 @@
       <workItem from="1747689504213" duration="66000" />
       <workItem from="1747693919836" duration="667000" />
       <workItem from="1747695004099" duration="4938000" />
-      <workItem from="1747708332446" duration="662000" />
+      <workItem from="1747708332446" duration="2047000" />
     </task>
     <task id="LOCAL-00001" summary="refactor: reestruturação completa do projeto (backend, frontend e database)&#10;&#10;- Reorganização das pastas e arquivos para melhor modularização&#10;- Separação clara entre camadas de backend, frontend e banco de dados&#10;- Ajustes nos imports e rotas para refletir a nova estrutura&#10;- Preparação para facilitar manutenção e escalabilidade futura">
       <option name="closed" value="true" />

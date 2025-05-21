@@ -33,6 +33,12 @@ def login(page):
             page.update()
         else:
             data = response.json()
+            token = data.get("access_token")
+            print("Token JWT recebido:", token)
+
+            # Armazena o token na sessão da página
+            page.session.set("token", token)
+
             user_type = data.get("user_type")
 
             if user_type == "patient":

@@ -18,7 +18,7 @@ def get_db():
 
 @router.get("/", response_model=list[UserResponse])
 def get_all_patients(db: Session = Depends(get_db)):
-    return db.query(User).filter(User.tipo_usuario == UserTypeEnum.patient).all()
+    return db.query(User).filter(User.user_type == UserTypeEnum.patient).all()
 
 @router.post("/patient_complete_registration", response_model=UserResponse)
 def complete_registration(data: PatientCompleteRegistration, db: Session = Depends(get_db)):

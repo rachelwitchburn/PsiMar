@@ -10,6 +10,7 @@ from api.app.security import get_password_hash, get_current_user
 
 router = APIRouter(prefix="/patient", tags=["patient"])
 
+
 @router.get("/", response_model=list[UserResponse])
 async def get_all_patients(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     """

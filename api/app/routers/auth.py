@@ -57,6 +57,7 @@ def login(email: str, senha: str, db: Session = Depends(get_db)):
         "access_token": access_token,
         "token_type": "bearer",
         "user_type": "professional" if usuario.is_admin else "patient"
+
     }
 
 

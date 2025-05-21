@@ -4,7 +4,7 @@ class PsimarAPI:
 
     def __init__(self, token=None):
         self.__base_url = "http://127.0.0.1:8000"
-        self.token = token  
+        self.token = token
 
     def _get_headers(self):
         if self.token:

@@ -1,9 +1,23 @@
 import flet as ft
+from client.src.services import PsimarAPI
 
 def user(page):
     page.title = 'PsiMar'
     page.clean()
 
+    token = page.session.get("token")
+
+    if not token:
+        print(" Nenhum token encontrado na sessão! Redirecionando para login...")
+        page.go("/")
+        return
+
+    api = PsimarAPI(token=token)
+
+    def logout(page):
+        page.session.remove("token")
+        print("token removido, fechando sessão")
+        page.go("/")
 
     agendamentos = ft.Column(
                 expand=True,
@@ -53,7 +67,7 @@ def user(page):
                         ft.Icon(ft.icons.LOGOUT, color= "#847769"),
                         ft.Text("Sair", color= "#847769"),
                     ]),
-                    on_click=lambda e: page.go("/"),
+                    on_click=lambda e: logout(page),
                 )
             ]
         ),

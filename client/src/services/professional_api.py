@@ -2,12 +2,15 @@ import requests
 
 class PsimarAPI:
 
-    def __init__(self):
+    def __init__(self, token=None):
         self.__base_url = "http://127.0.0.1:8000"
-        self.token = None
+        self.token = token  
 
     def _get_headers(self):
-        return {"Authorization": f"Bearer {self.token}"} if self.token else {}
+        if self.token:
+            return {"Authorization": f"Bearer {self.token}"}
+        return {}
+
 
     def get_users(self):
         """
@@ -69,7 +72,7 @@ class PsimarAPI:
             "professional_id": professional_id,
             "message": message
         }
-        response = requests.post(f"{self.__base_url}/feedback", json=payload, headers=self.__get_headers())
+        response = requests.post(f"{self.__base_url}/feedback", json=payload, headers=self._get_headers())
         return response
 
     def get_feedback_for_professional(self, professional_id: int):

@@ -1,5 +1,5 @@
 import flet as ft
-from client.src.services import PsimarAPI
+from src.services import PsimarAPI
 
 def psychologist(page):
     page.title = 'PsiMar'

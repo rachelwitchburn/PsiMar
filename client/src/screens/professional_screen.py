@@ -13,38 +13,36 @@ def psychologist(page):
         return
 
     api = PsimarAPI(token=token)
-    response = api.get_patients()
+    response = api.get_appointments()
 
-    lista_widgets = []
+    lista_agendamentos = []
 
     if response.status_code == 200:
-        pacientes = response.json()
-
-        if not pacientes:
-            lista_widgets.append(
-                ft.Text("Nenhum paciente encontrado.", color="black")
+        agendamentos = response.json()
+        if not agendamentos:
+            lista_agendamentos.append(
+                ft.Text("Nenhuma consulta agendada")
             )
         else:
-            for paciente in pacientes:
-                nome = f"{paciente.get('first_name', '')} {paciente.get('last_name', '')}"
-                email = paciente.get('email', 'Sem email')
+            for agendamento in agendamentos:
+                data_hora = agendamento["date_time"].replace("T", " ").split(".")[0]
+                status = agendamento["status"]
+                id_agendamento = agendamento["id"]
 
-                card = ft.Card(
-                    content=ft.Container(
-                        content=ft.Column([
-                            ft.Text(f"Nome: {nome}", color="black"),
-                            ft.Text(f"E-mail: {email}", color="black"),
-                        ]),
-                        padding=10,
-                        bgcolor="#f5f5f5",
+                lista_agendamentos.append(
+                    ft.Container(
+                        width= 420,
+                        padding=20,
+                        margin=5,
+                        bgcolor="#ffffff",
                         border_radius=10,
+                        content=ft.Column([
+                            ft.Text(f"Consulta: {id_agendamento}", size=25, weight=ft.FontWeight.BOLD, color= "#847769"),
+                            ft.Text(f"Data e hora: {data_hora}", size=20, color="#847769",),
+                            ft.Text(f"Status: {'Confirmado' if status == 'confirmed' else 'Esperando confirmação'}", size=20, color="#847769"),
+                        ])
                     )
                 )
-                lista_widgets.append(card)
-    else:
-        lista_widgets.append(
-            ft.Text("Erro ao buscar pacientes. Verifique a conexão ou permissões.", color="red")
-        )
 
     def logout(page):
         page.session.remove("token")
@@ -55,7 +53,7 @@ def psychologist(page):
         expand=True,
         alignment=ft.MainAxisAlignment.CENTER,
         horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-        controls=lista_widgets
+        controls=lista_agendamentos
     )
 
     page.floating_action_button = ft.FloatingActionButton(icon=ft.icons.ADD)
@@ -89,6 +87,14 @@ def psychologist(page):
                     ]),
                     on_click=lambda e: page.go("/feedback_professional"),
                 ),
+
+                ft.PopupMenuItem(
+                    content=ft.Row([
+                        ft.Icon(ft.icons.VIEW_AGENDA, color="#847769"),
+                        ft.Text("Confirmar agendamentos", color="#847769"),
+                    ]),
+                    on_click=lambda e: page.go("/professional_confirm_appointment"),
+                ),
             ]
         ),
         alignment=ft.alignment.top_right,
@@ -120,6 +126,16 @@ def psychologist(page):
         appbar=appBar,
         controls=[
             popupmenu,
-            agendamentos,
-        ],
+            ft.Container(
+                expand=True,
+                alignment=ft.alignment.top_center,
+                content=agendamentos,
+            ),
+        ],  floating_action_button=ft.FloatingActionButton(
+            icon=ft.icons.ADD,
+            on_click=lambda e: page.go("/professional_appointment"),
+            bgcolor= "#847769",
+            foreground_color= "white",
+        ),
+        floating_action_button_location=ft.FloatingActionButtonLocation.END_FLOAT,
     )

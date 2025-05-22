@@ -23,7 +23,7 @@ def login(page):
         page.update()
 
         if user.error_text or passwords.error_text:
-            return  # para execução se tiver erro
+            return
 
         api = PsimarAPI()
         response = api.login(user_input, password_input)
@@ -34,10 +34,13 @@ def login(page):
         else:
             data = response.json()
             token = data.get("access_token")
-            print("Token JWT recebido:", token)
+            user_id = data.get("user_id")
+            #print("Token JWT recebido:", token)
+            #print("ID do usuário:", user_id)
 
-            # Armazena o token na sessão da página
+            # Armazena o token na sessão da página e o id
             page.session.set("token", token)
+            page.session.set("user_id", user_id)
 
             user_type = data.get("user_type")
 

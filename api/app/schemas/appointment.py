@@ -7,11 +7,17 @@ class CreateAppointment(BaseModel):
     professional_id: int
     date_time: datetime
 
-    @field_validator("date_time")
-    def date_must_be_future(cls, v):
-        if v <= datetime.now(timezone.utc):
-            raise ValueError("A data da consulta deve estar no futuro.")
-        return v
+from datetime import timezone
+
+@field_validator("date_time")
+def date_must_be_future(cls, v):
+    if v.tzinfo is None:
+        v = v.replace(tzinfo=timezone.utc)
+    if v <= datetime.now(timezone.utc):
+        raise ValueError("A data da consulta deve estar no futuro.")
+    return v
+
+
 
 class ViewAppointment(BaseModel):
     id: int

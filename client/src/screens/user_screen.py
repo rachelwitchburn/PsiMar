@@ -13,6 +13,38 @@ def user(page):
         return
 
     api = PsimarAPI(token=token)
+    response= api.get_appointments()
+
+    lista_agendamentos = []
+
+    if response.status_code == 200:
+        agendamentos = response.json()
+        if not agendamentos:
+            lista_agendamentos.append(
+                ft.Text("Nenhuma consulta agendada")
+            )
+        else:
+            for agendamento in agendamentos:
+                data_hora = agendamento["date_time"].replace("T", " ").split(".")[0]
+                status = agendamento["status"]
+                id_agendamento = agendamento["id"]
+
+                lista_agendamentos.append(
+                    ft.Container(
+                        width= 420,
+                        padding=20,
+                        margin=5,
+                        bgcolor="#ffffff",
+                        border_radius=10,
+                        content=ft.Column([
+                            ft.Text(f"Consulta: {id_agendamento}", size=25, weight=ft.FontWeight.BOLD, color= "#847769"),
+                            ft.Text(f"Data e hora: {data_hora}", size=20, color="#847769",),
+                            ft.Text(f"Status: {'Confirmado' if status == 'confirmed' else 'Esperando confirmação'}", size=20, color="#847769"),
+                        ])
+                    )
+                )
+
+
 
     def logout(page):
         page.session.remove("token")
@@ -20,16 +52,13 @@ def user(page):
         page.go("/")
 
     agendamentos = ft.Column(
-                expand=True,
-                alignment=ft.MainAxisAlignment.CENTER,
-                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-                controls=[
-                    ft.Container(
-                        alignment=ft.alignment.center,
-                        content=ft.Text("As consultas marcadas ficam aqui!", color="black")
-                    ),
-                ],
+        expand=True,
+        alignment=ft.MainAxisAlignment.CENTER,
+        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        scroll=ft.ScrollMode.AUTO,
+        controls=lista_agendamentos
     )
+
     page.floating_action_button = ft.FloatingActionButton(icon=ft.icons.ADD)
     page.floating_action_button_location = ft.FloatingActionButtonLocation.CENTER_DOCKED
 
@@ -68,23 +97,19 @@ def user(page):
                         ft.Text("Sair", color= "#847769"),
                     ]),
                     on_click=lambda e: logout(page),
-                )
+                ),
+                ft.PopupMenuItem(
+                    content=ft.Row([
+                        ft.Icon(ft.icons.VIEW_AGENDA, color="#847769"),
+                        ft.Text("Confirmar agendamentos", color="#847769"),
+                    ]),
+                    on_click=lambda e: page.go("/patient_confirm_appointment"),
+                ),
             ]
         ),
         alignment=ft.alignment.top_right,
         padding=ft.padding.only(left=10, top=10),
     )
-
-    #logout = ft.Container(
-    #            content=ft.IconButton(
-    #                icon=ft.icons.LOGOUT,
-    #                on_click=lambda e: page.go("/"),
-    #                icon_color="black",
-    #            ),
-    #            alignment=ft.alignment.top_right,
-    #            padding=ft.padding.only(left=10, top=10),
-    #        )
-
 
 
     return ft.View(
@@ -93,11 +118,15 @@ def user(page):
         appbar=appBar,
         controls=[
             popupmenu,
-            agendamentos,
+            ft.Container(
+                expand=True,
+                alignment=ft.alignment.top_center,
+                content=agendamentos,
+            ),
         ],
         floating_action_button=ft.FloatingActionButton(
             icon=ft.icons.ADD,
-            on_click=lambda e: page.go("/appointment"),
+            on_click=lambda e: page.go("/patient_appointment"),
             bgcolor= "#847769",
             foreground_color= "white",
         ),

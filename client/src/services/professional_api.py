@@ -81,3 +81,35 @@ class PsimarAPI:
             headers=self._get_headers()
         )
         return response
+
+    def create_appointment(self, professional_id: int, patient_id: int, date_time: str):
+        return requests.post(
+            f"{self.__base_url}/appointment/create",
+            json={
+                "professional_id": professional_id,
+                "patient_id": patient_id,
+                "date_time": date_time
+            },
+            headers=self._get_headers()
+        )
+
+    def get_appointments(self):
+        """
+        Retorna os agendamentos do usuário logado (paciente ou profissional).
+        """
+        response = requests.get(
+            f"{self.__base_url}/appointment/",
+            headers=self._get_headers()
+        )
+        return response
+
+    def confirm_appointment_by_professional(self, appointment_id: int):
+        """
+        Profissional confirma um agendamento solicitado.
+        """
+        response = requests.post(
+            f"{self.__base_url}/appointment/confirm-professional/{appointment_id}",
+            headers=self._get_headers()
+        )
+        return response
+

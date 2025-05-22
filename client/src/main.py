@@ -11,7 +11,6 @@ from screens.professional_activities_screen import professional_activities
 from screens.patient_make_appointment_screen import make_appointment_patient
 from screens.professional_make_appointment_screen import make_appointment_professional
 from screens.create_activities_screen import create_activities
-from screens.agenda_screen import agenda
 from screens.feedback_user_screen import create_feedback
 from screens.feedback_professional_screen import read_feedbacks
 from screens.professional_confirm_appointment_screen import confirm_appointment

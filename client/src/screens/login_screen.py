@@ -2,7 +2,6 @@ import flet as ft
 
 from client.src.services import PsimarAPI
 
-
 def login(page):
     page.title = 'PsiMar'
     page.clean()

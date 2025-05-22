@@ -1,6 +1,6 @@
 import flet as ft
 
-from client.src.services import PsimarAPI
+from src.services import PsimarAPI
 
 def login(page):
     page.title = 'PsiMar'
@@ -73,7 +73,10 @@ def login(page):
     )
 
     content = ft.Container(
+        #bgcolor=ft.Colors.TRANSPARENT,
+        border_radius=5,
         expand=True,
+        bgcolor="rgba(0, 0, 0, 0.5)", # teste transparente
         alignment=ft.alignment.center,
         content=ft.Column(
             [
@@ -82,12 +85,12 @@ def login(page):
                 passwords,
                 ft.Row(
                     [
-                        ft.ElevatedButton("Login", on_click=login_action, color="white", width=140,
+                        ft.ElevatedButton("Login", on_click=login_action, color="black", width=140,
                                           style=ft.ButtonStyle(
                                               shape=ft.RoundedRectangleBorder(radius=5),
                                               elevation=5,
                                               overlay_color="rgba(255, 255, 255, 0.2)",
-                                              bgcolor="#212121",
+                                              bgcolor="#F8CACA",
                                               color="#white")
                                           ),
                         ft.ElevatedButton("Registrar", on_click=lambda e: page.go("/register"), width=140,
@@ -95,17 +98,19 @@ def login(page):
                                               shape=ft.RoundedRectangleBorder(radius=5),
                                               elevation=5,
                                               overlay_color="rgba(255, 255, 255, 0.2)",
-                                              bgcolor="#212121",
+                                              bgcolor="#F8CACA",
                                               color="white")
                                           )
                     ],
                     alignment=ft.MainAxisAlignment.CENTER,
                     spacing=10
                 ),
-                ft.TextButton(
+                ft.FilledButton(
                     "Esqueci minha senha",
                     on_click=lambda e: page.go("/changePass"),
-                    style=ft.ButtonStyle(color="#847769")
+                    style=ft.ButtonStyle(shape=ft.StadiumBorder(),
+                                         bgcolor="#F8CACA",
+                                         color="white")
                 ),
             ],
             alignment=ft.MainAxisAlignment.CENTER,
@@ -118,12 +123,23 @@ def login(page):
         bgcolor="#f2dbc2",
         controls=[
             ft.Stack(
-                expand=True,
-                controls=[
-                    ft.Image(src="../assets/imagem.png", fit=ft.ImageFit.COVER, expand=True),
-                    content
-                ]
+                [
+                    ft.Image(
+                        src="../assets/wallpaper_psi4.jpg",
+                        fit=ft.ImageFit.COVER,
+                        width=1920,
+                        height=1080,
+                        expand=True
+                    ),
+                    ft.Container(
+                        content=content,
+                        alignment=ft.alignment.center,
+                        expand=True
+                    )
+                ],
+                expand=True
             )
-        ]
+        ],
+        padding=0,
+        spacing=0
     )
-

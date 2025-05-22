@@ -1,6 +1,6 @@
 import flet as ft
 from flet_core import FontWeight
-from client.src.services import PsimarAPI
+from src.services import PsimarAPI
 
 
 def create_activities(page):

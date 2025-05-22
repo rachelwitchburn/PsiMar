@@ -1,5 +1,5 @@
 import flet as ft
-from client.src.services import PsimarAPI
+from src.services import PsimarAPI
 
 def change_password(page):
     page.title = 'PsiMar'

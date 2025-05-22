@@ -1,6 +1,6 @@
 import flet as ft
 from flet_core import FontWeight
-from client.src.services.professional_api import PsimarAPI
+from src.services.professional_api import PsimarAPI
 
 api = PsimarAPI()
 
@@ -15,7 +15,23 @@ def register(page):
     last_name = ft.Ref[ft.TextField]()
     access_code = ft.Ref[ft.TextField]()
 
+    form_container = ft.Container(
+        opacity=0,  # Começa invisível
+        animate_opacity=300,  # 300ms para animar opacidade
+        animate_scale=300,
+    )
+
     def show_form(user_type):
+        """
+        form_container.opacity = 0
+        form_container.update()
+        form_container.content = create_form(user_type)
+        form_container.scale = 0.8  # Começa menor (se quiser o zoom)
+        form_container.opacity = 1  # Fica visível
+        form_container.scale = 1.0  # Volta ao tamanho normal
+        form_container.update()
+        """
+
         form_container.clean()
         form_container.content = create_form(user_type)
         page.update()
@@ -145,7 +161,7 @@ def register(page):
                     shape=ft.RoundedRectangleBorder(radius=5),
                     elevation=5,
                     overlay_color="rgba(255, 255, 255, 0.2)",
-                    bgcolor="black",
+                    bgcolor="#F8CACA",
                     color="white"
                 )
             )
@@ -174,22 +190,22 @@ def register(page):
             ),
             ft.Container(
                 content=ft.Column([
-                    ft.Text("Escolha seu perfil:", size=20, weight=FontWeight.BOLD, color="black"),
+                    ft.Text("Escolha seu perfil:", size=20, weight=FontWeight.BOLD, color="#ED8061"),
                     ft.Row([
                         ft.ElevatedButton("Sou Psicólogo", on_click=lambda e: show_form("psicologo"),
                                           style=ft.ButtonStyle(
-                                              shape=ft.RoundedRectangleBorder(radius=5),
+                                              shape=ft.StadiumBorder(),
                                               elevation=5,
                                               overlay_color="rgba(255, 255, 255, 0.2)",
-                                              bgcolor="black",
+                                              bgcolor="#F8CACA",
                                               color="white"
                                           )),
                         ft.ElevatedButton("Sou Paciente", on_click=lambda e: show_form("paciente"),
                                           style=ft.ButtonStyle(
-                                              shape=ft.RoundedRectangleBorder(radius=5),
+                                              shape=ft.StadiumBorder(),
                                               elevation=5,
                                               overlay_color="rgba(255, 255, 255, 0.2)",
-                                              bgcolor="black",
+                                              bgcolor="#F8CACA",
                                               color="white"
                                           )),
                     ], alignment=ft.MainAxisAlignment.CENTER, spacing=20),

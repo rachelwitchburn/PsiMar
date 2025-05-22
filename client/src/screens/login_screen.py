@@ -85,13 +85,14 @@ def login(page):
                 passwords,
                 ft.Row(
                     [
-                        ft.ElevatedButton("Login", on_click=login_action, color="black", width=140,
+                        ft.ElevatedButton("Login", on_click=login_action, width=140,
                                           style=ft.ButtonStyle(
                                               shape=ft.RoundedRectangleBorder(radius=5),
                                               elevation=5,
                                               overlay_color="rgba(255, 255, 255, 0.2)",
                                               bgcolor="#F8CACA",
-                                              color="#white")
+                                              color="white"
+                                             )
                                           ),
                         ft.ElevatedButton("Registrar", on_click=lambda e: page.go("/register"), width=140,
                                           style=ft.ButtonStyle(

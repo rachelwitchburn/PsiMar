@@ -21,7 +21,7 @@ def user(page):
         agendamentos = response.json()
         if not agendamentos:
             lista_agendamentos.append(
-                ft.Text("Nenhuma consulta agendada")
+                ft.Text("Nenhuma consulta agendada", color="#847769")
             )
         else:
             for agendamento in agendamentos:

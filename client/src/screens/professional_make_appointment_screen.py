@@ -3,7 +3,7 @@ from datetime import datetime, timedelta ,timezone
 from client.src.services import PsimarAPI
 
 
-def make_appointment(page):
+def make_appointment_professional(page):
     page.title = 'Agendar Consulta'
     page.clean()
 
@@ -19,6 +19,35 @@ def make_appointment(page):
     # Variáveis para seleção
     selected_date = None
     selected_time = None
+    patients = []
+
+    patient_dropdown = ft.Dropdown(
+        label="Selecione o paciente",
+        options=[],  # Será preenchido via API
+        width=300,
+        text_size=14,
+        border_color="#847769",
+    )
+
+    # Função para carregar pacientes
+    def load_patients():
+        response = api.get_patients()
+        if response.status_code == 200:
+            patients_data = response.json()
+            patient_dropdown.options = [
+                ft.dropdown.Option(
+                    key=str(patient["id"]),
+                    text=f"{patient['first_name']} {patient['last_name']}",
+                ) for patient in patients_data
+            ]
+            page.update()
+        else:
+            page.snack_bar = ft.SnackBar(ft.Text("Erro ao carregar pacientes"))
+            page.snack_bar.open = True
+            page.update()
+
+    # Carrega os pacientes ao iniciar
+    load_patients()
 
     go_back = ft.IconButton(
         icon=ft.icons.ARROW_BACK,
@@ -48,6 +77,7 @@ def make_appointment(page):
                     style=ft.ButtonStyle(
                         shape=ft.RoundedRectangleBorder(radius=8),
                         bgcolor=ft.colors.WHITE,
+                        color = "#847769"
                     ),
                     width=80,
                     height=80,
@@ -59,7 +89,7 @@ def make_appointment(page):
     date_picker = build_date_picker()
 
     # Horários disponíveis
-    time_buttons = ft.Column(
+    time_buttons = ft.Row(
         controls=[
             ft.ElevatedButton(
                 text=time,
@@ -68,11 +98,15 @@ def make_appointment(page):
                 style=ft.ButtonStyle(
                     shape=ft.RoundedRectangleBorder(radius=8),
                     bgcolor=ft.colors.WHITE,
+                    color= "#847769"
+
                 ),
                 width=100,
             ) for time in ["08:00", "09:00", "10:00", "11:00", "14:00", "15:00", "16:00"]
         ],
         spacing=10,
+        scroll="auto",  # Adicione scroll se os botões não couberem na tela
+        wrap=True,
     )
 
     # Funções de seleção
@@ -115,8 +149,8 @@ def make_appointment(page):
             tzinfo=timezone.utc,
         )
 
-        patient_id = 7
-        response = api.create_appointment(professional_id, patient_id, appointment_datetime.isoformat())
+        patient_id= int(patient_dropdown.value)
+        response = api.create_appointment_professional(professional_id, patient_id, appointment_datetime.isoformat())
 
         print("Enviando:", appointment_datetime.isoformat())
 
@@ -138,10 +172,11 @@ def make_appointment(page):
         controls=[
             ft.Row([go_back], alignment="start"),
             title,
-            ft.Text("Selecione o dia:", size=16),
+            ft.Text("Selecione o dia:", size=16, color="#847769"),
             date_picker,
-            ft.Text("Selecione o horário:", size=16),
+            ft.Text("Selecione o horário:", size=16, color="#847769"),
             time_buttons,
+            patient_dropdown,
             ft.ElevatedButton(
                 "Confirmar Agendamento",
                 on_click=submit_appointment,

@@ -3,7 +3,7 @@ from datetime import datetime, timedelta ,timezone
 from client.src.services import PsimarAPI
 
 
-def make_appointment(page: ft.Page):
+def make_appointment_patient(page: ft.Page):
     page.title = 'Agendar Consulta'
     page.clean()
 
@@ -49,6 +49,7 @@ def make_appointment(page: ft.Page):
                     style=ft.ButtonStyle(
                         shape=ft.RoundedRectangleBorder(radius=8),
                         bgcolor=ft.colors.WHITE,
+                        color = "#847769"
                     ),
                     width=80,
                     height=80,
@@ -60,7 +61,7 @@ def make_appointment(page: ft.Page):
     date_picker = build_date_picker()
 
     # Horários disponíveis
-    time_buttons = ft.Column(
+    time_buttons = ft.Row(
         controls=[
             ft.ElevatedButton(
                 text=time,
@@ -69,11 +70,14 @@ def make_appointment(page: ft.Page):
                 style=ft.ButtonStyle(
                     shape=ft.RoundedRectangleBorder(radius=8),
                     bgcolor=ft.colors.WHITE,
+                    color= "#847769"
                 ),
                 width=100,
             ) for time in ["08:00", "09:00", "10:00", "11:00", "14:00", "15:00", "16:00"]
         ],
         spacing=10,
+        scroll="auto",  # Adicione scroll se os botões não couberem na tela
+        wrap=True,
     )
 
     # Funções de seleção
@@ -134,7 +138,6 @@ def make_appointment(page: ft.Page):
         page.snack_bar.open = True
         page.update()
 
-    # Layout simplificado
     content = ft.Column(
         controls=[
             ft.Row([go_back], alignment="start"),
@@ -149,6 +152,12 @@ def make_appointment(page: ft.Page):
                 bgcolor="#847769",
                 color="white",
                 width=200,
+                style=ft.ButtonStyle(
+                    shape=ft.RoundedRectangleBorder(radius=5),
+                    elevation=5,
+                    overlay_color="rgba(255, 255, 255, 0.2)",
+                    bgcolor="#212121",
+                    color="white")
             ),
         ],
         spacing=20,

@@ -122,12 +122,24 @@ def login(page):
         bgcolor="#f2dbc2",
         controls=[
             ft.Stack(
-                expand=True,
-                controls=[
-                    ft.Image(src="../assets/imagem.png", fit=ft.ImageFit.COVER, expand=True),
-                    content
-                ]
+                [
+                    ft.Image(
+                        src="../assets/imagem.png",
+                        fit=ft.ImageFit.COVER,
+                        width= 1920,
+                        height=1080,
+                        expand=True
+                    ),
+                    ft.Container(
+                        content=content,
+                        alignment=ft.alignment.center,
+                        expand=True
+                    )
+                ],
+                expand=True
             )
-        ]
+        ],
+        padding=0,
+        spacing=0
     )
 

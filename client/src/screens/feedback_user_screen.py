@@ -1,5 +1,5 @@
 import flet as ft
-from src.services.professional_api import PsimarAPI
+from client.src.services.professional_api import PsimarAPI
 
 api = PsimarAPI()
 

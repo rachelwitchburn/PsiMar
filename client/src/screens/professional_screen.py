@@ -1,0 +1,141 @@
+import flet as ft
+from client.src.services import PsimarAPI
+
+def psychologist(page):
+    page.title = 'PsiMar'
+    page.clean()
+
+    token = page.session.get("token")
+
+    if not token:
+        print(" Nenhum token encontrado na sessão! Redirecionando para login...")
+        page.go("/")
+        return
+
+    api = PsimarAPI(token=token)
+    response = api.get_appointments()
+
+    lista_agendamentos = []
+
+    if response.status_code == 200:
+        agendamentos = response.json()
+        if not agendamentos:
+            lista_agendamentos.append(
+                ft.Text("Nenhuma consulta agendada")
+            )
+        else:
+            for agendamento in agendamentos:
+                data_hora = agendamento["date_time"].replace("T", " ").split(".")[0]
+                status = agendamento["status"]
+                id_agendamento = agendamento["id"]
+
+                lista_agendamentos.append(
+                    ft.Container(
+                        width= 420,
+                        padding=20,
+                        margin=5,
+                        bgcolor="#ffffff",
+                        border_radius=10,
+                        content=ft.Column([
+                            ft.Text(f"Consulta: {id_agendamento}", size=25, weight=ft.FontWeight.BOLD, color= "#847769"),
+                            ft.Text(f"Data e hora: {data_hora}", size=20, color="#847769",),
+                            ft.Text(f"Status: {'Confirmado' if status == 'confirmed' else 'Esperando confirmação'}", size=20, color="#847769"),
+                        ])
+                    )
+                )
+
+    def logout(page):
+        page.session.remove("token")
+        print("token removido, fechando sessão")
+        page.go("/")
+
+    agendamentos = ft.Column(
+        expand=True,
+        alignment=ft.MainAxisAlignment.CENTER,
+        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        controls=lista_agendamentos
+    )
+
+    page.floating_action_button = ft.FloatingActionButton(icon=ft.icons.ADD)
+    page.floating_action_button_location = ft.FloatingActionButtonLocation.CENTER_DOCKED
+
+    popupmenu = ft.Container(
+        content=ft.PopupMenuButton(
+            icon=ft.icons.MENU,
+            icon_color="#847769",
+            bgcolor="white",
+            items=[
+                ft.PopupMenuItem(
+                    content=ft.Row([
+                        ft.Icon(ft.icons.ADD, color="#847769"),
+                        ft.Text("Gerenciar Horários", color="#847769"),
+                    ]),
+                    on_click=lambda e: page.go("/agenda"),
+                ),
+                ft.PopupMenuItem(
+                    content=ft.Row([
+                        ft.Icon(ft.icons.LOGOUT, color="#847769"),
+                        ft.Text("Sair", color="#847769"),
+
+                    ]),
+                    on_click=lambda e: logout(page),
+                ),
+                ft.PopupMenuItem(
+                    content=ft.Row([
+                        ft.Icon(ft.icons.FEEDBACK, color="#847769"),
+                        ft.Text("Ver feedback", color="#847769"),
+                    ]),
+                    on_click=lambda e: page.go("/feedback_professional"),
+                ),
+
+                ft.PopupMenuItem(
+                    content=ft.Row([
+                        ft.Icon(ft.icons.VIEW_AGENDA, color="#847769"),
+                        ft.Text("Confirmar agendamentos", color="#847769"),
+                    ]),
+                    on_click=lambda e: page.go("/professional_confirm_appointment"),
+                ),
+            ]
+        ),
+        alignment=ft.alignment.top_right,
+        padding=ft.padding.only(left=10, top=10),
+    )
+
+    appBar = ft.BottomAppBar(
+        bgcolor="#847769",
+        height=55.0,
+        shape=ft.NotchShape.CIRCULAR,
+        content=ft.Row(
+            controls=[
+                ft.Container(expand=True),
+                ft.IconButton(icon=ft.icons.HOUSE, icon_color=ft.colors.WHITE),
+                ft.Container(expand=True),
+                ft.IconButton(
+                    icon=ft.icons.BOOK,
+                    on_click=lambda e: page.go("/professional_activities"),
+                    icon_color=ft.colors.WHITE
+                ),
+                ft.Container(expand=True),
+            ]
+        ),
+    )
+
+    return ft.View(
+        route="/",
+        bgcolor="#f2dbc2",
+        appbar=appBar,
+        controls=[
+            popupmenu,
+            ft.Container(
+                expand=True,
+                alignment=ft.alignment.top_center,
+                content=agendamentos,
+            ),
+        ],  floating_action_button=ft.FloatingActionButton(
+            icon=ft.icons.ADD,
+            on_click=lambda e: page.go("/professional_appointment"),
+            bgcolor= "#847769",
+            foreground_color= "white",
+        ),
+        floating_action_button_location=ft.FloatingActionButtonLocation.END_FLOAT,
+    )

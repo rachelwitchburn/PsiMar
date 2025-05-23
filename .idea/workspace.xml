@@ -63,7 +63,6 @@
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="2ulCwRTtN7H3Qyd6Df8H1eLf4jJ" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -74,37 +73,44 @@
     &quot;FastAPI.Api.executor&quot;: &quot;Run&quot;,
     &quot;FastAPI.App.executor&quot;: &quot;Run&quot;,
     &quot;Python.Client.executor&quot;: &quot;Run&quot;,
-    &quot;Python.database_app.executor&quot;: &quot;Run&quot;,
     &quot;Python.env.executor&quot;: &quot;Run&quot;,
+    &quot;Python.login_screen.executor&quot;: &quot;Run&quot;,
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenDatabaseViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/raque/dev/python/projeto_gerencia&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/tassi/Downloads/PsiMar-branch-agendamentos-e-tasks/PsiMar-branch-agendamentos-e-tasks&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;,
     &quot;settings.editor.splitter.proportion&quot;: &quot;0.30040732&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;
+    ]
   }
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tassi\Desktop\PsiMar-dev" />
+      <recent name="C:\Users\tassi\Desktop\PsiMar-dev\api" />
+      <recent name="C:\Users\tassi\Desktop\PsiMar-dev\api\app" />
       <recent name="C:\Users\raque\dev\python\projeto_gerencia\api\app\crud" />
       <recent name="C:\Users\raque\dev\python\projeto_gerencia\api\app\schemas" />
-      <recent name="C:\Users\raque\dev\python\projeto_gerencia\api\app\models" />
-      <recent name="C:\Users\raque\dev\python\projeto_gerencia" />
-      <recent name="C:\Users\raque\dev\python\projeto_gerencia\database" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.env (1)">
-    <configuration name="database_app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="FastAPI.Api">
+    <configuration name="env" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProjetoPSIMAR" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -113,31 +119,9 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/api/app" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/api/app/database_app.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="env (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="ProjetoPSIMAR" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/database" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="SDK_NAME" value="Python 3.13" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/database/migrations" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
@@ -150,38 +134,16 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="env" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="ProjetoPSIMAR" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/database/migrations" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/database/migrations/env.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="Api" type="Python.FastAPI">
-      <option name="file" value="C:\Users\raque\dev\python\projeto_gerencia\api\app\main.py" />
+      <option name="file" value="C:\Users\tassi\Downloads\PsiMar-branch-agendamentos-e-tasks\PsiMar-branch-agendamentos-e-tasks\api\app\main.py" />
       <module name="ProjetoPSIMAR" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="$USER_HOME$/AppData/Local/Programs/Python/Python313/python.exe" />
+      <option name="SDK_NAME" value="Python 3.13" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/api" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
@@ -191,27 +153,22 @@
     <list>
       <item itemvalue="FastAPI.Api" />
       <item itemvalue="Python.Client" />
-      <item itemvalue="Python.database_app" />
-      <item itemvalue="Python.env (1)" />
       <item itemvalue="Python.env" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.env (1)" />
-        <item itemvalue="Python.database_app" />
-        <item itemvalue="Python.env" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-PY-243.26053.29" />
-        <option value="bundled-python-sdk-b1dbf8ef85a6-4df51de95216-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.26053.29" />
+        <option value="bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-PY-251.25410.159" />
+        <option value="bundled-python-sdk-e0ed3721d81e-36ea0e71a18c-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-251.25410.159" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>C:\Users\tassi\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="b0d7f162-b1c1-4b67-b4f0-c8798e9dc88f" name="Changes" comment="" />
@@ -240,12 +197,37 @@
       <workItem from="1744416656205" duration="387000" />
       <workItem from="1744417542926" duration="5000" />
       <workItem from="1744417620460" duration="77000" />
-      <workItem from="1745500100837" duration="294000" />
-      <workItem from="1745925374950" duration="415000" />
-      <workItem from="1745925826527" duration="432000" />
-      <workItem from="1746143613358" duration="1147000" />
-      <workItem from="1746355475219" duration="5668000" />
-      <workItem from="1746364004910" duration="2553000" />
+      <workItem from="1744631992796" duration="54198000" />
+      <workItem from="1744767509867" duration="274000" />
+      <workItem from="1744767792593" duration="1000" />
+      <workItem from="1744767839316" duration="5000" />
+      <workItem from="1744768317285" duration="572000" />
+      <workItem from="1745257055445" duration="3176000" />
+      <workItem from="1745974114851" duration="106000" />
+      <workItem from="1745974301946" duration="1242000" />
+      <workItem from="1745975661855" duration="60000" />
+      <workItem from="1745975775195" duration="138000" />
+      <workItem from="1746371729434" duration="1614000" />
+      <workItem from="1746378118185" duration="34226000" />
+      <workItem from="1746431287561" duration="2366000" />
+      <workItem from="1746575520527" duration="27320000" />
+      <workItem from="1746732491017" duration="6600000" />
+      <workItem from="1746746148390" duration="294000" />
+      <workItem from="1746746636631" duration="8048000" />
+      <workItem from="1746825001988" duration="25000" />
+      <workItem from="1746825033052" duration="8594000" />
+      <workItem from="1746837873359" duration="3000" />
+      <workItem from="1746837923298" duration="1000" />
+      <workItem from="1746838686251" duration="114000" />
+      <workItem from="1746918124817" duration="3016000" />
+      <workItem from="1746989885046" duration="31622000" />
+      <workItem from="1747076249957" duration="629000" />
+      <workItem from="1747077158108" duration="1503000" />
+      <workItem from="1747219124628" duration="2000" />
+      <workItem from="1747965016749" duration="13000" />
+      <workItem from="1747965051150" duration="2475000" />
+      <workItem from="1747967694648" duration="4000" />
+      <workItem from="1747969992726" duration="15358000" />
     </task>
     <task id="LOCAL-00001" summary="refactor: reestruturação completa do projeto (backend, frontend e database)&#10;&#10;- Reorganização das pastas e arquivos para melhor modularização&#10;- Separação clara entre camadas de backend, frontend e banco de dados&#10;- Ajustes nos imports e rotas para refletir a nova estrutura&#10;- Preparação para facilitar manutenção e escalabilidade futura">
       <option name="closed" value="true" />
@@ -289,12 +271,17 @@
     <option name="LAST_COMMIT_MESSAGE" value="refactor: reestruturação completa do projeto (backend, frontend e database)&#10;&#10;- Reorganização das pastas e arquivos para melhor modularização&#10;- Separação clara entre camadas de backend, frontend e banco de dados&#10;- Ajustes nos imports e rotas para refletir a nova estrutura&#10;- Preparação para facilitar manutenção e escalabilidade futura" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/PsiMar_dev$Client.coverage" NAME="Client Coverage Results" MODIFIED="1746376913399" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/client/src" />
     <SUITE FILE_PATH="coverage/ProjetoPSIMAR$main.coverage" NAME="main Coverage Results" MODIFIED="1743002745172" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
-    <SUITE FILE_PATH="coverage/projeto_gerencia$Client.coverage" NAME="Client Coverage Results" MODIFIED="1744332941608" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/client/src" />
-    <SUITE FILE_PATH="coverage/projeto_gerencia$database_app.coverage" NAME="database_app Coverage Results" MODIFIED="1746362602885" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/api/app" />
     <SUITE FILE_PATH="coverage/projeto_gerencia$main.coverage" NAME="Client Coverage Results" MODIFIED="1744161775627" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/client/src" />
     <SUITE FILE_PATH="coverage/projeto_gerencia$App.coverage" NAME="App Coverage Results" MODIFIED="1744030496382" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/projeto_gerencia$env.coverage" NAME="env Coverage Results" MODIFIED="1744168833284" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/database/migrations" />
     <SUITE FILE_PATH="coverage/projeto_gerencia$Api.coverage" NAME="Api Coverage Results" MODIFIED="1744416984742" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/api" />
+    <SUITE FILE_PATH="coverage/database_sqlite$Client.coverage" NAME="Client Coverage Results" MODIFIED="1747018779905" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/client/src" />
+    <SUITE FILE_PATH="coverage/database_sqlite$Api.coverage" NAME="Api Coverage Results" MODIFIED="1747018772443" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/api" />
+    <SUITE FILE_PATH="coverage/projeto_gerencia$env.coverage" NAME="env Coverage Results" MODIFIED="1744168833284" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/database/migrations" />
+    <SUITE FILE_PATH="coverage/PsiMar_dev$Api.coverage" NAME="Api Coverage Results" MODIFIED="1746374338892" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/api" />
+    <SUITE FILE_PATH="coverage/database_sqlite$main.coverage" NAME="main Coverage Results" MODIFIED="1747966595700" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/api/app" />
+    <SUITE FILE_PATH="coverage/PsiMar_dev$main.coverage" NAME="main Coverage Results" MODIFIED="1746372772248" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/api/app" />
+    <SUITE FILE_PATH="coverage/projeto_gerencia$Client.coverage" NAME="Client Coverage Results" MODIFIED="1744332941608" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/client/src" />
   </component>
 </project>

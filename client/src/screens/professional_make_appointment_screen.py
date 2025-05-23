@@ -7,7 +7,7 @@ def make_appointment_professional(page):
     page.title = 'Agendar Consulta'
     page.clean()
 
-    # Obter o token da sessão
+
     token = page.session.get("token")
     if not token:
         page.go("/")
@@ -23,7 +23,7 @@ def make_appointment_professional(page):
 
     patient_dropdown = ft.Dropdown(
         label="Selecione o paciente",
-        options=[],  # Será preenchido via API
+        options=[],
         width=300,
         text_size=14,
         border_color="#847769",
@@ -55,7 +55,7 @@ def make_appointment_professional(page):
         icon_color="black",
     )
 
-    title = ft.Text("Agendar Nova Consulta", size=24, weight=ft.FontWeight.BOLD)
+    title = ft.Text("Agendar Nova Consulta", size=24, weight=ft.FontWeight.BOLD, color= "#847769")
 
     def build_date_picker():
         today = datetime.now().date()

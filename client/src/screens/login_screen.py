@@ -92,7 +92,7 @@ def login(page):
                                               elevation=5,
                                               overlay_color="rgba(255, 255, 255, 0.2)",
                                               bgcolor="#212121",
-                                              color="#white")
+                                              color="white")
                                           ),
                         ft.ElevatedButton("Registrar", on_click=lambda e: page.go("/register"), width=140,
                                           style=ft.ButtonStyle(

@@ -130,3 +130,45 @@ class PsimarAPI:
             f"{self.__base_url}/appointment/confirm/{appointment_id}",
             headers=self._get_headers()
         )
+
+    def create_task(self, task_data: dict):
+        """Cria uma nova tarefa para um paciente"""
+        return requests.post(
+            f"{self.__base_url}/tasks/",
+            json=task_data,
+            headers=self._get_headers()
+        )
+
+    def get_assigned_tasks(self):
+        """
+        Retorna todas as tarefas atribuídas pelo profissional logado.
+        Requer que o usuário esteja autenticado como profissional.
+        """
+        response = requests.get(
+            f"{self.__base_url}/tasks/professional/assigned",
+            headers=self._get_headers()
+        )
+        return response
+
+    def get_patient_tasks(self):
+        """
+        Retorna todas as tarefas atribuídas ao paciente logado.
+        Requer que o usuário esteja autenticado como paciente.
+        """
+        response = requests.get(
+            f"{self.__base_url}/tasks/patient",
+            headers=self._get_headers()
+        )
+        return response
+
+    def update_task_status(self, task_id: int, status: str):
+        """
+        Atualiza o status de uma tarefa
+        """
+        response = requests.patch(
+            f"{self.__base_url}/tasks/{task_id}",
+            json={"status": status},
+            headers=self._get_headers()
+        )
+        return response
+

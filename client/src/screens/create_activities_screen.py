@@ -1,95 +1,137 @@
 import flet as ft
-from flet_core import FontWeight
+from datetime import datetime
 from client.src.services import PsimarAPI
 
 
-def create_activities(page):
+def create_activities(page: ft.Page):
+    page.title = 'Criar Atividade'
+    page.clean()
 
+    # Obter token da sessão
+    token = page.session.get("token")
+    if not token:
+        page.go("/")
+        return
+
+    api = PsimarAPI(token=token)
+
+    # Elementos do formulário
     title = ft.TextField(
+        label="Título",
+
         border_color="black",
         color="black",
         bgcolor="white",
-        hint_text="Título",
-        hint_style=ft.TextStyle(color="#767676")
+        width=300,
+
     )
 
     description = ft.TextField(
+        label="Descrição",
         border_color="black",
         color="black",
         bgcolor="white",
-        hint_text="Descrição",
-        hint_style=ft.TextStyle(color="#767676")
+        width=300,
+        multiline=True,
+        min_lines=3,
+        max_lines=5
     )
 
-    # Mostra quem foi selecionado
-    selected_patient = ft.Text(value="", color="black")
+    due_date = ft.TextField(
+        label="Data de Vencimento (DD/MM/AAAA)",
+        border_color="black",
+        color="black",
+        bgcolor="white",
+        width=300
+    )
 
-    # Dropdown vazio, vamos preencher depois
-    dropdown = ft.Dropdown(
-        label="Selecione um paciente",
-        hint_text="Clique no botão para carregar",
+    patient_dropdown = ft.Dropdown(
+        label="Paciente*",
         options=[],
-        on_change=lambda e: (
-            setattr(selected_patient, "value", f"Paciente selecionado: {e.control.value}"),
-            page.update()
-        )
+        width=300,
+        bgcolor= "white",
+        border_color="black"
     )
 
-    # Botão que faz a requisição e preenche o dropdown
-    def carregar_pacientes(e):
-        api = PsimarAPI()
+    def load_patients():
         response = api.get_patients()
         if response.status_code == 200:
             patients = response.json()
-            dropdown.options = [
+            patient_dropdown.options = [
                 ft.dropdown.Option(
-                    f"{p['first_name']} {p['last_name']} ({p['email']})"
+                    text=f"{p['first_name']} {p['last_name']}",
+                    key=str(p['id'])
                 ) for p in patients
             ]
             page.update()
 
-    btn_carregar = ft.ElevatedButton("Escolher paciente", on_click=carregar_pacientes)
+    load_patients()
 
-    go_back = ft.Container(
-        content=ft.IconButton(
-            icon=ft.icons.ARROW_BACK,
-            on_click=lambda e: page.go("/professional_activities"),
-            icon_color="black",
-        ),
-        alignment=ft.alignment.top_left,
-        padding=ft.padding.only(left=10, top=10),
-    )
+    # Criar tarefa
+    def create_task(e):
+        if not all([title.value, patient_dropdown.value]):
+            page.snack_bar = ft.SnackBar(ft.Text("Preencha os campos obrigatórios*"))
+            page.snack_bar.open = True
+            page.update()
+            return
 
-    content = ft.Container(
-        content=ft.Column(
-            controls=[
-                go_back,
-                ft.Text("Criar uma atividade:", size=20, weight=FontWeight.BOLD, color="black"),
-                title,
-                description,
+        try:
+            task_data = {
+                "title": title.value,
+                "description": description.value,
+                "patient_id": int(patient_dropdown.value),
+                "due_date": datetime.strptime(due_date.value, "%d/%m/%Y").isoformat() if due_date.value else None
+            }
 
-                # Botão para carregar pacientes + Dropdown + Texto de retorno
-                btn_carregar,
-                dropdown,
-                selected_patient,
+            response = api.create_task(task_data)
 
-                ft.ElevatedButton(
-                    "Criar Atividade",
-                    width=140,
-                    style=ft.ButtonStyle(
-                        shape=ft.RoundedRectangleBorder(radius=5),
-                        elevation=5,
-                        overlay_color="rgba(255, 255, 255, 0.2)",
-                        bgcolor="#212121",
-                        color="white"
-                    )
+            if response.status_code == 201:
+                page.snack_bar = ft.SnackBar(ft.Text("Tarefa criada com sucesso!"))
+                page.go("/professional_activities")
+            else:
+                error_msg = response.json().get("detail", "Erro ao criar tarefa")
+                page.snack_bar = ft.SnackBar(ft.Text(f"Erro: {error_msg}"))
+
+            page.snack_bar.open = True
+            page.update()
+
+        except ValueError:
+            page.snack_bar = ft.SnackBar(ft.Text("Formato de data inválido (use DD/MM/AAAA)"))
+            page.snack_bar.open = True
+            page.update()
+
+    # Layout simplificado
+    form = ft.Column(
+        controls=[
+            ft.Text("Criar Nova Tarefa", size=24, weight=ft.FontWeight.BOLD, color= "#847769"),
+            title,
+            description,
+            patient_dropdown,  # Dropdown único e auto-carregável
+            due_date,
+            ft.ElevatedButton(
+                "Criar Tarefa",
+                on_click=create_task,
+                icon=ft.icons.ADD,
+                width=200,
+                style=ft.ButtonStyle(
+                    bgcolor="#847769",
+                    color="white"
                 )
-            ],
-        ),
+            )
+        ],
+        spacing=20,
+        horizontal_alignment=ft.CrossAxisAlignment.CENTER
     )
 
     return ft.View(
-        route="/",
-        bgcolor="#f2dbc2",
-        controls=[content]
+        route="/create_activities",
+        controls=[
+            ft.Container(
+                content=form,
+                padding=30,
+                alignment=ft.alignment.center,
+                expand=True
+            )
+        ],
+        bgcolor="#f2dbc2"
     )

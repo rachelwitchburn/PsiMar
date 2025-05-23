@@ -109,7 +109,7 @@
       <recent name="C:\Users\raque\dev\python\projeto_gerencia\api\app\schemas" />
     </key>
   </component>
-  <component name="RunManager" selected="FastAPI.Api">
+  <component name="RunManager" selected="Python.Client">
     <configuration name="env" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProjetoPSIMAR" />
       <option name="ENV_FILES" value="" />
@@ -227,7 +227,7 @@
       <workItem from="1747965016749" duration="13000" />
       <workItem from="1747965051150" duration="2475000" />
       <workItem from="1747967694648" duration="4000" />
-      <workItem from="1747969992726" duration="15358000" />
+      <workItem from="1747969992726" duration="16872000" />
     </task>
     <task id="LOCAL-00001" summary="refactor: reestruturação completa do projeto (backend, frontend e database)&#10;&#10;- Reorganização das pastas e arquivos para melhor modularização&#10;- Separação clara entre camadas de backend, frontend e banco de dados&#10;- Ajustes nos imports e rotas para refletir a nova estrutura&#10;- Preparação para facilitar manutenção e escalabilidade futura">
       <option name="closed" value="true" />
@@ -276,8 +276,8 @@
     <SUITE FILE_PATH="coverage/projeto_gerencia$main.coverage" NAME="Client Coverage Results" MODIFIED="1744161775627" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/client/src" />
     <SUITE FILE_PATH="coverage/projeto_gerencia$App.coverage" NAME="App Coverage Results" MODIFIED="1744030496382" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/projeto_gerencia$Api.coverage" NAME="Api Coverage Results" MODIFIED="1744416984742" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/api" />
-    <SUITE FILE_PATH="coverage/database_sqlite$Client.coverage" NAME="Client Coverage Results" MODIFIED="1747018779905" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/client/src" />
-    <SUITE FILE_PATH="coverage/database_sqlite$Api.coverage" NAME="Api Coverage Results" MODIFIED="1747018772443" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/api" />
+    <SUITE FILE_PATH="coverage/database_sqlite$Client.coverage" NAME="Client Coverage Results" MODIFIED="1747992986729" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/client/src" />
+    <SUITE FILE_PATH="coverage/database_sqlite$Api.coverage" NAME="Api Coverage Results" MODIFIED="1747992981632" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/api" />
     <SUITE FILE_PATH="coverage/projeto_gerencia$env.coverage" NAME="env Coverage Results" MODIFIED="1744168833284" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/database/migrations" />
     <SUITE FILE_PATH="coverage/PsiMar_dev$Api.coverage" NAME="Api Coverage Results" MODIFIED="1746374338892" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/api" />
     <SUITE FILE_PATH="coverage/database_sqlite$main.coverage" NAME="main Coverage Results" MODIFIED="1747966595700" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/api/app" />

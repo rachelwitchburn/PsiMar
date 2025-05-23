@@ -34,7 +34,6 @@ def main(page: ft.Page):
         "/professional_activities": professional_activities,
         "/appointment": make_appointment,
         "/create_activities": create_activities,
-        "/agenda": agenda,
         "/feedback_user": create_feedback,
         "/feedback_professional": read_feedbacks
 

@@ -1,0 +1,76 @@
+from datetime import datetime, timedelta, timezone  # Importando classes para trabalhar com datas e intervalos de tempo
+from fastapi import Depends, HTTPException, status  # Importando classes e funções do FastAPI para dependências e exceções
+from fastapi.security import OAuth2PasswordBearer  # Importando OAuth2PasswordBearer para lidar com autenticação baseada em OAuth2
+from jose import JWTError, jwt, ExpiredSignatureError  # Importando a biblioteca 'jose' para trabalhar com JWT (JSON Web Tokens)
+from passlib.context import CryptContext  # Importando 'CryptContext' para trabalhar com criptografia de senhas
+from sqlalchemy.orm import Session  # Importando Session do SQLAlchemy para interação com o banco de dados
+from api.app.database_app import get_db  # Importando a função SessionLocal, que cria uma sessão do banco de dados
+from api.app.models.models import User, UserTypeEnum   # Importando o modelo Usuario para interagir com a tabela 'Usuarios' no banco de dados
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+SECRET_KEY = os.getenv("SECRET_KEY", "super-secret-key")  # Chave secreta usada para assinar os tokens JWT. Deve ser substituída por uma chave forte e segura
+ALGORITHM = "HS256"  # Algoritmo de hash usado para assinar o JWT
+ACCESS_TOKEN_EXPIRE_MINUTES = 60  # Tempo de expiração do token de acesso (em minutos)
+
+# Instanciando o contexto para criptografar senhas com bcrypt
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+# Instanciando a dependência para OAuth2 com senha (será usada para o token de autenticação)
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")  # A URL de login será 'auth/login', onde o token será gerado
+
+
+# Função para verificar se a senha fornecida (plain_password) é válida em relação à senha armazenada (hashed_password)
+def verify_password(plain_password, hashed_password):
+    return pwd_context.verify(plain_password, hashed_password)  # Verifica se a senha informada corresponde à senha criptografada
+
+
+# Função para gerar o hash de uma senha fornecida
+def get_password_hash(password):
+    return pwd_context.hash(password)  # Cria um hash seguro da senha com bcrypt
+
+
+# Função para criar um token de acesso JWT
+def create_access_token(data: dict, expires_delta: timedelta | None = None):
+    to_encode = data.copy()  # Faz uma cópia dos dados para adicionar a expiração
+    expire = datetime.now(timezone.utc) + (expires_delta if expires_delta else timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))  # Define a data de expiração do token
+    to_encode.update({"exp": expire})  # Adiciona a data de expiração ao payload do token
+    return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)  # Gera o token JWT com os dados e a chave secreta
+
+
+# Função para obter o usuário atual a partir do token JWT
+def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    credentials_exception = HTTPException(  # Exceção a ser levantada se o token for inválido
+        status_code=status.HTTP_401_UNAUTHORIZED,  # Código de status HTTP para não autorizado
+        detail="Token inválido",  # Detalhe da exceção
+        headers={"WWW-Authenticate": "Bearer"},  # Header de autenticação
+    )
+    try:
+        # Decodifica o token JWT e obtém as informações do payload
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        email: str = payload.get("sub")  # Obtém o email do usuário do payload
+        if email is None:  # Verifica se o email não foi encontrado no token
+            raise credentials_exception  # Levanta a exceção de credenciais inválidas
+    except ExpiredSignatureError:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Token expirado",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    except JWTError:  # Exceção gerada caso haja erro na decodificação do JWT
+        raise credentials_exception  # Levanta a exceção de credenciais inválidas
+
+    # Consulta o banco de dados para obter o usuário com o email informado no token
+    user = db.query(User).filter(User.email == email).first()
+    if user is None:  # Se o usuário não for encontrado no banco
+        raise credentials_exception  # Levanta a exceção de credenciais inválidas
+    # Converte para enum explicitamente
+    try:
+        user.user_type = UserTypeEnum(user.user_type)
+    except ValueError:
+        raise HTTPException(status_code=500, detail="Tipo de usuário inválido no banco de dados")
+
+    return user  # Retorna o usuário autenticado
+

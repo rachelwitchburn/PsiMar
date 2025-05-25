@@ -4,24 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0d7f162-b1c1-4b67-b4f0-c8798e9dc88f" name="Changes" comment="refactor: reestruturação completa do projeto (backend, frontend e database)&#10;&#10;- Reorganização das pastas e arquivos para melhor modularização&#10;- Separação clara entre camadas de backend, frontend e banco de dados&#10;- Ajustes nos imports e rotas para refletir a nova estrutura&#10;- Preparação para facilitar manutenção e escalabilidade futura">
-      <change afterPath="$PROJECT_DIR$/.idea/sqlDataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Client.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Client.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app/routers/appointment.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app/routers/auth.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app/routers/patient.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app/routers/professional.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app/routers/schedule.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app/routers/users.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/screens/agenda_screen.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/env.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/env.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/insert_access_code.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/api/tests.py" beforeDir="false" />
-    </list>
+    <list default="true" id="b0d7f162-b1c1-4b67-b4f0-c8798e9dc88f" name="Changes" comment="refactor: reestruturação completa do projeto (backend, frontend e database)&#10;&#10;- Reorganização das pastas e arquivos para melhor modularização&#10;- Separação clara entre camadas de backend, frontend e banco de dados&#10;- Ajustes nos imports e rotas para refletir a nova estrutura&#10;- Preparação para facilitar manutenção e escalabilidade futura" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -243,12 +226,12 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="FastAPI.Api" />
+      <item itemvalue="Python.Client" />
       <item itemvalue="Python.database_app" />
       <item itemvalue="Python.env (1)" />
       <item itemvalue="Python.env" />
       <item itemvalue="Python.main" />
-      <item itemvalue="FastAPI.Api" />
-      <item itemvalue="Python.Client" />
     </list>
     <recent_temporary>
       <list>
@@ -334,6 +317,7 @@
       <workItem from="1747956205574" duration="1442000" />
       <workItem from="1747999038720" duration="4629000" />
       <workItem from="1748136335171" duration="165000" />
+      <workItem from="1748136511801" duration="338000" />
     </task>
     <task id="LOCAL-00001" summary="refactor: reestruturação completa do projeto (backend, frontend e database)&#10;&#10;- Reorganização das pastas e arquivos para melhor modularização&#10;- Separação clara entre camadas de backend, frontend e banco de dados&#10;- Ajustes nos imports e rotas para refletir a nova estrutura&#10;- Preparação para facilitar manutenção e escalabilidade futura">
       <option name="closed" value="true" />

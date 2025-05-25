@@ -10,7 +10,6 @@ from screens.patient_activities_screen import patient_activities
 from screens.professional_activities_screen import professional_activities
 from screens.make_appointment_screen import make_appointment
 from screens.create_activities_screen import create_activities
-from screens.agenda_screen import agenda
 from screens.feedback_user_screen import create_feedback
 from screens.feedback_professional_screen import read_feedbacks
 

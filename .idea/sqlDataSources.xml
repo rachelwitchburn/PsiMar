@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="adafcbbf-58a8-4f8b-aa0e-643e59771ae3" name="database.sqlite Mapping">
+      <data-sources db="abbc32e2-29fb-4554-8bfc-d0276acb97e6" ddl="553abda2-e2bf-4dc8-b80f-79086ed97482" />
+      <scope>
+        <node negative="1">
+          <node kind="schema" qname="main" />
+          <node kind="database" negative="1" />
+        </node>
+      </scope>
+    </mapping>
+    <mapping uuid="bd0e489f-e8cf-4af4-a049-9303ae147d70" name="database_app.py Mapping">
+      <data-sources db="abbc32e2-29fb-4554-8bfc-d0276acb97e6" />
+    </mapping>
+  </component>
+</project>

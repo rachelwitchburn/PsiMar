@@ -69,3 +69,4 @@ if context.is_offline_mode():
     run_migrations_offline()  # Se estiver offline, executa migrações offline
 else:
     run_migrations_online()  # Se estiver online, executa migrações online
+

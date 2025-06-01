@@ -5,3 +5,6 @@ passlib[bcrypt]
 uvicorn
 python-jose
 sqlmodel
+alembic
+aiosmtplib
+email-validator

@@ -1,4 +1,4 @@
-from . import users, auth
+from . import users_router, auth_router
 #
 # app = Flask(__name__)
 #

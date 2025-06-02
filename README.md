@@ -1,22 +1,24 @@
-<H1>PSIMAR: COMO EXECUTAR O PROJETO</H1>
-<hr>
-<h2>PRÉ REQUISITOS</h2>
-<h3>1° passo: Baixe o projeto na sua máquina</h3>
-
 # APP PSIMAR
 Aplicação para atendimento psicológico com FastAPI.
 
 ✅ Como instalar dependências:
 
-pip install -r requirements.txt
+pip install -r api/requirements.txt
+pip install -r client/requirements.txt
 
 ✅ Como rodar a API:
 
-uvicorn app.main:app --reload
+uvicorn api.app.main:app --reload
 
 ✅ Como testar a API (com pytest):
 
 pytest
+pytest tests/api --db-reset (para resetar o db após algum teste)
+
+✅ Como iniciar banco de dados:
+
+alembic upgrade head
 
 ✅ Endpoints principais (/docs com Swagger)
 
+http://127.0.0.1:8000/docs

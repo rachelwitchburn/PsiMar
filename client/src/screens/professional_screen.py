@@ -82,19 +82,19 @@ def psychologist(page):
                     icon_color="#847769",
                     bgcolor="white",
                     items=[
-                        ft.PopupMenuItem(
-                            content=ft.Row([
-                                ft.Icon(ft.Icons.WALLET, color="#847769"),
-                                ft.Text("Realizar pagamentos", color="#847769"),
-                            ]),
-                            on_click=lambda e: page.go("/payment_user"),
-                        ),
+                    #    ft.PopupMenuItem(
+                    #        content=ft.Row([
+                    #            ft.Icon(ft.Icons.WALLET, color="#847769"),
+                    #            ft.Text("Realizar pagamentos", color="#847769"),
+                    #        ]),
+                    #        on_click=lambda e: page.go("/payment_user"),
+                    #    ),
                         ft.PopupMenuItem(
                             content=ft.Row([
                                 ft.Icon(ft.Icons.FEEDBACK, color="#847769"),
                                 ft.Text("Feedback", color="#847769"),
                             ]),
-                            on_click=lambda e: page.go("/feedback_user"),
+                            on_click=lambda e: page.go("/feedback_professional"),
                         ),
                         ft.PopupMenuItem(
                             content=ft.Row([

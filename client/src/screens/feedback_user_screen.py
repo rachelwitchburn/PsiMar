@@ -3,7 +3,7 @@ from client.src.services.professional_api import PsimarAPI
 
 def create_feedback(page: ft.Page):
     token = page.session.get("token")
-    patient_id = page.session.get("user_id")
+    patient_id = page.session.get("patient_id")
 
     if not token or not patient_id:
         page.go("/")
@@ -65,7 +65,7 @@ def create_feedback(page: ft.Page):
                 ft.Container(expand=True),
                 ft.IconButton(
                     icon=ft.icons.HOUSE,
-                    on_click=lambda e: page.go("/user"),
+                    on_click=lambda e: page.go("/patient"),
                     icon_color=ft.colors.WHITE
                 ),
                 ft.Container(expand=True),

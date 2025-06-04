@@ -4,7 +4,7 @@ from client.src.services import PsimarAPI
 
 def read_feedbacks(page: ft.Page):
     token = page.session.get("token")
-    professional_id = page.session.get("user_id")
+    professional_id = page.session.get("professional_id")
 
     if not token or not professional_id:
         page.go("/login")
@@ -77,7 +77,7 @@ def read_feedbacks(page: ft.Page):
                 ft.IconButton(icon=ft.icons.HOUSE, on_click=lambda e: page.go("/professional"),
                               icon_color=ft.colors.WHITE),
                 ft.Container(expand=True),
-                ft.IconButton(icon=ft.icons.BOOK, icon_color=ft.colors.WHITE),
+                ft.IconButton(icon=ft.icons.BOOK, on_click=lambda e: page.go("/professional_activities"),icon_color=ft.colors.WHITE),
                 ft.Container(expand=True),
             ]
         ),

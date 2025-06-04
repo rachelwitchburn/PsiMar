@@ -59,7 +59,7 @@ def create_activities(page: ft.Page):
             patients = response.json()
             patient_dropdown.options = [
                 ft.dropdown.Option(
-                    text=f"{p['first_name']} {p['last_name']}",
+                    text=f"{p['name']}", 
                     key=str(p['id'])
                 ) for p in patients
             ]

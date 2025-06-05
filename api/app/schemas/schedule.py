@@ -1,10 +1,9 @@
 from datetime import datetime
-
 from pydantic import BaseModel
-from sqlalchemy import DATETIME
 
 
-# quem usa é o psicologo
+
+
 class Schedule(BaseModel):
     id: int
     date_time: datetime

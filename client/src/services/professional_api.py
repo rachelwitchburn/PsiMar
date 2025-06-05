@@ -105,7 +105,8 @@ class PsimarAPI:
             json={
                 "professional_id": professional_id,
                 "patient_id": patient_id,
-                "date_time": date_time
+                "date_time": date_time,
+                "requested_by_id": patient_id
             },
             headers=self._get_headers()
         )
@@ -116,7 +117,8 @@ class PsimarAPI:
             json={
                 "professional_id": professional_id,  # Adicionado
                 "patient_id": patient_id,
-                "date_time": date_time
+                "date_time": date_time,
+                "requested_by_id": professional_id
             },
             headers=self._get_headers()
         )

@@ -1,7 +1,5 @@
 # Importa as bibliotecas necessárias
 import os
-
-from _pytest import monkeypatch
 from dotenv import load_dotenv
 from logging.config import fileConfig
 from sqlalchemy import engine_from_config
@@ -72,4 +70,4 @@ if context.is_offline_mode():
 else:
     run_migrations_online()  # Se estiver online, executa migrações online
 
-monkeypatch.setenv("FRONTEND_URL", "http://localhost:3000")
+os.environ["FRONTEND_URL"] = "http://localhost:3000"

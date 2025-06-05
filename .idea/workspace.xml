@@ -84,6 +84,7 @@
       <workItem from="1749134943776" duration="22000" />
       <workItem from="1749135454802" duration="9641000" />
       <workItem from="1749146206851" duration="9391000" />
+      <workItem from="1749157092651" duration="1009000" />
     </task>
     <servers />
   </component>
@@ -92,7 +93,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/database_sqlite$main.coverage" NAME="main Coverage Results" MODIFIED="1749135467014" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/api/app" />
-    <SUITE FILE_PATH="coverage/database_sqlite$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1749155663456" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/database_sqlite$Client.coverage" NAME="Client Coverage Results" MODIFIED="1749155668756" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/client/src" />
+    <SUITE FILE_PATH="coverage/database_sqlite$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1749157990627" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/database_sqlite$Client.coverage" NAME="Client Coverage Results" MODIFIED="1749158048732" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/client/src" />
   </component>
 </project>

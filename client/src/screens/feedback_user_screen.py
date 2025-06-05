@@ -10,7 +10,6 @@ def create_feedback(page: ft.Page):
         return
 
     api = PsimarAPI(token=token)
-    professional_id = 2
 
     feedback_field = ft.TextField(
         label="Escreva seu feedback",
@@ -27,9 +26,48 @@ def create_feedback(page: ft.Page):
 
     page.snack_bar = ft.SnackBar(content=ft.Text(""))
 
+    professional_dropdown = ft.Dropdown(
+        label="Selecione o psicologo",
+        label_style=ft.TextStyle(color="#847769"),
+        options=[],
+        width=300,
+        text_size=14,
+        border_color="#847769",
+        color="black"
+    )
+
+    def load_professionals():
+        response = api.get_professionals()
+        if response.status_code == 200:
+            professionals_data = response.json()
+            professional_dropdown.options = [
+                ft.dropdown.Option(
+                    key=str(professional["id"]),
+                    text=professional["name"],
+                ) for professional in professionals_data
+            ]
+            page.update()
+        else:
+            page.snack_bar = ft.SnackBar(ft.Text("Erro ao carregar profissionais"))
+            page.snack_bar.open = True
+            page.update()
+
+    load_professionals()
 
     def send_feedback(e):
+        # Verifica se um profissional foi selecionado
+        if not professional_dropdown.value:
+            page.snack_bar = ft.SnackBar(
+                ft.Text("Por favor, selecione um psicólogo antes de enviar"),
+                bgcolor=ft.Colors.ORANGE_400
+            )
+            page.snack_bar.open = True
+            page.update()
+            return
+
+        professional_id = int(professional_dropdown.value)
         message = feedback_field.value.strip()
+
         if message:
             response = api.send_feedback(
                 patient_id=patient_id,
@@ -39,18 +77,18 @@ def create_feedback(page: ft.Page):
             if response.status_code == 200:
                 page.snack_bar = ft.SnackBar(
                     ft.Text("Feedback enviado com sucesso!"),
-                    bgcolor=ft.colors.GREEN_400
+                    bgcolor=ft.Colors.GREEN_400
                 )
                 feedback_field.value = ""
             else:
                 page.snack_bar = ft.SnackBar(
                     ft.Text(f"Erro ao enviar feedback: {response.text}"),
-                    bgcolor=ft.colors.RED_400
+                    bgcolor=ft.Colors.RED_400
                 )
         else:
             page.snack_bar = ft.SnackBar(
                 ft.Text("Por favor, escreva seu feedback antes de enviar"),
-                bgcolor=ft.colors.ORANGE_400
+                bgcolor=ft.Colors.ORANGE_400
             )
 
         page.snack_bar.open = True
@@ -64,15 +102,15 @@ def create_feedback(page: ft.Page):
             controls=[
                 ft.Container(expand=True),
                 ft.IconButton(
-                    icon=ft.icons.HOUSE,
+                    icon=ft.Icons.HOUSE,
                     on_click=lambda e: page.go("/patient"),
-                    icon_color=ft.colors.WHITE
+                    icon_color="white"
                 ),
                 ft.Container(expand=True),
                 ft.IconButton(
-                    icon=ft.icons.BOOK,
+                    icon=ft.Icons.BOOK,
                     on_click=lambda e: page.go("/patient_activities"),
-                    icon_color=ft.colors.WHITE
+                    icon_color="white"
                 ),
                 ft.Container(expand=True),
             ]
@@ -93,12 +131,13 @@ def create_feedback(page: ft.Page):
                     controls=[
                         ft.Text("Deixe seu feedback", size=20, weight=ft.FontWeight.BOLD, color="#847769"),
                         feedback_field,
+                        professional_dropdown,
                     ],
                 ),
             )
         ],
         floating_action_button=ft.FloatingActionButton(
-            icon=ft.icons.SEND,
+            icon=ft.Icons.SEND,
             on_click=send_feedback,
             bgcolor="#847769",
             foreground_color="white",

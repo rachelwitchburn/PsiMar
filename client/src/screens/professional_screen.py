@@ -101,7 +101,7 @@ def psychologist(page):
                                 ft.Icon(ft.Icons.VIEW_AGENDA, color="#847769"),
                                 ft.Text("Confirmar agendamentos", color="#847769"),
                             ]),
-                            on_click=lambda e: page.go("/patient_confirm_appointment"),
+                            on_click=lambda e: page.go("/professional_confirm_appointment"),
                         ),
                         ft.PopupMenuItem(
                             content=ft.Row([

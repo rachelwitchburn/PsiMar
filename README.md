@@ -68,6 +68,8 @@ alembic upgrade head
 
 Para iniciar a API (backend):
 uvicorn app.main:app --reload
+
+
 A aplicação estará rodando em: http://127.0.0.1:8000
 A documentação automática estará disponível em: http://127.0.0.1:8000/docs
 

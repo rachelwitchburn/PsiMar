@@ -126,6 +126,12 @@ def patient(page):
                     weight=ft.FontWeight.BOLD,
                     color="#847769"
                 ),
+                ft.PopupMenuButton(
+                    icon=ft.icons.MENU,
+                    icon_color="#847769",
+                    bgcolor="white",
+                    items=[
+
                         ft.PopupMenuItem(
                             content=ft.Row([
                                 ft.Icon(ft.icons.FEEDBACK, color="#847769"),

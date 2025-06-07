@@ -132,8 +132,21 @@ exit
    Aperte OK
 
 8. Rodando o frontend
+No terminal, rode o comando:
+
+python api.app.main.py
+
+Minimize.
+
+9. Rodando o backend
+   Rode a FASTApi manualmente pelo botão no canto superior direito que configuramos anteriormente.
+   Ou
+   Em outro terminal, rode:
+   uvicorn app.main:app --reload
 
 
+A aplicação estará rodando em: http://127.0.0.1:8000
+A documentação automática estará disponível em: http://127.0.0.1:8000/docs
 
 
 

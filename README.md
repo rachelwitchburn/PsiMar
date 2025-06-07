@@ -95,10 +95,10 @@ Navegue até a pasta do projeto descompactado e clique em Abrir.
 
 
 5. Instalando o SQLAlchemy
-🔹 Passo 4.1 — Abrir o terminal do PyCharm
+🔹 Passo 5.1 — Abrir o terminal do PyCharm
 Dentro do projeto, abra o terminal inferior (aba Terminal na parte inferior da IDE)
 
-🔹 Passo 4.2 — Instalar o SQLAlchemy via pip
+🔹 Passo 5.2 — Instalar o SQLAlchemy via pip
 pip install SQLAlchemy
 
 Você verá uma saída semelhante a:
@@ -109,20 +109,14 @@ Dica: Você pode verificar se o pacote foi instalado com:
 pip show SQLAlchemy
 
 6. Baixando as dependências (requirements.txt)
-   Temos duas dependências, para baixar as do backend, abra o terminal e navegue da raíz do projeto até o caminho do backend:
-   <cd api>
+   Temos duas dependências, rode os comandos abaixo um após a execução total do outro:
 
    Rode o comando:
-   pip install -r requirements.txt
+   pip install -r api/requirements.txt
 
-   Volte para a raíz do projeto com o comanod:
-   exit
-
-   Navegue da raiz do projeto até o caminho do frontend?
-   <cd client>
-
-   Rode o comando:
-   pip install -r requirements.txt
+   Em seguida rode:
+   pip install -r client/requirements.txt
+   
 
 Volte para a raíz do projeto:
 exit
@@ -137,20 +131,44 @@ exit
    Insira o caminho para a api (backend)
    Aperte OK
 
-8. 
+8. Rodando o frontend
+
+Para poder se cadastrar no sistema como psicólogo, precisa criar um código de acesso. Para isso, siga estes passos:
+
+1. Inicie o servidor com o comando:
+   `uvicorn app.main:app --reload`
+
+2. Abra um segundo terminal para que o banco de dados seja criado. Caso não seja, execute:
+   `python -m client.src.main`  
+   Feche a janela que abrir para liberar o terminal.
+
+3. Após a criação do banco de dados, atualize com:
+   `alembic upgrade head`
+
+4. Use o comando `python` para entrar no terminal interativo e adicione o código abaixo:
 
 
+```python
+from api.app.models import models
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from api.app.models.models import AccessCode
+
+engine = create_engine("sqlite:///api/app/build/database.sqlite", echo=True)
+Session = sessionmaker(bind=engine)
+session = Session()
+novo_codigo = AccessCode(code="psimar")  # <- Insira seu código aqui
+session.add(novo_codigo)
+session.commit()
+```
+  Então de enter para executar e use o comando `exit` para encerrar o interpretador
+  
+5. Agora é so executar o comando `python -m client.src.main ` para executar o sistema e poder fazer o cadastro do psicólogo e do paciente
 
 
 
 <hr>
-Como rodar o projeto:
 
-Para atualizar o banco de dados:
-alembic upgrade head
-
-Para iniciar a API (backend):
-uvicorn app.main:app --reload
 
 
 A aplicação estará rodando em: http://127.0.0.1:8000

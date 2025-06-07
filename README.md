@@ -95,10 +95,10 @@ Navegue até a pasta do projeto descompactado e clique em Abrir.
 
 
 5. Instalando o SQLAlchemy
-🔹 Passo 4.1 — Abrir o terminal do PyCharm
+🔹 Passo 5.1 — Abrir o terminal do PyCharm
 Dentro do projeto, abra o terminal inferior (aba Terminal na parte inferior da IDE)
 
-🔹 Passo 4.2 — Instalar o SQLAlchemy via pip
+🔹 Passo 5.2 — Instalar o SQLAlchemy via pip
 pip install SQLAlchemy
 
 Você verá uma saída semelhante a:

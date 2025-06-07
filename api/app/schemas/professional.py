@@ -1,4 +1,7 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, ConfigDict
 
-class LoginProfessional(BaseModel):
-    access_code: str
+class ProfessionalOut(BaseModel):
+    id: int
+    name: str
+
+model_config = ConfigDict(from_attributes=True)

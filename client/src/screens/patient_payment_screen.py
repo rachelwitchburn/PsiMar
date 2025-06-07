@@ -53,7 +53,7 @@ def payment(page: ft.Page):
 
     submit_button = ft.ElevatedButton(
         "Realizar Pagamento",
-        icon=ft.icons.PAYMENT,
+        icon=ft.icons.PAYMENT,##
         bgcolor="#847769",
         color="white",
         width=300,
@@ -62,6 +62,12 @@ def payment(page: ft.Page):
 
     loading_indicator = ft.ProgressRing(visible=False)
     status_message = ft.Text(visible=False)
+
+    back_button = ft.IconButton(
+                            icon=ft.icons.ARROW_BACK,
+                            on_click=lambda e: page.go("/patient"),
+                            icon_color="black",
+                        )
 
     def process_payment(e):
         # Validação dos campos
@@ -80,13 +86,12 @@ def payment(page: ft.Page):
 
         # Prepara os dados do pagamento
         payment_data = {
-            "appointment_id" : appointment_id,
+            "appointment_id": appointment_id,
             "patient_id": patient_id,
             "professional_id": professional_id,
             "amount": payment_amount,
             "payment_method": payment_method.value
         }
-        print(payment_data)
 
         # Mostra loading e desabilita o botão
         loading_indicator.visible = True
@@ -94,45 +99,49 @@ def payment(page: ft.Page):
         status_message.visible = False
         page.update()
 
-        create_response = api.create_payment(payment_data)
+        try:
+            create_response = api.create_payment(payment_data)
 
-        if create_response.status_code != 200:
-            error_msg = create_response.json().get("detail", "Erro ao criar pagamento")
-            show_status(f"Erro: {error_msg}", is_error=True)
-            return
+            if create_response.status_code == 409:  # Conflito - pagamento já existe
+                show_status("Já existe um pagamento para esta consulta", is_error=True)
+                return
+            elif create_response.status_code != 201:
+                error_msg = create_response.json().get("detail", "Erro ao criar pagamento")
+                show_status(f"Erro: {error_msg}", is_error=True)
+                return
 
-         #Se criação foi bem sucedida, obtém o ID do pagamento criado
-        payment_id = create_response.json().get("id")
-        if not payment_id:
-            show_status("Erro: ID do pagamento não retornado", is_error=True)
-            return
+            # Se criação foi bem sucedida, obtém o ID do pagamento criado
+            payment_id = create_response.json().get("id")
+            if not payment_id:
+                show_status("Erro: ID do pagamento não retornado", is_error=True)
+                return
 
-        # Confirma o pagamento
-        confirm_response = api.confirm_payment(payment_id)
-        response = confirm_response.json()
-        print(response)
+            # Confirma o pagamento
+            confirm_response = api.confirm_payment(payment_id)
 
-        if confirm_response.status_code == 200:
+            if confirm_response.status_code == 200:
+                show_status("Pagamento criado e confirmado com sucesso!")
+                page.session.set("payment_status", "completed")
+                page.session.remove("appointment_id")
+                page.session.remove("professional_id")
+                page.session.remove("patient_id")
+                amount_field.value = ""
+                page.go("/patient")
+            else:
+                error_msg = confirm_response.json().get("detail", "Erro ao confirmar pagamento")
+                show_status(f"Pagamento criado mas não confirmado: {error_msg}", is_error=True)
 
-            show_status("Pagamento criado e confirmado com sucesso!")
-            page.session.set("payment_status", "completed")
-            page.session.remove("appointment_id")
-            page.session.remove("professional_id")
-            page.session.remove("patient_id")
-            amount_field.value = ""
-            page.go("/patient")
-        else:
-            error_msg = confirm_response.json().get("detail", "Erro ao confirmar pagamento")
-            show_status(f"Pagamento criado mas não confirmado: {error_msg}", is_error=True)
-
-        # Esconde loading e reabilita o botão
-        loading_indicator.visible = False
-        submit_button.disabled = False
-        page.update()
+        except Exception as ex:
+            show_status(f"Erro inesperado: {str(ex)}", is_error=True)
+        finally:
+            # Sempre esconde loading e reabilita o botão, mesmo em caso de erro
+            loading_indicator.visible = False
+            submit_button.disabled = False
+            page.update()
 
     def show_status(message, is_error=False):
         status_message.value = message
-        status_message.color = ft.colors.RED if is_error else ft.colors.GREEN
+        status_message.color = "red" if is_error else "green"
         status_message.visible = True
 
     submit_button.on_click = process_payment
@@ -140,6 +149,7 @@ def payment(page: ft.Page):
     # Layout da página
     content = ft.Column(
         [
+            ft.Row([back_button], alignment=ft.MainAxisAlignment.START),
             ft.Text("Realizar Pagamento", size=24, weight=ft.FontWeight.BOLD, color="#847769"),
             ft.Divider(height=20),
             amount_field,

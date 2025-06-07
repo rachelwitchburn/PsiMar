@@ -1,22 +1,23 @@
 import flet as ft
 
-from services import PsimarAPI
-from screens.login_screen import login
-from screens.professional_screen import psychologist
-from screens.register_screen import register
-from screens.patient_screen import patient
-from screens.change_password_screen import change_password
-from screens.patient_activities_screen import patient_activities
-from screens.professional_activities_screen import professional_activities
-from screens.patient_make_appointment_screen import make_appointment_patient
-from screens.professional_make_appointment_screen import make_appointment_professional
-from screens.create_activities_screen import create_activities
-from screens.feedback_user_screen import create_feedback
-from screens.feedback_professional_screen import read_feedbacks
-from screens.professional_confirm_appointment_screen import confirm_appointment_professional
-from screens.patient_confirm_appointment_screen import confirm_appointment_patient
-from screens.patient_payment_screen import payment
-from screens.professional_payment_screen import  payments_view
+from client.src.services import PsimarAPI
+from client.src.screens.login_screen import login
+from client.src.screens.professional_screen import psychologist
+from client.src.screens.register_screen import register
+from client.src.screens.patient_screen import patient
+from client.src.screens.change_password_screen import change_password
+from client.src.screens.patient_activities_screen import patient_activities
+from client.src.screens.professional_activities_screen import professional_activities
+from client.src.screens.patient_make_appointment_screen import make_appointment_patient
+from client.src.screens.professional_make_appointment_screen import make_appointment_professional
+from client.src.screens.create_activities_screen import create_activities
+from client.src.screens.feedback_user_screen import create_feedback
+from client.src.screens.feedback_professional_screen import read_feedbacks
+from client.src.screens.professional_confirm_appointment_screen import confirm_appointment_professional
+from client.src.screens.patient_confirm_appointment_screen import confirm_appointment_patient
+from client.src.screens.patient_payment_screen import payment
+from client.src.screens.professional_payment_screen import  payments_view
+
 
 
 def main(page: ft.Page):

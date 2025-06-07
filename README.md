@@ -109,20 +109,14 @@ Dica: Você pode verificar se o pacote foi instalado com:
 pip show SQLAlchemy
 
 6. Baixando as dependências (requirements.txt)
-   Temos duas dependências, para baixar as do backend, abra o terminal e navegue da raíz do projeto até o caminho do backend:
-   <cd api>
+   Temos duas dependências, rode os comandos abaixo um após a execução total do outro:
 
    Rode o comando:
-   pip install -r requirements.txt
+   pip install -r api/requirements.txt
 
-   Volte para a raíz do projeto com o comanod:
-   exit
-
-   Navegue da raiz do projeto até o caminho do frontend?
-   <cd client>
-
-   Rode o comando:
-   pip install -r requirements.txt
+   Em seguida rode:
+   pip install -r client/requirements.txt
+   
 
 Volte para a raíz do projeto:
 exit
@@ -137,7 +131,7 @@ exit
    Insira o caminho para a api (backend)
    Aperte OK
 
-8. 
+8. Rodando o frontend
 
 
 

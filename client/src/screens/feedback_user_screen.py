@@ -74,7 +74,7 @@ def create_feedback(page: ft.Page):
                 professional_id=professional_id,
                 message=message
             )
-            if response.status_code == 200:
+            if response.status_code == 201:
                 page.snack_bar = ft.SnackBar(
                     ft.Text("Feedback enviado com sucesso!"),
                     bgcolor=ft.Colors.GREEN_400

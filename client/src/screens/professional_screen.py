@@ -85,13 +85,6 @@ def psychologist(page: ft.Page):
                     items=[
                         ft.PopupMenuItem(
                             content=ft.Row([
-                                ft.Icon(ft.icons.WALLET, color="#847769"),
-                                ft.Text("Realizar pagamentos", color="#847769"),
-                            ]),
-                            on_click=lambda e: page.go("/payment_user"),
-                        ),
-                        ft.PopupMenuItem(
-                            content=ft.Row([
                                 ft.Icon(ft.icons.FEEDBACK, color="#847769"),
                                 ft.Text("Feedback", color="#847769"),
                             ]),

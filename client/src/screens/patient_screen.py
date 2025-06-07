@@ -126,18 +126,6 @@ def patient(page):
                     weight=ft.FontWeight.BOLD,
                     color="#847769"
                 ),
-                ft.PopupMenuButton(
-                    icon=ft.icons.MENU,
-                    icon_color="#847769",
-                    bgcolor="white",
-                    items=[
-                        ft.PopupMenuItem(
-                            content=ft.Row([
-                                ft.Icon(ft.icons.WALLET, color="#847769"),
-                                ft.Text("Realizar pagamentos", color="#847769"),
-                            ]),
-                            on_click=lambda e: page.go("/payment_user"),
-                        ),
                         ft.PopupMenuItem(
                             content=ft.Row([
                                 ft.Icon(ft.icons.FEEDBACK, color="#847769"),

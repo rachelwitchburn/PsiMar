@@ -132,32 +132,43 @@ exit
    Aperte OK
 
 8. Rodando o frontend
-No terminal, rode o comando:
 
-python api.app.main.py
+Para poder se cadastrar no sistema como psicólogo, precisa criar um código de acesso. Para isso, siga estes passos:
 
-Minimize.
+1. Inicie o servidor com o comando:
+   `uvicorn app.main:app --reload`
 
-9. Rodando o backend
-   Rode a FASTApi manualmente pelo botão no canto superior direito que configuramos anteriormente.
-   Ou
-   Em outro terminal, rode:
-   uvicorn app.main:app --reload
+2. Abra um segundo terminal para que o banco de dados seja criado. Caso não seja, execute:
+   `python -m client.src.main`  
+   Feche a janela que abrir para liberar o terminal.
+
+3. Após a criação do banco de dados, atualize com:
+   `alembic upgrade head`
+
+4. Use o comando `python` para entrar no terminal interativo e adicione o código abaixo:
 
 
-A aplicação estará rodando em: http://127.0.0.1:8000
-A documentação automática estará disponível em: http://127.0.0.1:8000/docs
+```python
+from api.app.models import models
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from api.app.models.models import AccessCode
+
+engine = create_engine("sqlite:///api/app/build/database.sqlite", echo=True)
+Session = sessionmaker(bind=engine)
+session = Session()
+novo_codigo = AccessCode(code="psimar")  # <- Insira seu código aqui
+session.add(novo_codigo)
+session.commit()
+```
+  Então de enter para executar e use o comando `exit` para encerrar o interpretador
+  
+5. Agora é so executar o comando `python -m client.src.main ` para executar o sistema e poder fazer o cadastro do psicólogo e do paciente
 
 
 
 <hr>
-Como rodar o projeto:
 
-Para atualizar o banco de dados:
-alembic upgrade head
-
-Para iniciar a API (backend):
-uvicorn app.main:app --reload
 
 
 A aplicação estará rodando em: http://127.0.0.1:8000

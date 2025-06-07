@@ -8,3 +8,4 @@ sqlmodel
 alembic
 aiosmtplib
 email-validator
+python-multipart

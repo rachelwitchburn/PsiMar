@@ -9,56 +9,139 @@ Este guia explica em detalhes como instalar e rodar tudo do zero.
 
 Antes de tudo, você precisa:
 
-1. **Instalar o [Python 3.10+](https://www.python.org/downloads/)**
-   - Durante a instalação, **marque a opção "Add Python to PATH"**.
-   - Após instalar, abra o terminal (Prompt de Comando ou PowerShell) e teste com:
-     ```bash
-     python --version
-     ```
-     Se aparecer algo como `Python 3.10.x`, está tudo certo!
+✅ 1. Instalando o Python
+🔹 Passo 1.1 — Acesse o site oficial
+Vá até o site oficial do Python: https://www.python.org/downloads/
 
-2. **Instalar o [Visual Studio Code (VSCode)](https://code.visualstudio.com/)**
-   - Após instalar, recomendamos instalar as extensões:
-     - **Python**
-     - **Pylance**
-     - **Code Runner (opcional)**
+🔹 Passo 1.2 — Faça o download
+Clique no botão amarelo: Download Python 3.X.X (a versão mais recente recomendada será mostrada).
 
-3. **Instalar o Git (opcional, para baixar via repositório):**
-   - [https://git-scm.com/downloads](https://git-scm.com/downloads)
+Aguarde o download do instalador.
 
----
+🔹 Passo 1.3 — Execute o instalador
+Abra o arquivo baixado
 
-## 📥 COMO BAIXAR O PROJETO
+Marque a opção: Add Python 3.X to PATH
 
-### 1° passo: Baixe o projeto na sua máquina
+Clique em Install Now
+
+Aguarde até o fim da instalação
+
+Clique em Close quando finalizar
+
+⚠️ Importante: Marcar a opção Add Python to PATH garante que o Python seja reconhecido pelo terminal.
+
+🔹 Passo 1.4 — Verificar instalação
+Abra o terminal (Prompt de Comando no Windows ou Terminal no macOS/Linux) e digite:
+python --version
+
+Você deverá ver algo como:
+Python 3.X.X
+
+
+
+2. **Instalar a IDE (Recomendamos o Pycharm)**
+  🔹 Passo 2.1 — Acesse o site oficial
+Vá para: https://www.jetbrains.com/pycharm/download
+
+🔹 Passo 2.2 — Baixe a versão Community Edition (gratuita)
+🔹 Passo 2.3 — Instale o PyCharm
+Execute o instalador
+
+Marque as opções recomendadas:
+
+Create Desktop Shortcut
+
+Add "Open Folder as Project"
+
+Clique em Install
+
+Finalize e abra o PyCharm
+
+
+
+3. **Instalando o projeto**
+   Baixe o projeto na sua máquina
 
 Você pode:
-- **Baixar o ZIP** do repositório clicando em "Code > Download ZIP", ou
-- **Clonar com Git** (opcional):
-  ```bash
-  git clone https://github.com/seu-usuario/seu-repositorio.git
+- **Baixar o ZIP** do repositório clicando em "Code > Download ZIP"
+- Encontre o arquivo .zip na pasta de downloads
+- Extraia o conteúdo do .zip
 
-  2° passo: Encontre o arquivo .zip na pasta de downloads
-3° passo: Extraia o conteúdo do .zip
 
-4° passo: Abra o projeto no VSCode
-Clique em File > Open Folder e selecione a pasta extraída.
+4. **Abrir o projeto no Pycharm**
+ Na tela inicial, clique em New Project
 
-5° passo: Crie e ative um ambiente virtual
-No terminal do VSCode (use Ctrl + `` para abrir), execute:
-python -m venv venv
+Em Location, escolha a pasta onde deseja salvar
 
-Depois, ative o ambiente virtual:
+Em Python Interpreter, clique em:
 
-No Windows:
-.\venv\Scripts\activate
+   Selecione "Add Interpreter"
 
-No Linux/Mac:
-source venv/bin/activate
+   Escolha "System Interpreter"
 
-📦 6° passo: Instalar as dependências
-Dentro do ambiente virtual, rode:
-pip install -r requirements.txt
+   Localize o executável do Python (ex: C:\Users\SeuNome\caminho_do_projeto)
+
+Clique em OK
+
+Clique em Create
+
+ou:
+
+Abra a sua IDE de escolha (por exemplo, Visual Studio Code, PyCharm, etc.).
+No menu da IDE, selecione a opção Abrir pasta ou Open Folder.
+Navegue até a pasta do projeto descompactado e clique em Abrir.
+
+
+
+5. Instalando o SQLAlchemy
+🔹 Passo 4.1 — Abrir o terminal do PyCharm
+Dentro do projeto, abra o terminal inferior (aba Terminal na parte inferior da IDE)
+
+🔹 Passo 4.2 — Instalar o SQLAlchemy via pip
+pip install SQLAlchemy
+
+Você verá uma saída semelhante a:
+Successfully installed SQLAlchemy-X.X.X
+
+
+Dica: Você pode verificar se o pacote foi instalado com:
+pip show SQLAlchemy
+
+6. Baixando as dependências (requirements.txt)
+   Temos duas dependências, para baixar as do backend, abra o terminal e navegue da raíz do projeto até o caminho do backend:
+   <cd api>
+
+   Rode o comando:
+   pip install -r requirements.txt
+
+   Volte para a raíz do projeto com o comanod:
+   exit
+
+   Navegue da raiz do projeto até o caminho do frontend?
+   <cd client>
+
+   Rode o comando:
+   pip install -r requirements.txt
+
+Volte para a raíz do projeto:
+exit
+
+7. **Configurando a opção de run automático para backend com fastapi""
+
+   No canto superior direito da IDE, ao lado esquerdo do ícone de _play_ Configure as opções de configuração:
+   Selecione 'Edit configurations'
+   Aperte no ícone de + (mais) no canto superior esquerdo
+   Adicione nova configuração
+   Selecione FASTApi
+   Insira o caminho para a api (backend)
+   Aperte OK
+
+8. 
+
+
+
+
 
 <hr>
 Como rodar o projeto:

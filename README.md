@@ -136,7 +136,7 @@ exit
 Para poder se cadastrar no sistema como psicólogo, precisa criar um código de acesso. Para isso, siga estes passos:
 
 1. Inicie o servidor com o comando:
-   `uvicorn app.main:app --reload`
+   `uvicorn api.app.main:app --reload`
 
 2. Abra um segundo terminal para que o banco de dados seja criado. Caso não seja, execute:
    `python -m client.src.main`  

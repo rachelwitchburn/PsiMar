@@ -94,9 +94,14 @@ Navegue até a pasta do projeto descompactado e clique em Abrir.
 
 
 
-5. Instalando o SQLAlchemy
+5. Inciciando o ambiente virtual e instalando o SQLAlchemy
+
 🔹 Passo 5.1 — Abrir o terminal do PyCharm
 Dentro do projeto, abra o terminal inferior (aba Terminal na parte inferior da IDE)
+
+🔹 Passo 5.2 — Criar o ambiente virtual
+python -m venv venv   
+venv\Scripts\activate 
 
 🔹 Passo 5.2 — Instalar o SQLAlchemy via pip
 pip install SQLAlchemy
